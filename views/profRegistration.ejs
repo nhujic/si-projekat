@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"></meta>
+    <title>Registracija</title>
+    <link rel='stylesheet' href='/stylesheets/profRegistration.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/checkPassword.js"></script>
+    <script type="text/javascript" src="/javascripts/registracija.js"></script>
+</head>
+
+<body>
+<div class = "title"><h1> Registracija profesora </h1></div>
+<div  class="container" >
+    <div class = "left">
+        <div class="formBox">
+            <form>
+            <p>Ime</p>
+            <input type="text" name="ime" placeholder="Unesi ime" required="required" id="ime">
+            <p></p><div class="validacija" id="val_ime"> </div>
+            <p>Prezime</p>
+            <input type="text" name="prezime" placeholder="Unesi prezime" required="required" id="prezime">
+            <div class="validacija" id="val_prezime"> </div>
+            <p>Fakultet</p>
+            <input type="text" name="fakultet" placeholder="Unesi fakultet" required="required" id="fakultet">
+            <div class="validacija" id="val_fakultet"> </div>
+            <p>Odsjek</p>
+            <input type="text" name="odsjek" placeholder="Unesi odsjek" required="required" id="odsjek">
+            <div class="validacija" id="val_odsjek"> </div>
+        </div>
+    </div>
+    <div class = "right">
+        <div class="formBox">
+
+                <p>Username</p>
+                <input type="text" name="username" placeholder="Unesi username" required="required" id="username">
+                <div class="validacija" id="val_username"> </div>
+                <p>Email</p>
+                <input type="text" name="email" placeholder="Unesi email" required="required" id="email">
+                <div class="validacija" id="val_email"> </div>
+                <p>Password</p>
+                <input type="Password" name="password" id="password" placeholder="*****" required="required" onkeyup="checkPass(); return false;">
+                <div class="validacija" id="val_pass"> </div>
+                <p>Ponovi Password</p>
+                <input type="Password" name="ponoviPassword" id="passwordValidation" placeholder="*****" required="required" onkeyup="checkPassMatch(); return false;">
+                <div class="validacija" id="val_pass"> </div>
+                <span id="confirmMessage" class="confirmMessage"></span>
+                <input type="submit" name="registracija" value="Registracija" id="reg_btn" onclick="registracijaProfesor();">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Student Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS-->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/stylesheets/style.css" id="theme-stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/javascripts/helper.js"></script>
+    <!-- Custom stylesheet - for your changes--
+    <link rel="stylesheet" href="css/custom.css">-->
+    <!-- Favicon--
+    <link rel="shortcut icon" href="favicon.png">-->
+
+</head>
+<body>
+
+<div class="page home-page">
+    <!-- Main Navbar-->
+    <header class="header">
+        <nav class="navbar-myheader">
+            <div class="container-fluid">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <!-- Navbar Header-->
+                    <div class="navbar-header">
+                        <a href="index.html" class="navbar-brand-text white upper" > Kursevi </a>
+                        <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                    </div>
+                    <!-- Navbar Menu -->
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                        <!-- Logout    -->
+                        <li class="nav-item"><a href="login.html" class="nav-link logout white small">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-content d-flex align-items-stretch">
+        <!-- Side Navbar -->
+        <nav class="side-navbar">
+            <!-- Sidebar Header-->
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="img/img6.png" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h4">Ime prezime</h1>
+                    <p>Smjer</p>
+                </div>
+            </div>
+
+            <ul class="list-unstyled">
+                <li class="active"> <a href="index.html"><i class="icon fa fa-home"></i>Početna</a></li>
+                <li><a href="/users/sviKursevi"> <i class="icon-interface-windows"></i>Svi Kursevi </a>
+                </li>
+                <li><a href="" aria-expanded="false" data-toggle="collapse" id="test"> <i class="icon-interface-windows" ></i>Moji Kursevi </a>
+                    <!-- da mi preko id se otvori -
+                    <ul id="dashvariants" class="collapse list-unstyled">
+                       <li><a href="#">Računarske mreže</a></li>
+                       <li><a href="#">Računarske mreže</a></li>
+                     </ul>
+                   </li>-->
+                <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Ispiti </a>
+                    <ul id="dashvariants" class="collapse list-unstyled">
+                        <li><a href="#">Nadolazeći ispiti</a></li>
+                        <li><a href="#">Rezultati ispita</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="content-inner">
+            <header class="page-header">
+                <div class="container-fluid">
+                    <h2 class="no-margin-bottom">Svi kursevi</h2>
+                </div>
+            </header>
+
+            <div class ="table-striped" id="tabela">
+                <table>
+                    <tr>
+                        <th>Naziv kursa</th>
+
+                    </tr>
+                    <% for(var i=0; i < rows.length; i++) { %>
+                    <tr>
+                        <td><%= rows[i].NazivKursa %></td>
+                        <td><%= rows[i].Odsjek %></td>
+                        <td><%= rows[i].SifraKursa %></td>
+                    </tr>
+                    <% } %>
+                </table>
+            </div>
+
+            <!-- Page Footer-->
+            <footer class="main-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>Kursevi &copy; 2017</p>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+</body>
+</html>

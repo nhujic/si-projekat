@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"></meta>
+    <title>Registracija</title>
+    <link rel='stylesheet' href='/stylesheets/studentRegistration.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/javascripts/datepicker.js"></script>
+    <script type="text/javascript" src="/javascripts/checkPassword.js"></script>
+    <script type="text/javascript" src="/javascripts/registracija.js"></script>
+
+</head>
+
+<body>
+<div class = "title"><h1> Registracija studenta </h1></div>
+<div  class="container" >
+    <div class = "left">
+        <div class="formBox">
+            <form>
+                <p>Ime</p>
+                <input type="text" name="ime" placeholder="Unesi ime" required = "required" id="ime">
+                <p>Prezime</p>
+                <input type="text" name="prezime" placeholder="Unesi prezime" required = "required" id="prezime">
+                <p>Datum rodjenja</p>
+                <input type="date" name="datumRodjenja" required = "required" id="datumRodjenja">
+                <p>Fakultet</p>
+                <input type="text" name="fakultet" placeholder="Unesi fakultet" required = "required" id="fakultet">
+                <p>Odsjek</p>
+                <input type="text" name="odsjek" placeholder="Unesi odsjek" required = "required" id="odsjek">
+                <p>Smjer</p>
+                <input type="text" name="smjer" placeholder="Unesi smjer" required = "required" id="smjer">
+        </div>
+    </div>
+    <div class = "right">
+        <div class="formBox">
+
+                <p>Broj indexa</p>
+                <input type="text" name="brojIndexa" placeholder="Unesi broj indexa" required = "required" id="brojIndexa">
+                <p>Username</p>
+                <input type="text" name="username" placeholder="Unesi username" required = "required" id="username">
+                <p>Email</p>
+                <input type="text" name="email" placeholder="Unesi email" required = "required" id="email">
+                <p>Password</p>
+                <input type="Password" name="password" id="password" placeholder="*****" required = "required" onkeyup="checkPass(); return false;" >
+                <p>Ponovi Password</p>
+                <input type="Password" name="ponoviPassword"  id="passwordValidation" placeholder="*****" required = "required" onkeyup="checkPassMatch(); return false;" >
+                <span id="confirmMessage" class="confirmMessage"></span>
+                <input type="submit" name="register" value="Registracija" id="reg_btn" onclick="registracijaStudent();" >
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
+
+</body>
+</html>

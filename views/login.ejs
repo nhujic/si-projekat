@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <met charset="utf-8"></met>
+    <title>Login form</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" language="javascript" src="javascripts/login.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div class = "title"><h1> PRIJAVA </h1></div>
+<div  class="container" >
+    <div class = "left"></div>
+    <div class = "right">
+        <div class="formBox">
+            <form>
+            <p>Username</p>
+            <input type="text" name="username" placeholder="Unesi username" id="username" required="required"><p></p>
+            <div class="validacija" id="validator_username"> </div>
+            <p>Password</p>
+            <input type="Password" name="password" placeholder="*****" id="password" required="required"><p></p>
+            <p> </p>
+            <div class="validacija" id="validator_pass"> </div> <p></p>
+            <p> </p>
+            <P></P><input type="submit" name="login" value="Prijava" id="login_btn" onclick="log();">
+            </form>
+            <a href="#">Zaboravljen password</a><p></p>
+            <a href="/choose">Registracija</a>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

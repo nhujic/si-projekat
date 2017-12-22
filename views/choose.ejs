@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <met charset="utf-8"></met>
+    <title>Tip korisnika</title>
+    <link rel='stylesheet' href='/stylesheets/choose.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/checkPassword.js"></script>
+
+</head>
+
+<body>
+<div class = "title"><h1> Izaberite tip korisnika </h1></div>
+<div  class="container" >
+    <div class ="centerContainer">
+        <div class="formBox">
+            <form method="get" action="/users/registracija/profesor">
+                <input type="submit" name="profesor" value="Registracija profesora" href="profRegistration">
+            </form>
+            <p></p>
+            <form method="get" action="/users/registracija/student">
+                <input type="submit" name="student" value="Registracija studenta" href="studentRegistration">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
