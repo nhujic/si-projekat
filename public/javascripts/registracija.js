@@ -36,7 +36,7 @@ function registracijaStudent() {
     $.post("/users/registracija/student", {ime: ime, prezime: prezime, datumRodjenja: datumRodjenja, fakultet: fakultet, odsjek: odsjek, smjer: smjer, brojIndexa: brojIndexa, email: email, username: username, password: password})
         .done(function (data) {
             if(data.status == 200){
-                $(alert(data.poruka));
+                //$(alert(data.poruka));
                 window.location.href = "/";
             }else if (data.status == 401) {
                 $(alert(data.poruka));
@@ -91,7 +91,7 @@ function registracijaProfesor() {
         })
             .done(function (data) {
                 if (data.status == 200) {
-                    $(alert(data.poruka));
+                   // $(alert(data.poruka));
                     window.location.href = "/";
                 } else if (data.status == 401) {
                     $(alert(data.poruka));
