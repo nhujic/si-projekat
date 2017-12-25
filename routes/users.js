@@ -364,6 +364,19 @@ router.get('/sviKursevi', function(req, res, next) {
 
     });
 });
+router.get('/kurs', function(req, res, next) {
+    konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        else{
+
+            res.render('kurs', {rows:results});
+
+        }
+
+    });
+});
 
 router.post('/logout', function (req, res, next) {
 

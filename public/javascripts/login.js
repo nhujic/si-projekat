@@ -2,9 +2,9 @@ function log() {
     var username = $("#username").val();
     var password = $("#password").val();
 
-    if( username== "" ) {
+    if (username == "") {
         $("#validator_username").html("Unesite username!");
-    }else if(password == ""){
+    } else if (password == "") {
         $("#validator_pass").html("Unesite password!");
     }
     else {
@@ -26,9 +26,7 @@ function log() {
 
             });
     }
+
 }
 
 
-
-
-//pocetna je stranica koja ce se otvarati nakon sto je tacno ispunjena login forma

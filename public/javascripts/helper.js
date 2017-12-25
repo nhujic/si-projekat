@@ -1,25 +1,21 @@
-$(document).ready(function(){
-    $("#test").click(function(){
-        alert("The paragraph was clicked.");
+/*
+$(document).ready(function() {
+    $('#prijavaDugme').click(function (event) {
+        $('#prijavaModal').modal('show')
     });
 });
-
-$(document).ready(function(){
-    $("#allC").click(function(){
-        $.get("/users/allKursevi")
-            .done(function (data) {
-                if (data.status == 200) {
-                    $("#tabela").html('<p> jagjajajlkgjakljgalkjga ' + data.poruka + '</p>');
-                }else{
-                    alert('Greska!');
-                }
-
-            });
+$(document).ready(function() {
+    $('#dodajKursDugme').click(function (event) {
+        $('#dodajKursModal').modal('show')
     });
-});
-
+});*/
 $(document).ready(function () {
-    $(".button").on('click', function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+});/*
+$(document).ready(function () {
+    $("#dodajKurs").on('click', function () {
         $(".cover").fadeIn('slow');
         $(".popup").fadeIn('slow');
 
@@ -31,29 +27,20 @@ $(document).ready(function () {
         }
     });
     $(".cover").on('click', function () {
-            $(".cover").fadeOut('slow');
-            $(".popup").fadeOut('slow');
+        $(".cover").fadeOut('slow');
+        $(".popup").fadeOut('slow');
     });
 });
-
-$(document).ready(function(){
-    $("#logout").click(function(){
-        $.post("/users/logout")
+/*$(document).ready(function(){
+    $("#allC").click(function(){
+        $.get("/users/sviKursevi")
             .done(function (data) {
-                if(data.status == 200){
-                    window.location.href = '/';
+                if (data.status == 200) {
+                    $("#tabela").html();
+                }else{
+                    alert('Greska!');
                 }
+
             });
     });
-});
-
-$(document).ready(function(){
-    $("#logout1").click(function(){
-        $.post("/users/logout")
-            .done(function (data) {
-                if(data.status == 200){
-                    window.location.href = '/';
-                }
-            });
-    });
-});
+});*/
