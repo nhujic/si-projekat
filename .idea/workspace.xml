@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0e0f227-d9b1-4b39-83c8-2950286b0169" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/mojiKursevi.ejs" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/baza1.sql" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/helper.js" afterPath="$PROJECT_DIR$/public/javascripts/helper.js" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
-      <change beforePath="$PROJECT_DIR$/routes/users.js" afterPath="$PROJECT_DIR$/routes/users.js" />
-      <change beforePath="$PROJECT_DIR$/views/kursevi.ejs" afterPath="$PROJECT_DIR$/views/kursevi.ejs" />
       <change beforePath="$PROJECT_DIR$/views/pocetnaProfesor.ejs" afterPath="$PROJECT_DIR$/views/pocetnaProfesor.ejs" />
       <change beforePath="$PROJECT_DIR$/views/pocetnaStudent.ejs" afterPath="$PROJECT_DIR$/views/pocetnaStudent.ejs" />
     </list>
@@ -24,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="kursevi.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="kursevi.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/kursevi.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -44,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pocetnaStudent.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pocetnaStudent.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/pocetnaStudent.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="89" />
+            <state relative-caret-position="296">
+              <caret line="99" column="42" lean-forward="true" selection-start-line="99" selection-start-column="42" selection-end-line="99" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -67,8 +60,8 @@
       <file leaf-file-name="pocetnaProfesor.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/pocetnaProfesor.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+            <state relative-caret-position="442">
+              <caret line="95" column="66" lean-forward="false" selection-start-line="95" selection-start-column="66" selection-end-line="95" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -157,11 +150,11 @@
       <find>dashb</find>
       <find>body</find>
       <find>logout</find>
-      <find>imePrezime</find>
       <find>sviku</find>
       <find>rowa</find>
       <find>rows</find>
       <find>kursev</find>
+      <find>imePrezime</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,11 +171,11 @@
         <option value="$PROJECT_DIR$/public/stylesheets/styleDefault.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/public/javascripts/helper.js" />
-        <option value="$PROJECT_DIR$/views/pocetnaStudent.ejs" />
-        <option value="$PROJECT_DIR$/views/pocetnaProfesor.ejs" />
         <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/views/mojiKursevi.ejs" />
         <option value="$PROJECT_DIR$/views/kursevi.ejs" />
+        <option value="$PROJECT_DIR$/views/pocetnaProfesor.ejs" />
+        <option value="$PROJECT_DIR$/views/pocetnaStudent.ejs" />
       </list>
     </option>
   </component>
@@ -296,7 +289,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30998000" />
+    <option name="totallyTimeSpent" value="31575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -660,14 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/pocetnaProfesor.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -684,18 +669,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/pocetnaStudent.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/kursevi.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="105" column="24" lean-forward="false" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/pocetnaProfesor.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="95" column="66" lean-forward="false" selection-start-line="95" selection-start-column="66" selection-end-line="95" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/pocetnaStudent.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="99" column="42" lean-forward="true" selection-start-line="99" selection-start-column="42" selection-end-line="99" selection-end-column="42" />
           <folding />
         </state>
       </provider>
