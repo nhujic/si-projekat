@@ -3,25 +3,25 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema baza1
+-- Schema mydb
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema baza1
+-- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `baza1` DEFAULT CHARACTER SET utf8 ;
-USE `baza1` ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `baza1`.`table1`
+-- Table `mydb`.`table1`
 -- -----------------------------------------------------
 
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`Kurs`
+-- Table `mydb`.`Kurs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`Kurs` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Kurs` (
   `KursId` INT NOT NULL AUTO_INCREMENT,
   `NazivKursa` VARCHAR(45) NOT NULL,
   `Odsjek` VARCHAR(45) NULL,
@@ -34,9 +34,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`Ispit`
+-- Table `mydb`.`Ispit`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`Ispit` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Ispit` (
   `IspitId` INT NOT NULL AUTO_INCREMENT,
   `DatumIspita` DATETIME NOT NULL,
   `BrojParcijale` INT NULL,
@@ -46,16 +46,16 @@ CREATE TABLE IF NOT EXISTS `baza1`.`Ispit` (
   INDEX `fk_Ispit_Kurs1_idx` (`Kurs_KursId` ASC),
   CONSTRAINT `fk_Ispit_Kurs1`
     FOREIGN KEY (`Kurs_KursId`)
-    REFERENCES `baza1`.`Kurs` (`KursId`)
+    REFERENCES `mydb`.`Kurs` (`KursId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`RezultatiZadatka`
+-- Table `mydb`.`RezultatiZadatka`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`RezultatiZadatka` (
+CREATE TABLE IF NOT EXISTS `mydb`.`RezultatiZadatka` (
   `RezultatId` INT NOT NULL AUTO_INCREMENT,
   `OsvojeniBrojBodova` INT NULL,
   PRIMARY KEY (`RezultatId`),
@@ -64,9 +64,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`Zadatak`
+-- Table `mydb`.`Zadatak`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`Zadatak` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Zadatak` (
   `ZadatakId` INT NOT NULL AUTO_INCREMENT,
   `RedniBrojZadatka` INT NOT NULL,
   `MaxBrojBodova` INT NOT NULL,
@@ -79,21 +79,21 @@ CREATE TABLE IF NOT EXISTS `baza1`.`Zadatak` (
   INDEX `fk_Zadatak_RezultatiZadatka1_idx` (`RezultatiZadatka_RezultatId` ASC),
   CONSTRAINT `fk_Zadatak_Ispit1`
     FOREIGN KEY (`Ispit_IspitId` , `Ispit_Kurs_KursId`)
-    REFERENCES `baza1`.`Ispit` (`IspitId` , `Kurs_KursId`)
+    REFERENCES `mydb`.`Ispit` (`IspitId` , `Kurs_KursId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Zadatak_RezultatiZadatka1`
     FOREIGN KEY (`RezultatiZadatka_RezultatId`)
-    REFERENCES `baza1`.`RezultatiZadatka` (`RezultatId`)
+    REFERENCES `mydb`.`RezultatiZadatka` (`RezultatId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`KorisnickiDetalji`
+-- Table `mydb`.`KorisnickiDetalji`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`KorisnickiDetalji` (
+CREATE TABLE IF NOT EXISTS `mydb`.`KorisnickiDetalji` (
   `KorisnickiDetaljiId` INT NOT NULL AUTO_INCREMENT,
   `Ime` VARCHAR(45) NOT NULL,
   `Prezime` VARCHAR(45) NOT NULL,
@@ -107,9 +107,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`Odsjek`
+-- Table `mydb`.`Odsjek`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`Odsjek` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Odsjek` (
   `OdsjekId` INT NOT NULL AUTO_INCREMENT,
   `KorisnickiDetalji_KorisnickiDetaljiId` INT NOT NULL,
   `Naziv` VARCHAR(45) NULL,
@@ -119,16 +119,16 @@ CREATE TABLE IF NOT EXISTS `baza1`.`Odsjek` (
   INDEX `fk_Smjer_KorisnickiDetalji1_idx` (`KorisnickiDetalji_KorisnickiDetaljiId` ASC),
   CONSTRAINT `fk_Smjer_KorisnickiDetalji1`
     FOREIGN KEY (`KorisnickiDetalji_KorisnickiDetaljiId`)
-    REFERENCES `baza1`.`KorisnickiDetalji` (`KorisnickiDetaljiId`)
+    REFERENCES `mydb`.`KorisnickiDetalji` (`KorisnickiDetaljiId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`TipKorisnika`
+-- Table `mydb`.`TipKorisnika`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`TipKorisnika` (
+CREATE TABLE IF NOT EXISTS `mydb`.`TipKorisnika` (
   `TipKorisnikaId` INT NOT NULL AUTO_INCREMENT,
   `Tip` VARCHAR(45) NULL,
   `KorisnickiDetalji_KorisnickiDetaljiId` INT NOT NULL,
@@ -137,16 +137,16 @@ CREATE TABLE IF NOT EXISTS `baza1`.`TipKorisnika` (
   INDEX `fk_TipKorisnika_KorisnickiDetalji1_idx` (`KorisnickiDetalji_KorisnickiDetaljiId` ASC),
   CONSTRAINT `fk_TipKorisnika_KorisnickiDetalji1`
     FOREIGN KEY (`KorisnickiDetalji_KorisnickiDetaljiId`)
-    REFERENCES `baza1`.`KorisnickiDetalji` (`KorisnickiDetaljiId`)
+    REFERENCES `mydb`.`KorisnickiDetalji` (`KorisnickiDetaljiId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`Korisnik`
+-- Table `mydb`.`Korisnik`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`Korisnik` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Korisnik` (
   `KorisnikId` INT NOT NULL AUTO_INCREMENT,
   `TipKorisnika_TipKorisnikaId` INT NOT NULL,
   `Username` VARCHAR(45) NOT NULL,
@@ -160,16 +160,16 @@ CREATE TABLE IF NOT EXISTS `baza1`.`Korisnik` (
   INDEX `fk_Korisnik_TipKorisnika1_idx` (`TipKorisnika_TipKorisnikaId` ASC),
   CONSTRAINT `fk_Korisnik_TipKorisnika1`
     FOREIGN KEY (`TipKorisnika_TipKorisnikaId`)
-    REFERENCES `baza1`.`TipKorisnika` (`TipKorisnikaId`)
+    REFERENCES `mydb`.`TipKorisnika` (`TipKorisnikaId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baza1`.`Korisnik_Kurs`
+-- Table `mydb`.`Korisnik_Kurs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baza1`.`Korisnik_Kurs` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Korisnik_Kurs` (
   `Korisnik_KorisnikId` INT NOT NULL,
   `Korisnik_TipKorisnika_TipKorisnikaId` INT NOT NULL,
   `Kurs_KursId` INT NOT NULL,
@@ -178,12 +178,12 @@ CREATE TABLE IF NOT EXISTS `baza1`.`Korisnik_Kurs` (
   INDEX `fk_Korisnik_has_Kurs_Korisnik1_idx` (`Korisnik_KorisnikId` ASC, `Korisnik_TipKorisnika_TipKorisnikaId` ASC),
   CONSTRAINT `fk_Korisnik_has_Kurs_Korisnik1`
     FOREIGN KEY (`Korisnik_KorisnikId` , `Korisnik_TipKorisnika_TipKorisnikaId`)
-    REFERENCES `baza1`.`Korisnik` (`KorisnikId` , `TipKorisnika_TipKorisnikaId`)
+    REFERENCES `mydb`.`Korisnik` (`KorisnikId` , `TipKorisnika_TipKorisnikaId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Korisnik_has_Kurs_Kurs1`
     FOREIGN KEY (`Kurs_KursId`)
-    REFERENCES `baza1`.`Kurs` (`KursId`)
+    REFERENCES `mydb`.`Kurs` (`KursId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
