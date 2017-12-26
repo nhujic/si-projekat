@@ -3,7 +3,6 @@ function kreirajKurs() {
     var naziv_kursa = $("#naziv_kursa").val();
     var odsjek = $("#odsjek").val();
     var semestar = $("#semestar").val();
-    var smjer = $("#smjer").val();
     var ciklus = $("#ciklus").val();
     var sifra_kursa = $("#sifra_kursa").val();
 /*
@@ -23,16 +22,15 @@ function kreirajKurs() {
 
     else {*/
 
-        $.post("/kreirajKurs", {naziv_kursa: naziv_kursa, odsjek: odsjek, semestar:semestar, smjer:smjer, ciklus:ciklus, sifra_kursa:sifra_kursa})
+        $.post("/kreirajKurs", {naziv_kursa: naziv_kursa, odsjek: odsjek, semestar:semestar, ciklus:ciklus, sifra_kursa:sifra_kursa})
             .done(function (data) {
                 if (data.status == 200) {
-                    logger.info("Uspjesno kreiranje kursa!");
+                    window.location.href = "/users/sviKursevi";
                 } else if (data.status == 404) {
-                    alert(data.poruka);
+                    //alert(data.poruka);
                 } else {
                     alert('Greska!');
                 }
-
             });
 
 }
@@ -62,30 +60,4 @@ function prijaviSe(KursId) {
                 });
         });
     });
-}
-
-
-function prijaviKurs(){
-     var sifra_kursa = $("#sifra_kursa").val();
-
-    /*
-
-        }else if (sifra_kursa == "") {
-            $("#validator_pass").html("Unesite sifru kursa!");
-        }
-
-        else {*/
-
-    $.post("/prijavaNaKurs", {sifra_kursa:sifra_kursa})
-        .done(function (data) {
-            if (data.status == 200) {
-                $(alert(data.poruka));
-                window.location.href = "/users/sviKursevi";
-            } else if (data.status == 401) {
-                $(alert(data.poruka));
-            } else {
-                $(alert('Greska!'));
-            }
-
-        });
 }

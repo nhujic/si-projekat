@@ -14,13 +14,10 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
-<<<<<<< HEAD
     <link rel="stylesheet" href="/stylesheets/style.css" id="theme-stylesheet">
-=======
+
     <link rel="stylesheet" href="/stylesheets/styleDefault.css" id="theme-stylesheet">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
->>>>>>> refs/remotes/origin/master
+
     <script type="text/javascript" src="/javascripts/helper.js"></script>
     <script type="text/javascript" src="/javascripts/popup.js"></script>
 </head>
@@ -136,15 +133,13 @@
                             <input type="text" name="semestar" id="semestar" placeholder="Unesi semestar"
                                    required="required">
                             <p></p>
-                            <p>Smjer</p>
-                            <input type="text" name="smjer" id="smjer" placeholder="Unesi smjer" required="required">
                             <p>Ciklus</p>
                             <input type="text" name="ciklus" id="ciklus" placeholder="Unesi ciklus" required="required">
                             <p>Šifra kursa</p>
                             <input type="text" name="sifra_kursa" id="sifra_kursa" placeholder="Unesi šifru kursa"
                                    required="required">
                         </div>
-                        <input type="submit" class="btn btn-info" value="Submit" formmethod="post">
+                        <input type="submit" class="btn btn-info" value="Submit" onclick="kreirajKurs();" >
                     </div>
 
                     <div class="modal-footer">

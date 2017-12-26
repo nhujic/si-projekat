@@ -123,6 +123,53 @@ router.get('/pocetnaProfesor', function(req, res, next) {
 
 });
 
+router.post('/kreirajKurs', function (req, res, next) {
+    var detaljiKursa = {
+        "nazivKursa": req.body.naziv_kursa,
+        "odsjek": req.body.odsjek,
+        "semestar": req.body.semestar,
+        "ciklus": req.body.ciklus,
+        "sifraKursa": req.body.sifra_kursa
+    }
+
+    var token = req.headers.cookie;
+    var obj = getObjectFromToken(token);
+    var username = obj.username;
+    var KorisnikId, TipId;
+    konekcija.query("SELECT * from Korisnik where username = ?", [username], function (err, results, fields) {
+        if (err) {
+            console.log(err);
+            res.send({status:404});
+        }else if(results.length > 0){
+            KorisnikId = results[0].KorisnikId;
+            TipId = results[0].TipKorisnika_TipKorisnikaId;
+        }else{
+            res.send({status:404});
+        }
+    });
+    konekcija.query('INSERT INTO Kurs SET ?', detaljiKursa, function (err, results, fields) {
+        if(err){
+            console.log(err);
+            res.send({status:404});
+        }else {
+            var KursId = results.insertId;
+                        konekcija.query("INSERT INTO Korisnik_Kurs (Korisnik_KorisnikId, Korisnik_TipKorisnika_TipKorisnikaId ,Kurs_KursId) VALUES ('" + KorisnikId + "', '" + TipId + "', '" + KursId + "')", function (err, results, fields) {
+                if(err){
+                    console.log(err);
+                    res.send({status:404});
+                }else{
+                    console.log("uspjesno ste kreirali kurs");
+                    res.send({status:200});
+
+                }
+            });
+        }
+    });
+
+
+
+});
+
 router.post('/prijavaNaKurs', function (req, res, next) {
 
     var sifraKursa = req.body.sifra_kursa1;

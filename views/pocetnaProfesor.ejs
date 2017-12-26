@@ -26,7 +26,12 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="test">
-                <h4>Ime prezime</h4>
+                <% for(var i = 0; i < imePrezime.length; i++) {%>
+                <h1 class="h4"><%= imePrezime[i].Ime %> <%= imePrezime[i].Prezime %></h1>
+                <% }%>
+                <% for(var i = 0; i < odsjek.length; i++) {%>
+                <p><%= odsjek[i].Odsjek%></p>
+                <% }%>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -68,7 +73,7 @@
                 <a class="navbar-brand" href="#"> Dashboard</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         </nav>
         <div class="dasboard" id ="dashboard">
