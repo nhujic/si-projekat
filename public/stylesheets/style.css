@@ -1,20 +1,9 @@
-
 body {
   margin: 0;
   padding: 0;
   background: url("slike/pozadina_blur.jpg");
   background-size: cover;
   font-family: sans-serif;
-}
-.dasboard{
-  background: white;
-  padding: 3%;
-  width: 105%;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-.numberDashboard{
-  font-size: 30px;
-  font-weight: bold;
 }
 .title{
   text-align: center;
@@ -104,11 +93,6 @@ body {
 }
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #fafafa;
-}
 
 p {
   font-family: 'Poppins', sans-serif;

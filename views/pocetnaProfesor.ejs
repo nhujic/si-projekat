@@ -25,13 +25,8 @@
     <nav id="sidebar">
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
-            <div class="sidebartext" id="test">
-                <% for(var i = 0; i < imePrezime.length; i++) {%>
-                <h1 class="h4"><%= imePrezime[i].Ime %> <%= imePrezime[i].Prezime %></h1>
-                <% }%>
-                <% for(var i = 0; i < odsjek.length; i++) {%>
-                <p><%= odsjek[i].Odsjek%></p>
-                <% }%>
+            <div class="sidebartext" id="sidebartext">
+                Ime prezime
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -45,14 +40,8 @@
                     Početna
                 </a>
             <li>
-                <a href="/users/sviKursevi">
+                <a href="/users/mojiKursevi">
                     <i class="glyphicon glyphicon-tasks"></i>
-                    Svi Kursevi
-                </a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
             </li>

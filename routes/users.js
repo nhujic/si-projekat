@@ -385,4 +385,18 @@ router.post('/logout', function (req, res, next) {
 
 });
 
+router.get('/mojiKursevi', function(req, res, next) {
+    konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        else{
+
+            res.render('mojiKursevi', {kursevi:results});
+
+        }
+
+    });
+});
+
 module.exports = router;

@@ -44,21 +44,8 @@
             <li class="active">
                 <a href="#">
                     <i class="glyphicon glyphicon-tasks"></i>
-                    Svi Kursevi
-                </a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <%  if(rows.length >= 1){
-                        for(var i=0; i < rows.length; i++) { %>
-                    <li><a href="#"><%= rows[i].NazivKursa %></a></li>
-
-                    <% }} %>
-                </ul>
             </li>
             <li>
                 <a href="#">
@@ -86,24 +73,67 @@
         <!--Table for courses-->
         <div class="table-striped" id="tabela">
             <table class="table">
-                <% if(rows.length >= 1){
-                    for(var i = 0; i < rows.length; i++) {
-                     %>
+                <% if(kursevi.length >= 1){
+                for(var i = 0; i < kursevi.length; i++) {
+                %>
                 <tr>
-                    <td id="imeKursa"><%= rows[i].NazivKursa %></td>
-                    <td id="odsjek"><%= rows[i].Odsjek %></td>
-
-
-                    <td>
-                        <button type="button" id="prijavaDugme" class="btn btn-info" data-toggle="modal"
-                                data-target="#prijavaModal" onclick="prijaviSe(<%= rows[i].KursId %>);">Prijava
-                        </button>
-                    </td>
+                    <td id="imeKursa"><%= kursevi[i].NazivKursa %></td>
+                    <td id="odsjek"><%= kursevi[i].Odsjek %></td>
+                    <td id="odsjek"><%= kursevi[i].Semestar %></td>
+                    <td id="odsjek"><%= kursevi[i].Ciklus %></td>
                 </tr>
                 <% }} %>
             </table>
         </div>
         <!--Table end-->
+
+        <!--Creating Course-->
+        <button class="button btn-info" id="dodajKursDugme" data-toggle="modal" data-target="#dodajKursModal"> Dodaj
+            kurs
+        </button>
+
+        <div class="modal fade" id="dodajKursModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Kreiranje kursa</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p>Kurs</p>
+                            <input type="text" name="naziv_kursa" id="naziv_kursa" placeholder="Unesi naziv kursa"
+                                   required="required">
+                            <p>Odsjek</p>
+                            <input type="text" name="odsjek" id="odsjek" placeholder="Unesi odsjek" required="required">
+                            <p></p>
+                            <p>Semestar</p>
+                            <input type="text" name="semestar" id="semestar" placeholder="Unesi semestar"
+                                   required="required">
+                            <p></p>
+                            <p>Ciklus</p>
+                            <input type="text" name="ciklus" id="ciklus" placeholder="Unesi ciklus" required="required">
+                            <p>Šifra kursa</p>
+                            <input type="text" name="sifra_kursa" id="sifra_kursa" placeholder="Unesi šifru kursa"
+                                   required="required">
+                        </div>
+                        <input type="submit" class="btn btn-info" value="Submit" onclick="kreirajKurs();" >
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!--Create Course end -->
 
         <div class="modal fade" id="prijavaModal" role="dialog">
             <div class="modal-dialog">

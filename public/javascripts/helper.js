@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
-        $("#test").toggle();
+        $("#sidebartext").toggle();
         $('#profilnaSlika').toggleClass('sidebarSmallIcon');
         $('#nav').toggleClass('wide');
         $('#tabela').toggleClass('wide');
