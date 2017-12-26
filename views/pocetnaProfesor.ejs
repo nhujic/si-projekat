@@ -26,9 +26,8 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="test">
-                <% for(var i = 0; i < imePrezime.length; i++) {%>
-                <h1 class="h4"><%= imePrezime[i].Ime %> <%= imePrezime[i].Prezime %></h1>
-                <% }%>
+                <h1 class="h4"><%= imePrezime[0].Ime %> <%= imePrezime[0].Prezime %></h1>
+
                 <% for(var i = 0; i < odsjek.length; i++) {%>
                 <p><%= odsjek[i].Odsjek%></p>
                 <% }%>
