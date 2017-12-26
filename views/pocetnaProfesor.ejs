@@ -52,11 +52,7 @@
                     Moji Kursevi
                 </a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <% for(var i=0; i < rows.length; i++) { %>
 
-                    <li><a href="#"><%= rows[i].NazivKursa %></a></li>
-
-                    <% } %>
                 </ul>
             </li>
             <li>
@@ -79,15 +75,7 @@
 
         <div class ="table-striped" id="tabela">
             <table class="table">
-                <% for(var i=0; i < rows.length; i++) { %>
-                <tr>
-                    <td><%= rows[i].NazivKursa %></td>
-                    <td><%= rows[i].Odsjek %></td>
-                    <td><%= rows[i].SifraKursa %></td>
-                    <td><%= rows[i].SifraKursa %></td>
-                    <td>  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Prijava</button></td>
-                </tr>
-                <% } %>
+
             </table>
         </div>
 

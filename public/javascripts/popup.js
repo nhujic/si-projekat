@@ -37,10 +37,37 @@ function kreirajKurs() {
 
 }
 
+function prijaviSe(KursId) {
+    var kursId = KursId;
+    $(document).ready(function() {
+        $('#prijaviKurs').click(function (event) {
+            var sifra_kursa1 = $("#sifra_kursa1").val();
+            $.post("/prijavaNaKurs", {sifra_kursa1:sifra_kursa1, kursId:kursId})
+                .done(function (data) {
+                    if (data.status == 200) {
+                        $(alert(data.poruka));
+                        window.location.href = "/users/sviKursevi";
+                    } else if (data.status == 401) {
+                        $(alert(data.poruka));
+                    } else if(data.status == 402){
+                        $(alert(data.poruka));
+                    } else if(data.status == 403){
+                        $(alert(data.poruka));
+                        window.location.href = "/users/sviKursevi";
+                    }
+                    else {
+                        $(alert('Greska!'));
+                    }
 
-function prijaviKurs() {
+                });
+        });
+    });
+}
 
-    var sifra_kursa = $("#sifra_kursa").val();
+
+function prijaviKurs(){
+     var sifra_kursa = $("#sifra_kursa").val();
+
     /*
 
         }else if (sifra_kursa == "") {
@@ -52,13 +79,13 @@ function prijaviKurs() {
     $.post("/prijavaNaKurs", {sifra_kursa:sifra_kursa})
         .done(function (data) {
             if (data.status == 200) {
-                logger.info("Uspjesna prijava na kurs!");
-            } else if (data.status == 404) {
-                alert(data.poruka);
+                $(alert(data.poruka));
+                window.location.href = "/users/sviKursevi";
+            } else if (data.status == 401) {
+                $(alert(data.poruka));
             } else {
-                alert('Greska!');
+                $(alert('Greska!'));
             }
 
         });
-
 }

@@ -30,6 +30,10 @@ router.get('/choose', function(req, res, next) {
     res.render('choose');
 });
 
+router.get('/kursevi', function(req, res, next) {
+    res.render('kursevi');
+});
+
 router.get('/pocetnaStudent', function(req, res, next) {
 
     var obj = getObjectFromToken(req.headers.cookie);
@@ -57,6 +61,7 @@ router.get('/pocetnaStudent', function(req, res, next) {
                                             }
                                             else{
                                                 if(results3.length > 0){
+                                                    console.log(results2);
                                                     res.render('pocetnaStudent', {imePrezime: results2, odsjek:results3});
                                                 }
                                             }
@@ -116,6 +121,63 @@ router.get('/pocetnaProfesor', function(req, res, next) {
 
 
 
+});
+
+router.post('/prijavaNaKurs', function (req, res, next) {
+
+    var sifraKursa = req.body.sifra_kursa1;
+    var obj = getObjectFromToken(req.headers.cookie);
+    let username = obj.username;
+    var KursId = req.body.kursId;
+    console.log("KURS JEEEE:      ",KursId);
+    console.log("sifra kursa: ", sifraKursa);
+
+    konekcija.query("SELECT * FROM Kurs WHERE SifraKursa = ?", [sifraKursa], function (error, results, fields) {
+       if(error){
+           console.log(error);
+           res.send({status:401});
+       }
+       else if(results.length > 0){
+               konekcija.query("SELECT * FROM Korisnik WHERE Username = ?", [username], function (error1, results1, fields1) {
+                   if(error1){
+                       console.log(error1);
+                       res.send({status:401});
+                   }
+                   else{
+                       if(results1.length > 0){
+                            konekcija.query("SELECT * FROM korisnik_kurs WHERE Kurs_KursId = ? and Korisnik_KorisnikId = ?", [KursId, results1[0].KorisnikId], function (err, result, fields){
+                                if(err){
+                                    console.log(err);
+                                    res.send({status:401});
+                                }
+                                else if(result.length > 0){
+                                    console.log("Vec ste prijavljeni na ovaj kurs!");
+                                    res.send({status:403, poruka:"Vec ste prijavljeni na ovaj kurs!"});
+                                }
+                                else{
+                                    konekcija.query("INSERT INTO korisnik_kurs (Korisnik_KorisnikId, Korisnik_TipKorisnika_TipKorisnikaId, Kurs_KursId) VALUES ('" + results1[0].KorisnikId + "', '" + results1[0].TipKorisnika_TipKorisnikaId + "', '" + KursId +"' )", function (error2, results2, fields2) {
+                                        if(error2){
+                                            console.log(error2);
+                                            res.send({status:401});
+                                        }
+                                        else{
+                                            console.log("Upsješno ste se prijavili na kurs!");
+                                            res.send({status:200, poruka:"Upsješno ste se prijavili na kurs!"})
+                                        }
+                                    })
+                                }
+                            });
+
+                       }
+                   }
+               });
+           }
+       else{
+           console.log("Pogrijesili ste sifru. Pokusajte ponovo");
+           res.send({status:402, poruka:"Pogrijesili ste sifru. Pokusajte ponovo"})
+       }
+
+    });
 });
 
 
