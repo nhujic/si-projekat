@@ -44,21 +44,8 @@
             <li class="active">
                 <a href="#">
                     <i class="glyphicon glyphicon-tasks"></i>
-                    Svi Kursevi
-                </a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <%  if(rows.length >= 1){
-                        for(var i=0; i < rows.length; i++) { %>
-                    <li><a href="#"><%= rows[i].NazivKursa %></a></li>
-
-                    <% }} %>
-                </ul>
             </li>
             <li>
                 <a href="#">
@@ -78,35 +65,42 @@
                 <a class="navbar-brand" href="#"> Svi Kursevi</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-
-                <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a href="#" id = "logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         </nav>
         <!--Header end-->
+        <button class="button btn-info" id="dodajKursDugme" data-toggle="modal" data-target="#dodajKursModal"> Dodaj
+            kurs
+        </button>
+        <p></p>
 
         <!--Table for courses-->
         <div class="table-striped" id="tabela">
             <table class="table">
-                <% if(rows.length >= 1){
-                    for(var i = 0; i < rows.length; i++) {
-                     %>
+                <th>Naziv Kursa</th>
+                <th>Odsjek</th>
+                <th>Semestar</th>
+                <th>Ciklus</th>
+                <th>Sifra kursa</th>
+                <% if(kursevi.length >= 1){
+                for(var i = 0; i < kursevi.length; i++) {
+                %>
                 <tr>
-                    <td id="imeKursa"><%= rows[i].NazivKursa %></td>
-                    <td id="odsjek"><%= rows[i].Odsjek %></td>
-
-
-                    <td>
-                        <button type="button" id="prijavaDugme" class="btn btn-info" data-toggle="modal"
-                                data-target="#prijavaModal" onclick="prijaviSe(<%= rows[i].KursId %>);">Prijava
-                        </button>
-                    </td>
+                    <td><%= kursevi[i].NazivKursa %></td>
+                    <td><%= kursevi[i].Odsjek %></td>
+                    <td><%= kursevi[i].Semestar %></td>
+                    <td><%= kursevi[i].Ciklus %></td>
+                    <td><%= kursevi[i].SifraKursa %></td>
                 </tr>
                 <% }} %>
             </table>
         </div>
         <!--Table end-->
 
-        <div class="modal fade" id="prijavaModal" role="dialog">
+        <!--Creating Course-->
+
+
+        <div class="modal fade" id="dodajKursModal" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
@@ -114,15 +108,24 @@
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Prijava na kurs</h4>
+                        <h4 class="modal-title">Kreiranje kursa</h4>
                     </div>
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="usr">Unesite sifru kursa:</label>
-                            <input type="text" class="form-control" id="sifra_kursa1" name="sifraKursa">
+                            <p>Kurs</p>
+                            <input type="text" name="naziv_kursa" id="naziv_kursa" placeholder="Unesi naziv kursa" required="required">
+                            <p>Odsjek</p>
+                            <input type="text" name="odsjek" id="odsjek" placeholder="Unesi odsjek" required="required">
+                            <p>Semestar</p>
+                            <input type="text" name="semestar" id="semestar" placeholder="Unesi semestar" required="required">
+                            <p>Ciklus</p>
+                            <input type="text" name="ciklus" id="ciklus" placeholder="Unesi ciklus" required="required">
+                            <p>Šifra kursa</p>
+                            <input type="text" name="sifra_kursa" id="sifra_kursa" placeholder="Unesi šifru kursa"
+                                   required="required">
                         </div>
-                        <input type="submit" class="btn btn-info" value="Submit" id="prijaviKurs">
+                        <input type="submit" class="btn btn-info" value="Submit" onclick="kreirajKurs();" >
                     </div>
 
                     <div class="modal-footer">
@@ -133,6 +136,8 @@
 
             </div>
         </div>
+
+        <!--Create Course end -->
 
     </div>
 </div>

@@ -25,14 +25,8 @@
     <nav id="sidebar">
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
-            <div>
-                <% for(var i = 0; i < imePrezime.length; i++) {%>
-                <h1 class="h4"><%= imePrezime[i].Ime %> <%= imePrezime[i].Prezime %></h1>
-                <% }%>
-                <% for(var i = 0; i < odsjek.length; i++) {%>
-                <p><%= odsjek[i].Smjer%></p>
-                <% }%>
-
+            <div class="sidebartext" id="sidebartext">
+                <h1 class="h4"><%= imePrezime[0].Ime %> <%= imePrezime[0].Prezime %></h1>
              </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -46,7 +40,7 @@
                     Početna
                 </a>
             <li>
-                <a href="/users/sviKursevi">
+                <a href="/users/kurseviStudent">
                     <i class="glyphicon glyphicon-tasks"></i>
                     Svi Kursevi
                 </a>
@@ -95,7 +89,7 @@
 
                     <div class="col-sm-4">
                         <div class="round yellow">
-                            <img  class = "icon" src="/images/img3.png" alt="book icon">
+                            <img  class = "icon" src="/images/img3.png" alt="exam icon">
                         </div>
                         <div class="text">
                         <span class="textDashboard">Preostalih ispita: </span>
@@ -105,7 +99,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="round blue">
-                            <img  class = "icon" src="/images/img9.png" alt="book icon">
+                            <img  class = "icon" src="/images/img9.png" alt="exam icon">
                         </div>
                         <div class="text">
                             <span class="textDashboard">Položenih ispita:</span>

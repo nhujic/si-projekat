@@ -5,6 +5,7 @@ function kreirajKurs() {
     var semestar = $("#semestar").val();
     var ciklus = $("#ciklus").val();
     var sifra_kursa = $("#sifra_kursa").val();
+
 /*
     if (naziv_kursa == "") {
         $("#validator_naziv_kursa").html("Unesite naziv kursa!");
@@ -25,7 +26,7 @@ function kreirajKurs() {
         $.post("/kreirajKurs", {naziv_kursa: naziv_kursa, odsjek: odsjek, semestar:semestar, ciklus:ciklus, sifra_kursa:sifra_kursa})
             .done(function (data) {
                 if (data.status == 200) {
-                    window.location.href = "/users/sviKursevi";
+                    window.location.href = "/users/kurseviProfesor";
                 } else if (data.status == 404) {
                     //alert(data.poruka);
                 } else {
@@ -44,14 +45,14 @@ function prijaviSe(KursId) {
                 .done(function (data) {
                     if (data.status == 200) {
                         $(alert(data.poruka));
-                        window.location.href = "/users/sviKursevi";
+                        window.location.href = "/users/kurseviStudent";
                     } else if (data.status == 401) {
                         $(alert(data.poruka));
                     } else if(data.status == 402){
                         $(alert(data.poruka));
                     } else if(data.status == 403){
                         $(alert(data.poruka));
-                        window.location.href = "/users/sviKursevi";
+                        window.location.href = "/users/kurseviStudent";
                     }
                     else {
                         $(alert('Greska!'));

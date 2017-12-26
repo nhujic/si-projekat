@@ -24,6 +24,13 @@ function decrypt(text) {
     return decrypted;
 }
 
+function getObjectFromToken(token){
+    if (!token || token.length === 0) return null;
+    str = decrypt(token.substr(5));
+    var obj = JSON.parse(str);
+    return obj;
+}
+
 var konekcija = baza.dbConnection();
 
 /* GET users listing. */
@@ -351,27 +358,13 @@ router.post('/login', function (req, res, next) {
 
 
 
-router.get('/sviKursevi', function(req, res, next) {
+router.get('/kurseviStudent', function(req, res, next) {
     konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
         if(error){
             console.log(error);
         }
         else{
-
             res.render('kursevi', {rows:results});
-
-        }
-
-    });
-});
-router.get('/kurs', function(req, res, next) {
-    konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
-        if(error){
-            console.log(error);
-        }
-        else{
-
-            res.render('kurs', {rows:results});
 
         }
 
@@ -382,6 +375,44 @@ router.post('/logout', function (req, res, next) {
 
     res.clearCookie('name');
     res.send({status:200});
+
+});
+
+router.get('/kurseviProfesor', function(req, res, next) {
+    /*var obj = getObjectFromToken(req.headers.cookie);
+    let username = obj.username;
+    var KorisnikId;
+    konekcija.query("SELECT * FROM Korisnik WHERE username = ?", [username], function (err, result, fields) {
+        if(err){
+            console.log(err);
+        }
+        else if(result.length > 0){
+            KorisnikId = result[0].KorisnikId;
+            console.log("korisnik id ", KorisnikId);
+
+            konekcija.query("call VratiKurseveZaKorisnika(?)", [KorisnikId] , function (error, results, fields) {
+                if(error){
+                    console.log(error)
+                }
+                else{
+                    console.log(results);
+                    res.render('mojiKursevi', {kursevi:results});
+                }
+            })
+        }
+
+    });*/
+
+    konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
+        if(error){
+            console.log(error);
+        }
+        else{
+            res.render('mojiKursevi', {kursevi:results});
+
+        }
+
+    });
 
 });
 
