@@ -13,7 +13,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="/stylesheets/style.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="/stylesheets/styleDefault.css" id="theme-stylesheet">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script type="text/javascript" src="/javascripts/helper.js"></script>
@@ -23,10 +23,9 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <!-- <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle">-->
-            <div>
-                <h1 class="h4">Ime prezime</h1>
-                <p>Smjer</p>
+            <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
+            <div class="sidebartext" id="test">
+                <h4>Ime prezime</h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -35,19 +34,19 @@
 
         <ul class="list-unstyled components">
             <li>
-                <a href="#homeSubmenu">
+                <a href="/pocetnaStudent">
                     <i class="glyphicon glyphicon-home"></i>
                     Početna
                 </a>
             <li class="active">
                 <a href="#">
-                    <i class="glyphicon glyphicon-briefcase"></i>
+                    <i class="glyphicon glyphicon-tasks"></i>
                     Svi Kursevi
                 </a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-duplicate"></i>
+                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -60,7 +59,7 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="glyphicon glyphicon-link"></i>
+                    <i class="glyphicon glyphicon-list-alt"></i>
                     Ispiti
                 </a>
             </li>
@@ -70,10 +69,13 @@
     <!-- Page Content Holder -->
     <div id="content" class="customWidth">
         <! Header-->
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default" id="nav">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#"> Svi Kursevi</a>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
         </nav>
         <!Header end-->
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Svi kursevi</title>
+    <title>Dobrodosli na kurseve</title>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <!-- Bootstrap Js CDN -->
@@ -14,7 +14,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="/stylesheets/style.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="/stylesheets/styleDefault.css" id="theme-stylesheet">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script type="text/javascript" src="/javascripts/helper.js"></script>
@@ -24,10 +24,9 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <!-- <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle">-->
-            <div>
-                <h1 class="h4">Ime prezime</h1>
-                <p>Smjer</p>
+            <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
+            <div class="sidebartext" id="test">
+                <h4>Ime prezime</h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -36,25 +35,25 @@
 
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="#homeSubmenu">
+                <a href="/pocetnaStudent">
                     <i class="glyphicon glyphicon-home"></i>
                     Početna
                 </a>
             <li>
-                <a href="users/sviKursevi">
-                    <i class="glyphicon glyphicon-briefcase"></i>
+                <a href="/users/sviKursevi">
+                    <i class="glyphicon glyphicon-tasks"></i>
                     Svi Kursevi
                 </a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-duplicate"></i>
+                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="glyphicon glyphicon-link"></i>
+                    <i class="glyphicon glyphicon-list-alt"></i>
                     Ispiti
                 </a>
             </li>
@@ -64,11 +63,15 @@
     <!-- Page Content Holder -->
     <div id="content" class="customWidth">
 
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default" id ="nav">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#"> Dashboard</a>
-            </div></nav>
-    <div class="dasboard">
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </nav>
+    <div class="dasboard" id ="dashboard">
             <div class="container">
                 <div class="row">
 
@@ -86,7 +89,7 @@
 
                     <div class="col-sm-4">
                         <div class="round yellow">
-                            <img  class = "icon" src="/images/img1.jpg" alt="book icon">
+                            <img  class = "icon" src="/images/img3.png" alt="book icon">
                         </div>
                         <div class="text">
                         <span class="textDashboard">Preostalih ispita: </span>
@@ -96,7 +99,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="round blue">
-                            <img  class = "icon" src="/images/img1.jpg" alt="book icon">
+                            <img  class = "icon" src="/images/img9.png" alt="book icon">
                         </div>
                         <div class="text">
                             <span class="textDashboard">Položenih ispita:</span>
