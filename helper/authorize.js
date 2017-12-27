@@ -28,21 +28,15 @@ function getObjectFromToken(token){
 }
 
 function authorize() {
-    let validationPaths = ['/pocetnaProfesor','/pocetnaStudent'];
-    let profesorValidationPaths = ['/pocetnaProfesor'];
-    let studentValidationPaths = ['/pocetnaStudent'];
+    let validationPaths = ['/pocetnaProfesor','/pocetnaStudent','/users/kurseviProfesor','/users/kurseviStudent'];
+    let profesorValidationPaths = ['/pocetnaProfesor','/users/kurseviProfesor'];
+    let studentValidationPaths = ['/pocetnaStudent','/users/kurseviStudent'];
     let regLogValidationPaths = ['/','/login', '/users/registracija/profesor', 'users/registracija/student', '/choose'];
 
     return function (req,res,next) {
         var obj = getObjectFromToken(req.headers.cookie);
         var path = req.path;
         var ruta = req.path;
-        var x = req.path.substr(1).indexOf('/');
-
-        if (x>0) {
-            path = path.substr(0, x+1);
-        }
-
 
 
         if (obj) {
@@ -64,13 +58,13 @@ function authorize() {
             }
 
             for (var i = 0; i<studentValidationPaths.length; i++) {
-                if (path === studentValidationPaths[i] && req.user.tip == 'profesor') {
+                if (ruta === studentValidationPaths[i] && req.user.tip == 'profesor') {
                     console.info("Redirecting!");
                     res.redirect('/pocetnaProfesor');
                 }
             }
             for (var i = 0; i<profesorValidationPaths.length; i++) {
-                if (path === profesorValidationPaths[i] && req.user.tip == 'student') {
+                if (ruta === profesorValidationPaths[i] && req.user.tip == 'student') {
                     console.info("Redirecting!");
                     res.redirect('/pocetnaStudent');
                 }
@@ -83,7 +77,7 @@ function authorize() {
 
 
         for (var i=0; i<validationPaths.length; i++) {
-            if (path === validationPaths[i] && req.user == null) {
+            if (ruta === validationPaths[i] && req.user == null) {
                 //console.info("Redirecting!");
                 res.redirect('/');
             }

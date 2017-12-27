@@ -26,11 +26,14 @@ function kreirajKurs() {
         $.post("/kreirajKurs", {naziv_kursa: naziv_kursa, odsjek: odsjek, semestar:semestar, ciklus:ciklus, sifra_kursa:sifra_kursa})
             .done(function (data) {
                 if (data.status == 200) {
+                    alert(data.poruka);
                     window.location.href = "/users/kurseviProfesor";
                 } else if (data.status == 404) {
                     //alert(data.poruka);
-                } else {
-                    alert('Greska!');
+                } else if(data.status == 401) {
+                    alert(data.poruka);
+                }else{
+                    alert('Greska');
                 }
             });
 

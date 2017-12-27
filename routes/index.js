@@ -147,20 +147,31 @@ router.post('/kreirajKurs', function (req, res, next) {
             res.send({status:404});
         }
     });
-    konekcija.query('INSERT INTO Kurs SET ?', detaljiKursa, function (err, results, fields) {
+
+    konekcija.query("SELECT * from Kurs where NazivKursa = ?", [detaljiKursa.nazivKursa], function (err, results, fields) {
         if(err){
             console.log(err);
             res.send({status:404});
-        }else {
-            var KursId = results.insertId;
-                        konekcija.query("INSERT INTO Korisnik_Kurs (Korisnik_KorisnikId, Korisnik_TipKorisnika_TipKorisnikaId ,Kurs_KursId) VALUES ('" + KorisnikId + "', '" + TipId + "', '" + KursId + "')", function (err, results, fields) {
+        }else if(results.length > 0){
+            console.log('Kurs vec postoji!');
+            res.send({status:401,poruka:'Kurs vec postoji!'});
+        }else{
+            konekcija.query('INSERT INTO Kurs SET ?', detaljiKursa, function (err, results1, fields) {
                 if(err){
                     console.log(err);
                     res.send({status:404});
-                }else{
-                    console.log("uspjesno ste kreirali kurs");
-                    res.send({status:200});
+                }else {
+                    var KursId = results1.insertId;
+                    konekcija.query("INSERT INTO Korisnik_Kurs (Korisnik_KorisnikId, Korisnik_TipKorisnika_TipKorisnikaId ,Kurs_KursId) VALUES ('" + KorisnikId + "', '" + TipId + "', '" + KursId + "')", function (err, results, fields) {
+                        if(err){
+                            console.log(err);
+                            res.send({status:404});
+                        }else{
+                            console.log("uspjesno ste kreirali kurs");
+                            res.send({status:200,poruka:'Uspjesno ste kreirali kurs'});
 
+                        }
+                    });
                 }
             });
         }
