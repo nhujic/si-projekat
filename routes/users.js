@@ -24,12 +24,7 @@ function decrypt(text) {
     return decrypted;
 }
 
-function getObjectFromToken(token){
-    if (!token || token.length === 0) return null;
-    str = decrypt(token.substr(5));
-    var obj = JSON.parse(str);
-    return obj;
-}
+
 
 var konekcija = baza.dbConnection();
 
@@ -379,31 +374,22 @@ router.post('/logout', function (req, res, next) {
 });
 
 router.get('/kurseviProfesor', function(req, res, next) {
-    /*var obj = getObjectFromToken(req.headers.cookie);
-    let username = obj.username;
-    var KorisnikId;
-    konekcija.query("SELECT * FROM Korisnik WHERE username = ?", [username], function (err, result, fields) {
+    let username = req.user.username;
+
+    konekcija.query("SELECT * FROM Korisnik as k " +
+        "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+        "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+        "WHERE username = $1::text", [username], function (err, result, fields) {
         if(err){
             console.log(err);
         }
-        else if(result.length > 0){
-            KorisnikId = result[0].KorisnikId;
-            console.log("korisnik id ", KorisnikId);
-
-            konekcija.query("call VratiKurseveZaKorisnika(?)", [KorisnikId] , function (error, results, fields) {
-                if(error){
-                    console.log(error)
-                }
-                else{
-                    console.log(results);
-                    res.render('mojiKursevi', {kursevi:results});
-                }
-            })
+        else {
+            console.log(result)
         }
 
-    });*/
+    });
 
-    konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
+    /*konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
         if(error){
             console.log(error);
         }
@@ -412,7 +398,7 @@ router.get('/kurseviProfesor', function(req, res, next) {
 
         }
 
-    });
+    });*/
 
 });
 

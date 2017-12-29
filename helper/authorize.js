@@ -82,6 +82,7 @@ function authorize() {
                 res.redirect('/');
             }
         }
+
         next();
     }
 
