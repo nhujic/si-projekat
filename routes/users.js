@@ -107,7 +107,11 @@ router.post('/registracija/profesor', function (req, res, next) {
                             }
                             else {
                                 var korisnickiDetaljiId = results.insertId;
-                                konekcija.query("INSERT INTO TipKorisnika (Tip, KorisnickiDetalji_KorisnickiDetaljiId) values ('" + tipKorisnika + "', '" + korisnickiDetaljiId + "')", function (error, resultsTip, fields) {
+                                var tipKorisnika = {
+                                    "Tip":tipKorisnika,
+                                    "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId
+                                }
+                                konekcija.query("INSERT INTO TipKorisnika SET ?", [tipKorisnika], function (error, resultsTip, fields) {
                                     if (error) {
                                         console.log("Greska", error);
                                         res.send({status:409});
@@ -131,8 +135,16 @@ router.post('/registracija/profesor', function (req, res, next) {
                                         danas = yyyy + '-' + mm + '-' + dd;
                                         var godinaPlus = yyyy + 10;
                                         var vaziDo = godinaPlus + '-' + mm + '-' + dd;
+                                        var korisnik = {
+                                            "TipKorisnika_TipKorisnikaId":tipKorisnikaId,
+                                            "Username":username,
+                                            "Password":password,
+                                            "Aktivan": aktivan,
+                                            "DatumKreiranjaAccounta":danas,
+                                            "DatumVazenjaAccounta":vaziDo
+                                        }
 
-                                        konekcija.query("INSERT INTO Korisnik (TipKorisnika_TipKorisnikaId, Username, Password, Aktivan, DatumKreiranjaAccounta, DatumVazenjaAccounta) VALUES ('" + tipKorisnikaId + "', '" + username + "', '" + password + "', b'" + aktivan + "', '" + danas + "', '" + vaziDo + "')", function (error, resultsKorisnik, fields) {
+                                        konekcija.query("INSERT INTO Korisnik SET ?", [korisnik], function (error, resultsKorisnik, fields) {
                                             if (error) {
                                                 console.log("Greska", error);
                                                 res.send({status:409});
@@ -142,7 +154,13 @@ router.post('/registracija/profesor', function (req, res, next) {
 
                                     }
                                 });
-                                konekcija.query("INSERT INTO Odsjek (KorisnickiDetalji_KorisnickiDetaljiId, Naziv, Fakultet) VALUES ('" + korisnickiDetaljiId + "','" + odsjek + "','" + fakultet + "')", function (error, results, fields) {
+                                var odsjek = {
+                                    "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId,
+                                    "Naziv":odsjek,
+                                    "Smjer":smjer,
+                                    "Fakultet":fakultet
+                                }
+                                konekcija.query("INSERT INTO Odsjek SET ?", [odsjek], function (error, results, fields) {
                                     if (error) {
                                         console.log("Greska", error);
                                         res.send({status:409});
@@ -246,7 +264,11 @@ router.post('/registracija/student', function (req, res, next) {
                                     }
                                     else {
                                         var korisnickiDetaljiId = results.insertId;
-                                        konekcija.query("INSERT INTO TipKorisnika (Tip, KorisnickiDetalji_KorisnickiDetaljiId) values ('" + tipKorisnika + "', '" + korisnickiDetaljiId + "')", function (error, resultsTip, fields) {
+                                        var tipKorisnika = {
+                                            "Tip": tipKorisnika,
+                                            "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId
+                                        }
+                                        konekcija.query("INSERT INTO TipKorisnika SET ?", [tipKorisnika], function (error, resultsTip, fields) {
                                             if (error) {
                                                 console.log("Greska", error);
                                                 res.send({status:409});
@@ -269,8 +291,16 @@ router.post('/registracija/student', function (req, res, next) {
                                                 var godinaPlus = yyyy + 5;
                                                 var vaziDo = godinaPlus + '-' + mm + '-' + dd;
 
+                                                var korisnik = {
+                                                    "TipKorisnika_TipKorisnikaId":tipKorisnikaId,
+                                                    "Username":username,
+                                                    "Password":password,
+                                                    "Aktivan": aktivan,
+                                                    "DatumKreiranjaAccounta":danas,
+                                                    "DatumVazenjaAccounta":vaziDo
+                                                }
 
-                                                konekcija.query("INSERT INTO Korisnik (TipKorisnika_TipKorisnikaId, Username, Password, Aktivan, DatumKreiranjaAccounta, DatumVazenjaAccounta) VALUES ('" + tipKorisnikaId + "', '" + username + "', '" + password + "', b'" + aktivan + "', '" + danas + "', '" + vaziDo + "')", function (error, resultsKorisnik, fields) {
+                                                konekcija.query("INSERT INTO Korisnik SET ? ", [korisnik], function (error, resultsKorisnik, fields) {
                                                     if (error) {
                                                         console.log("Greska", error);
                                                         res.send({status:409});
@@ -278,7 +308,13 @@ router.post('/registracija/student', function (req, res, next) {
                                                 });
                                             }
                                         });
-                                        konekcija.query("INSERT INTO Odsjek (KorisnickiDetalji_KorisnickiDetaljiId,Naziv, Smjer, Fakultet) VALUES ('" + korisnickiDetaljiId + "','" + odsjek + "','" + smjer + "','" + fakultet + "')", function (error, results, fields) {
+                                        var odsjek = {
+                                            "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId,
+                                            "Naziv":odsjek,
+                                            "Smjer":smjer,
+                                            "Fakultet":fakultet
+                                        }
+                                        konekcija.query("INSERT INTO Odsjek SET ?", [odsjek], function (error, results, fields) {
                                             if (error) {
                                                 console.log("Greska", error);
                                                 res.send({status:409});
@@ -308,7 +344,7 @@ router.post('/login', function (req, res, next) {
 
     password = encrypt(password);
 
-    konekcija.query("SELECT TipKorisnika_TipKorisnikaId from Korisnik where Password = '" + password + "' and username = '" + username + "'", function (err, results, fields) {
+    konekcija.query("SELECT TipKorisnika_TipKorisnikaId from Korisnik where Password = ? and username = ?", [password, username], function (err, results, fields) {
         if (err) {
             res.send({status:400});
         } else if (results.length > 0) {
@@ -354,15 +390,64 @@ router.post('/login', function (req, res, next) {
 
 
 router.get('/kurseviStudent', function(req, res, next) {
-    konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
-        if(error){
-            console.log(error);
-        }
-        else{
-            res.render('kursevi', {rows:results});
 
-        }
+    let username = req.user.username;
 
+    konekcija.query( "SELECT * FROM Korisnik as k " +
+        "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+        "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+        "WHERE username = ? ", [username], function (err, result, fields) {
+        if(err){
+            console.log(err);
+        }
+        else {
+            konekcija.query("SELECT * FROM Korisnik WHERE username = ?",[username], function (error1, results1, fields1) {
+                if(error1){
+                    console.log(error1);
+                }
+                else{
+                    var TipKorisnikId = results1[0].TipKorisnika_TipKorisnikaId;
+                    konekcija.query("SELECT * FROM tipKorisnika WHERE TipKorisnikaId = ?",[TipKorisnikId], function (error2, results2, fields2) {
+                        if(error2){
+                            console.log(error2);
+                        }
+                        else{
+                            var korDetaljiId = results2[0].KorisnickiDetalji_KorisnickiDetaljiId;
+                            konekcija.query("SELECT * FROM Odsjek WHERE KorisnickiDetalji_KorisnickiDetaljiId = ?", [korDetaljiId], function (err1, results3, fields3) {
+                                if(err1){
+                                    console.log(err1);
+                                }
+                                else{
+                                    var odsjekNaziv = results3[0].Naziv;
+                                    konekcija.query("SELECT * FROM KorisnickiDetalji AS kd " +
+                                        "INNER JOIN odsjek AS o ON kd.korisnickidetaljiid = o.korisnickidetalji_korisnickidetaljiid " +
+                                        "INNER JOIN tipkorisnika AS tk ON kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid " +
+                                        "INNER JOIN korisnik AS k ON k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid " +
+                                        "INNER JOIN korisnik_kurs AS kk ON k.korisnikId = kk.korisnik_korisnikid " +
+                                        "INNER JOIN kurs AS kurs ON kurs.kursid = kk.kurs_kursid " +
+                                        "WHERE tk.Tip = ? AND o.Naziv = ?", ["profesor", odsjekNaziv], function (error, results, fields) {
+                                        if(error){
+                                            console.log(error);
+                                        }
+                                        else{
+                                            konekcija.query("SELECT * FROM KorisnickiDetalji WHERE KorisnickiDetaljiId = ?", [korDetaljiId], function (err2, res1, fields) {
+                                               if(err2){
+                                                   console.log(err2);
+                                               }
+                                               else{
+                                                   res.render('kursevi', {rows:results, kursevi:result, imePrez:res1});
+                                               }
+                                            });
+
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
     });
 });
 
@@ -379,27 +464,38 @@ router.get('/kurseviProfesor', function(req, res, next) {
     konekcija.query("SELECT * FROM Korisnik as k " +
         "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
         "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
-        "WHERE username = $1::text", [username], function (err, result, fields) {
+        "WHERE username = ?", [username], function (err, result, fields) {
         if(err){
             console.log(err);
         }
         else {
-            console.log(result)
+            konekcija.query("SELECT * FROM korisnik WHERE username = ?", [username], function (err1, result1, fields) {
+               if(err1){
+                   console.log(err1);
+               }
+               else{
+                   var TipKorisnikId = result1[0].TipKorisnika_TipKorisnikaId;
+                   konekcija.query("SELECT * FROM tipKorisnika WHERE TipKorisnikaId = ?",[TipKorisnikId],function (err2, result2, fields) {
+                      if(err2){
+                          console.log(err2);
+                      }
+                      else{
+                          var korDetaljiId = result2[0].KorisnickiDetalji_KorisnickiDetaljiId;
+                          konekcija.query("SELECT * FROM KorisnickiDetalji WHERE KorisnickiDetaljiId = ?", [korDetaljiId], function (err3, result3, fields) {
+                              if(err3){
+                                  console.log(err3);
+                              }
+                              else{
+                                  res.render('mojiKursevi', {kursevi:result, imePrez:result3});
+                              }
+                          })
+                      }
+                   });
+               }
+            });
         }
 
     });
-
-    /*konekcija.query("SELECT * FROM Kurs", function (error, results, fields) {
-        if(error){
-            console.log(error);
-        }
-        else{
-            res.render('mojiKursevi', {kursevi:results});
-
-        }
-
-    });*/
-
 });
 
 module.exports = router;

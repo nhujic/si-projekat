@@ -28,7 +28,7 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="sidebartext">
-                <h4>Ime prezime</h4>
+                <h4><%= imePrez[0].Ime%> <%= imePrez[0].Prezime%></h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -78,7 +78,6 @@
         <div class="table-striped" id="tabela">
             <table class="table">
                 <th>Naziv Kursa</th>
-                <th>Odsjek</th>
                 <th>Semestar</th>
                 <th>Ciklus</th>
                 <th>Sifra kursa</th>
@@ -87,7 +86,6 @@
                 %>
                 <tr>
                     <td><%= kursevi[i].NazivKursa %></td>
-                    <td><%= kursevi[i].Odsjek %></td>
                     <td><%= kursevi[i].Semestar %></td>
                     <td><%= kursevi[i].Ciklus %></td>
                     <td><%= kursevi[i].SifraKursa %></td>
@@ -115,8 +113,6 @@
                         <div class="form-group">
                             <p>Kurs</p>
                             <input type="text" name="naziv_kursa" id="naziv_kursa" placeholder="Unesi naziv kursa" required="required">
-                            <p>Odsjek</p>
-                            <input type="text" name="odsjek" id="odsjek" placeholder="Unesi odsjek" required="required">
                             <p>Semestar</p>
                             <input type="text" name="semestar" id="semestar" placeholder="Unesi semestar" required="required">
                             <p>Ciklus</p>

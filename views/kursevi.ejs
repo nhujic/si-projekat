@@ -28,7 +28,7 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="sidebartext">
-                <h4>Ime prezime</h4>
+                <h4><%= imePrez[0].Ime%> <%= imePrez[0].Prezime%></h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -53,9 +53,9 @@
                     Moji Kursevi
                 </a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <%  if(rows.length >= 1){
-                        for(var i=0; i < rows.length; i++) { %>
-                    <li><a href="#"><%= rows[i].NazivKursa %></a></li>
+                    <%  if(kursevi.length >= 1){
+                        for(var i=0; i < kursevi.length; i++) { %>
+                    <li><a href="#"><%= kursevi[i].NazivKursa %></a></li>
 
                     <% }} %>
                 </ul>
@@ -91,8 +91,11 @@
                     for(var i = 0; i < rows.length; i++) {
                      %>
                 <tr>
-                    <td id="imeKursa"><%= rows[i].NazivKursa %></td>
-                    <td id="odsjek"><%= rows[i].Odsjek %></td>
+                    <td><%= rows[i].NazivKursa %></td>
+                    <td><%= rows[i].Odsjek %></td>
+                    <td>
+                        <%= rows[i].Ime%> <%= rows[i].Prezime%>
+                    </td>
 
 
                     <td>

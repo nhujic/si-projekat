@@ -50,6 +50,13 @@
                     <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <%  if(kursevi.length >= 1){
+                    for(var i=0; i < kursevi.length; i++) { %>
+                    <li><a href="#"><%= kursevi[i].NazivKursa %></a></li>
+
+                    <% }} %>
+                </ul>
             </li>
             <li>
                 <a href="#">
@@ -82,7 +89,7 @@
                     <div class="text">
                         <span class="textDashboard">Kurseva:</span>
                         <br>
-                        <h1 class="numberDashboard redtext"> 7 </h1>
+                        <h1 class="numberDashboard redtext"> <%= kursevi.length %></h1>
                     </div>
                 </div>
 
