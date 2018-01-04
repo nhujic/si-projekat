@@ -11,6 +11,13 @@ router.get('/choose', function(req, res, next) {
     res.render('choose');
 });
 
+router.get('/kurs', function(req, res, next) {
+    res.render('kursStudent');
+});
+router.get('/kursProfesor', function(req, res, next) {
+    res.render('kursProfesor');
+});
+
 router.get('/pocetnaStudent', function(req, res, next) {
 
     let username = req.user.username;

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Kursevi</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/stylesheets/styleDefault.css" id="theme-stylesheet">
+
+    <script type="text/javascript" src="/javascripts/helper.js"></script>
+    <script type="text/javascript" src="/javascripts/popup.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
+            <div class="sidebartext" id="sidebartext">
+                <h4><%#= imePrez[0].Ime%> <%#= imePrez[0].Prezime%></h4>
+            </div>
+        </div>
+        <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
+            <i class="glyphicon glyphicon-align-left"></i>
+        </button>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="/pocetnaStudent">
+                    <i class="glyphicon glyphicon-home"></i>
+                    Početna
+                </a>
+            <li>
+                <a href="#">
+                    <i class="glyphicon glyphicon-tasks"></i>
+                    Svi Kursevi
+                </a>
+            </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-book"></i>
+                    Moji Kursevi
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <%#  if(kursevi.length >= 1){
+                    for(var i=0; i < kursevi.length; i++) { %>
+                    <li><a href="#"><%#= kursevi[i].NazivKursa %></a></li>
+
+                    <%# }} %>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="glyphicon glyphicon-list-alt"></i>
+                    Ispiti
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!--Sidebar end -->
+    <!-- Page Content Holder -->
+    <div id="content" class="customWidth">
+        <!-- Header-->
+        <nav class="navbar navbar-default" id="nav">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" >Kurs </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </nav>
+        <!--Header end-->
+
+        <!-- Ispiti -->
+        <div class="box">
+            <button type="button" id="kreirajIspitDugme" class="btn btn-default dugmeProf" data-toggle="modal"
+                    data-target="#kreirajIspit"> + Novi ispit
+            </button>
+            <h4>Ispiti</h4>
+            <table class="table">
+                <tr>
+                    <td> Naziv ispita </td>
+                    <td> Mjesto održavanja</td>
+                    <td> Vrijeme održavanja</td>
+                    <td> Dosad prijavljeno</td>
+
+                </tr>
+            </table>
+        </div>
+
+        <!--modal za kreiranje ispita-->
+        <div class="modal fade" id="kreirajIspit" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Kreiranje ispita</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="usr">Ispit iz:</label>
+                            <input type="text" class="form-control" id="ispit" name="ispit">
+
+                            <label for="usr">Mjesto održavanja ispita:</label>
+                            <input type="text" class="form-control" id="mjesto" name="mjesto">
+
+                            <label for="usr">Vrijeme održavanja ispita:</label>
+                            <input type="text" class="form-control" id="vrijeme" name="vrijeme">
+                        </div>
+                        <input type="submit" class="btn btn-info" value="Submit" id="kreirajIspit">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Rezultati ispita-->
+        <div class="box">
+            <button type="button" id="dodajRezultat" class="btn btn-default dugmeProf"> + Dodaj rezultate
+            </button>
+            <h4>Rezultati ispita</h4>
+
+            <table class="table">
+                <tr>
+                    <td> Naziv ispita </td>
+                    <td> Datum objave </td>
+                    <td> <a href ="#">Rezultat ispita</a></td>
+
+                </tr>
+            </table>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+</body>
+</html>
