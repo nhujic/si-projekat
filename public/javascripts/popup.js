@@ -39,6 +39,7 @@ function kreirajKurs() {
 
 }
 
+
 function prijaviSe(KursId) {
     var kursId = KursId;
     $(document).ready(function() {

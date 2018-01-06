@@ -277,7 +277,7 @@ router.post('/kreirajIspit', function (req, res, next) {
         }
         else{
             console.log("Upsješno ste kreirali ispit!");
-            res.send({status:200, poruka:"Upsješno ste kreirali ispit!"})
+            res.send({status:200, poruka:"Uspješno ste kreirali ispit!"})
         }
     })
 
