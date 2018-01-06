@@ -65,3 +65,21 @@ function prijaviSe(KursId) {
         });
     });
 }
+
+function kreirajIspit(KursID) {
+    var kursId = KursID;
+    var dio_ispita = $("#ispit").val();
+    var mjesto_ispita = $("#mjesto").val();
+    var vrijeme_ispita = $("#vrijeme").val();
+
+    $.post("/kreirajIspit", {kursId: kursId,dio_ispita: dio_ispita, mjesto_ispita: mjesto_ispita, vrijeme_ispita:vrijeme_ispita})
+        .done(function (data) {
+            if (data.status == 200) {
+                alert(data.poruka);
+                window.location.href = "/kursProfesor?kursId=" + kursId;
+            } else if (data.status == 404) {
+                alert('Greska');
+            }
+        });
+
+}

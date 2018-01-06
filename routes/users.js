@@ -498,4 +498,6 @@ router.get('/kurseviProfesor', function(req, res, next) {
     });
 });
 
+
+
 module.exports = router;

@@ -11,11 +11,28 @@ router.get('/choose', function(req, res, next) {
     res.render('choose');
 });
 
+router.get('/kursProfesor', function(req, res, next) {
+    var kursId =  req.query.kursId;
+    konekcija.query("SELECT * FROM Kurs where KursId = ?", [kursId], function (err, result, fields) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            konekcija.query("SELECT * FROM Ispit where Kurs_KursId = ?", [kursId], function (err1, result1, fields) {
+                if(err1){
+                    console.log(err1);
+                }else{
+                    res.render('kursProfesor',{
+                        nazivKursa: result,
+                        ispiti:result1
+                    });
+                }
+            });
+        }
+    });
+});
 router.get('/kurs', function(req, res, next) {
     res.render('kursStudent');
-});
-router.get('/kursProfesor', function(req, res, next) {
-    res.render('kursProfesor');
 });
 
 router.get('/pocetnaStudent', function(req, res, next) {
@@ -242,6 +259,28 @@ router.post('/prijavaNaKurs', function (req, res, next) {
        }
 
     });
+});
+
+router.post('/kreirajIspit', function (req, res, next) {
+    console.log('post kreiranja ispita');
+    var detaljiIspita = {
+        "DatumIspita": req.body.vrijeme_ispita,
+        "BrojParcijale": req.body.dio_ispita,
+        "NazivKabineta": req.body.mjesto_ispita,
+        "Kurs_KursId": req.body.kursId
+    };
+
+    konekcija.query("INSERT INTO Ispit SET ?", detaljiIspita, function (err, result, fields) {
+        if(err){
+            console.log(err);
+            res.send({status:404});
+        }
+        else{
+            console.log("Upsješno ste kreirali ispit!");
+            res.send({status:200, poruka:"Upsješno ste kreirali ispit!"})
+        }
+    })
+
 });
 
 

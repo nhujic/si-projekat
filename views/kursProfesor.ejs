@@ -26,7 +26,7 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="sidebartext">
-                <h4><%#= imePrez[0].Ime%> <%#= imePrez[0].Prezime%></h4>
+                <h4><%#= imePrezime[0].Ime %> <%#= imePrezime[0].Prezime %></h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -73,7 +73,7 @@
         <nav class="navbar navbar-default" id="nav">
 
             <div class="navbar-header">
-                <a class="navbar-brand" >Kurs </a>
+                <a class="navbar-brand" ><%= nazivKursa[0].NazivKursa %> </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
 
@@ -96,6 +96,15 @@
                     <td> Dosad prijavljeno</td>
 
                 </tr>
+                <% if(ispiti.length >= 1){
+                for(var i = 0; i < ispiti.length; i++) {
+                %>
+                <tr>
+                    <td><%= ispiti[i].BrojParcijale %></td>
+                    <td><%= ispiti[i].NazivKabineta %></td>
+                    <td><%= ispiti[i].DatumIspita %></td>
+                </tr>
+                <% }} %>
             </table>
         </div>
 
@@ -122,7 +131,7 @@
                             <label for="usr">Vrijeme održavanja ispita:</label>
                             <input type="text" class="form-control" id="vrijeme" name="vrijeme">
                         </div>
-                        <input type="submit" class="btn btn-info" value="Submit" id="kreirajIspit">
+                        <input type="submit" class="btn btn-info" value="Submit" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
                     </div>
 
                     <div class="modal-footer">
