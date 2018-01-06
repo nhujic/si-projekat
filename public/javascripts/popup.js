@@ -84,3 +84,19 @@ function kreirajIspit(KursID) {
         });
 
 }
+
+function prijaviIspit(IspitId) {
+    var ispitId = IspitId;
+
+    $.post("/prijavaNaIspit", {ispitId: ispitId})
+        .done(function (data) {
+            if(data.status == 200){
+                alert(data.poruka);
+            }else if(data.status == 401){
+                alert(data.poruka);
+            }else if(data.status == 400){
+                alert("Greska");
+            }
+        });
+
+}
