@@ -55,8 +55,8 @@ router.post('/registracija/profesor', function (req, res, next) {
     var password = req.body.password;
     var provjeraPassword = req.body.passwordValidation;
     var fakultet = req.body.fakultet;
-    var odsjek = req.body.odsjek;
-    var tipKorisnika = 'profesor';
+    var naziv = req.body.odsjek;
+    var tip = 'profesor';
     var aktivan = 1;
 
     req.checkBody('ime', 'Ime je obavezno').notEmpty();
@@ -70,6 +70,8 @@ router.post('/registracija/profesor', function (req, res, next) {
     req.checkBody('odsjek', 'Odsjek je obavezan').notEmpty();
 
     password = encrypt(password);
+
+    console.log(naziv);
 
     var errors = req.validationErrors();
 
@@ -108,7 +110,7 @@ router.post('/registracija/profesor', function (req, res, next) {
                             else {
                                 var korisnickiDetaljiId = results.insertId;
                                 var tipKorisnika = {
-                                    "Tip":tipKorisnika,
+                                    "Tip":tip,
                                     "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId
                                 }
                                 konekcija.query("INSERT INTO TipKorisnika SET ?", [tipKorisnika], function (error, resultsTip, fields) {
@@ -156,8 +158,7 @@ router.post('/registracija/profesor', function (req, res, next) {
                                 });
                                 var odsjek = {
                                     "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId,
-                                    "Naziv":odsjek,
-                                    "Smjer":smjer,
+                                    "Naziv":naziv,
                                     "Fakultet":fakultet
                                 }
                                 konekcija.query("INSERT INTO Odsjek SET ?", [odsjek], function (error, results, fields) {
@@ -198,10 +199,12 @@ router.post('/registracija/student', function (req, res, next) {
     var password = req.body.password;
     var provjeraPassword = req.body.passwordValidation;
     var fakultet = req.body.fakultet;
-    var odsjek = req.body.odsjek;
+    var naziv = req.body.odsjek;
     var smjer = req.body.smjer;
-    var tipKorisnika = 'student';
+    var tip = 'student';
     var aktivan = 1;
+
+    console.log(smjer);
 
 
     req.checkBody('ime', 'Ime je obavezno').notEmpty();
@@ -265,7 +268,7 @@ router.post('/registracija/student', function (req, res, next) {
                                     else {
                                         var korisnickiDetaljiId = results.insertId;
                                         var tipKorisnika = {
-                                            "Tip": tipKorisnika,
+                                            "Tip": tip,
                                             "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId
                                         }
                                         konekcija.query("INSERT INTO TipKorisnika SET ?", [tipKorisnika], function (error, resultsTip, fields) {
@@ -310,7 +313,7 @@ router.post('/registracija/student', function (req, res, next) {
                                         });
                                         var odsjek = {
                                             "KorisnickiDetalji_KorisnickiDetaljiId":korisnickiDetaljiId,
-                                            "Naziv":odsjek,
+                                            "Naziv":naziv,
                                             "Smjer":smjer,
                                             "Fakultet":fakultet
                                         }
@@ -352,10 +355,13 @@ router.post('/login', function (req, res, next) {
             console.log('Upjesan login');
             var korisnikId = results[0].KorisnikId;
             var tipKorisnikaId = results[0].TipKorisnika_TipKorisnikaId;
+            console.log(tipKorisnikaId);
             konekcija.query("SELECT Tip from TipKorisnika where TipKorisnikaId = ?", [tipKorisnikaId], function (err, resultsTip, fields) {
                 if (err) {
+                    console.log(err);
                     res.send({status:400});
                 } else if (resultsTip[0].Tip == 'student') {
+                    console.log("lslslslsl");
                     var obj = {
                         username: username,
                         password: password,
@@ -369,6 +375,7 @@ router.post('/login', function (req, res, next) {
                     res.cookie('name', kriptuj);
                     res.send({status:200, tip:'student'});
                 } else if (resultsTip[0].Tip == 'profesor') {
+                    console.log("jjgiajiaj");
                     var obj = {
                         username: username,
                         password: password,

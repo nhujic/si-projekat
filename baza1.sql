@@ -36,20 +36,29 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Ispit`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Ispit` (
-  `IspitId` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `mydb`.`ispit` (
+  `IspitId` INT(11) NOT NULL AUTO_INCREMENT,
   `DatumIspita` DATETIME NOT NULL,
-  `BrojParcijale` INT NULL,
+  `DioIspita` VARCHAR(45) NULL DEFAULT NULL,
   `NazivKabineta` VARCHAR(45) NOT NULL,
-  `Kurs_KursId` INT NOT NULL,
-  PRIMARY KEY (`IspitId`, `Kurs_KursId`),
+  `Kurs_KursId` INT(11) NOT NULL,
+  `korisnik_KorisnikId` INT(11) NOT NULL,
+  `korisnik_TipKorisnika_TipKorisnikaId` INT(11) NOT NULL,
+  PRIMARY KEY (`IspitId`, `Kurs_KursId`, `korisnik_KorisnikId`, `korisnik_TipKorisnika_TipKorisnikaId`),
   INDEX `fk_Ispit_Kurs1_idx` (`Kurs_KursId` ASC),
+  INDEX `fk_ispit_korisnik1_idx` (`korisnik_KorisnikId` ASC, `korisnik_TipKorisnika_TipKorisnikaId` ASC),
   CONSTRAINT `fk_Ispit_Kurs1`
     FOREIGN KEY (`Kurs_KursId`)
-    REFERENCES `mydb`.`Kurs` (`KursId`)
+    REFERENCES `mydb`.`kurs` (`KursId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ispit_korisnik1`
+    FOREIGN KEY (`korisnik_KorisnikId` , `korisnik_TipKorisnika_TipKorisnikaId`)
+    REFERENCES `mydb`.`korisnik` (`KorisnikId` , `TipKorisnika_TipKorisnikaId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
