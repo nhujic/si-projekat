@@ -28,9 +28,9 @@ function getObjectFromToken(token){
 }
 
 function authorize() {
-    let validationPaths = ['/pocetnaProfesor','/pocetnaStudent','/users/kurseviProfesor','/users/kurseviStudent'];
-    let profesorValidationPaths = ['/pocetnaProfesor','/users/kurseviProfesor'];
-    let studentValidationPaths = ['/pocetnaStudent','/users/kurseviStudent'];
+    let validationPaths = ['/pocetnaProfesor','/pocetnaStudent','/users/kurseviProfesor','/users/kurseviStudent', '/kursProfesor', '/kursStudent'];
+    let profesorValidationPaths = ['/pocetnaProfesor','/users/kurseviProfesor', '/kursProfesor'];
+    let studentValidationPaths = ['/pocetnaStudent','/users/kurseviStudent', '/kursStudent'];
     let regLogValidationPaths = ['/','/login', '/users/registracija/profesor', 'users/registracija/student', '/choose'];
 
     return function (req,res,next) {
@@ -43,6 +43,8 @@ function authorize() {
             req.user = {
                 username: obj.username,
                 password: obj.password,
+                korisnikId: obj.korisnikId,
+                tipKorisnikaId: obj.tipKorisnikaId,
                 tip: obj.tip
             }
 

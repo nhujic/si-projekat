@@ -344,19 +344,23 @@ router.post('/login', function (req, res, next) {
 
     password = encrypt(password);
 
-    konekcija.query("SELECT TipKorisnika_TipKorisnikaId from Korisnik where Password = ? and username = ?", [password, username], function (err, results, fields) {
+    konekcija.query("SELECT * from Korisnik where Password = ? and username = ?", [password, username], function (err, results, fields) {
         if (err) {
             res.send({status:400});
         } else if (results.length > 0) {
 
             console.log('Upjesan login');
-            konekcija.query("SELECT Tip from TipKorisnika where TipKorisnikaId = ?", [results[0].TipKorisnika_TipKorisnikaId], function (err, resultsTip, fields) {
+            var korisnikId = results[0].KorisnikId;
+            var tipKorisnikaId = results[0].TipKorisnika_TipKorisnikaId;
+            konekcija.query("SELECT Tip from TipKorisnika where TipKorisnikaId = ?", [tipKorisnikaId], function (err, resultsTip, fields) {
                 if (err) {
                     res.send({status:400});
                 } else if (resultsTip[0].Tip == 'student') {
                     var obj = {
                         username: username,
                         password: password,
+                        korisnikId: korisnikId,
+                        tipKorisnikaId: tipKorisnikaId,
                         tip: 'student'
                     }
                     var str = JSON.stringify(obj);
@@ -368,6 +372,8 @@ router.post('/login', function (req, res, next) {
                     var obj = {
                         username: username,
                         password: password,
+                        korisnikId: korisnikId,
+                        tipKorisnikaId: tipKorisnikaId,
                         tip: 'profesor'
                     }
                     var str = JSON.stringify(obj);

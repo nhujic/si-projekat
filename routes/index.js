@@ -11,6 +11,68 @@ router.get('/choose', function(req, res, next) {
     res.render('choose');
 });
 
+router.get('/kursStudent', function(req, res, next) {
+    let username = req.user.username;
+    var KursId = req.query.kursId;
+    console.log(KursId, username);
+
+    konekcija.query("SELECT * FROM Korisnik as k " +
+        "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+        "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+        "AND ku.kursid = ? " +
+        "WHERE username = ?", [KursId, username], function (err, result1, fields) {
+        if(err){
+            console.log(err);
+            res.send({status:400, poruka:"Greska"});
+        }
+        else{
+            console.log(result1[0].NazivKursa);
+            konekcija.query("SELECT TipKorisnika_TipKorisnikaId from Korisnik where Username = ?", [username], function (err,results, fields) {
+                if(err){
+                    console.log(err);
+                }else{
+                    if(results.length > 0){
+                        konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [results[0].TipKorisnika_TipKorisnikaId], function (err1, results1, fields) {
+                            if(err1){
+                                console.log(err1);
+                            }
+                            else{
+                                if(results1.length > 0){
+                                    konekcija.query("SELECT * FROM KorisnickiDetalji WHERE KorisnickiDetaljiId = ?", [results1[0].KorisnickiDetalji_KorisnickiDetaljiId], function (err2, results2, fields) {
+                                        if(err2){
+                                            console.log(err2);
+                                        }
+                                        else {
+                                            konekcija.query("SELECT * FROM Korisnik as k " +
+                                                "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+                                                "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+                                                "WHERE username = ?", [username], function (err, result, fields) {
+                                                if (err) {
+                                                    console.log(err);
+                                                }
+                                                else {
+                                                    res.render('kursStudent', {
+                                                        imePrezime: results2,
+                                                        kursevi: result,
+                                                        nazivKursa:result1
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+
+        }
+    });
+
+    //res.render('kursStudent');
+});
 router.get('/kursProfesor', function(req, res, next) {
     var kursId =  req.query.kursId;
     konekcija.query("SELECT * FROM Kurs where KursId = ?", [kursId], function (err, result, fields) {
@@ -30,9 +92,6 @@ router.get('/kursProfesor', function(req, res, next) {
             });
         }
     });
-});
-router.get('/kurs', function(req, res, next) {
-    res.render('kursStudent');
 });
 
 router.get('/pocetnaStudent', function(req, res, next) {
@@ -209,54 +268,54 @@ router.post('/prijavaNaKurs', function (req, res, next) {
 
 
     konekcija.query("SELECT * FROM Kurs WHERE SifraKursa = ?", [sifraKursa], function (error, results, fields) {
-       if(error){
-           console.log(error);
-           res.send({status:401});
-       }
-       else if(results.length > 0){
-               konekcija.query("SELECT * FROM Korisnik WHERE Username = ?", [username], function (error1, results1, fields1) {
-                   if(error1){
-                       console.log(error1);
-                       res.send({status:401});
-                   }
-                   else{
-                       if(results1.length > 0){
-                            konekcija.query("SELECT * FROM korisnik_kurs WHERE Kurs_KursId = ? and Korisnik_KorisnikId = ?", [KursId, results1[0].KorisnikId], function (err, result, fields){
-                                if(err){
-                                    console.log(err);
-                                    res.send({status:401});
+        if(error){
+            console.log(error);
+            res.send({status:401});
+        }
+        else if(results.length > 0){
+            konekcija.query("SELECT * FROM Korisnik WHERE Username = ?", [username], function (error1, results1, fields1) {
+                if(error1){
+                    console.log(error1);
+                    res.send({status:401});
+                }
+                else{
+                    if(results1.length > 0){
+                        konekcija.query("SELECT * FROM korisnik_kurs WHERE Kurs_KursId = ? and Korisnik_KorisnikId = ?", [KursId, results1[0].KorisnikId], function (err, result, fields){
+                            if(err){
+                                console.log(err);
+                                res.send({status:401});
+                            }
+                            else if(result.length > 0){
+                                console.log("Vec ste prijavljeni na ovaj kurs!");
+                                res.send({status:403, poruka:"Vec ste prijavljeni na ovaj kurs!"});
+                            }
+                            else{
+                                var korisnik_kurs = {
+                                    "Korisnik_KorisnikId": results1[0].KorisnikId,
+                                    "Korisnik_TipKorisnika_TipKorisnikaId":results1[0].TipKorisnika_TipKorisnikaId,
+                                    "Kurs_KursId":KursId
                                 }
-                                else if(result.length > 0){
-                                    console.log("Vec ste prijavljeni na ovaj kurs!");
-                                    res.send({status:403, poruka:"Vec ste prijavljeni na ovaj kurs!"});
-                                }
-                                else{
-                                    var korisnik_kurs = {
-                                        "Korisnik_KorisnikId": results1[0].KorisnikId,
-                                        "Korisnik_TipKorisnika_TipKorisnikaId":results1[0].TipKorisnika_TipKorisnikaId,
-                                        "Kurs_KursId":KursId
+                                konekcija.query("INSERT INTO korisnik_kurs SET ?", korisnik_kurs, function (error2, results2, fields2) {
+                                    if(error2){
+                                        console.log(error2);
+                                        res.send({status:401});
                                     }
-                                    konekcija.query("INSERT INTO korisnik_kurs SET ?", korisnik_kurs, function (error2, results2, fields2) {
-                                        if(error2){
-                                            console.log(error2);
-                                            res.send({status:401});
-                                        }
-                                        else{
-                                            console.log("Upsješno ste se prijavili na kurs!");
-                                            res.send({status:200, poruka:"Upsješno ste se prijavili na kurs!"})
-                                        }
-                                    })
-                                }
-                            });
+                                    else{
+                                        console.log("Upsješno ste se prijavili na kurs!");
+                                        res.send({status:200, poruka:"Upsješno ste se prijavili na kurs!"})
+                                    }
+                                })
+                            }
+                        });
 
-                       }
-                   }
-               });
-           }
-       else{
-           console.log("Pogrijesili ste sifru. Pokusajte ponovo");
-           res.send({status:402, poruka:"Pogrijesili ste sifru. Pokusajte ponovo"})
-       }
+                    }
+                }
+            });
+        }
+        else{
+            console.log("Pogrijesili ste sifru. Pokusajte ponovo");
+            res.send({status:402, poruka:"Pogrijesili ste sifru. Pokusajte ponovo"})
+        }
 
     });
 });
@@ -282,6 +341,5 @@ router.post('/kreirajIspit', function (req, res, next) {
     })
 
 });
-
 
 module.exports = router;

@@ -55,7 +55,7 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <%  if(kursevi.length >= 1){
                         for(var i=0; i < kursevi.length; i++) { %>
-                    <li><a href="#"><%= kursevi[i].NazivKursa %></a></li>
+                    <li><a href="/kursStudent?kursId=<%= kursevi[i].KursId%>"><%= kursevi[i].NazivKursa %></a></li>
 
                     <% }} %>
                 </ul>
@@ -87,6 +87,9 @@
         <!--Table for courses-->
         <div class="table-striped" id="tabela">
             <table class="table">
+                <th>Naziv kursa</th>
+                <th>Odsjek</th>
+                <th>Profesor</th>
                 <% if(rows.length >= 1){
                     for(var i = 0; i < rows.length; i++) {
                      %>
