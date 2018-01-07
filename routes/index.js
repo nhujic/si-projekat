@@ -296,7 +296,9 @@ router.post('/kreirajIspit', function (req, res, next) {
         "DatumIspita": req.body.vrijeme_ispita,
         "DioIspita": req.body.dio_ispita,
         "NazivKabineta": req.body.mjesto_ispita,
-        "Kurs_KursId": req.body.kursId
+        "Kurs_KursId": req.body.kursId,
+        "korisnik_KorisnikId": req.user.korisnikId,
+        "korisnik_TipKorisnika_TipKorisnikaId": req.user.tipKorisnikaId
     };
 
     konekcija.query("INSERT INTO Ispit SET ?", detaljiIspita, function (err, result, fields) {
