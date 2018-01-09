@@ -88,19 +88,20 @@
         </div>
 
         <!-- Ispiti i prijava-->
+        <% if(ispiti.length >= 1){
+        for(var i = 0; i < ispiti.length; i++) {
+        %>
         <div class="box">
-            <h4>Ispiti</h4>
+            <h4 class="green">Ispiti</h4>
             <table class="table">
                 <th>Naziv ispita</th>
                 <th>Mjesto odrzavanja</th>
                 <th>Vrijeme odrzavanja</th>
-                <% if(ispiti.length >= 1){
-                for(var i = 0; i < ispiti.length; i++) {
-                %>
+
                 <tr>
-                    <td><%= ispiti[i].DioIspita %></td>
-                    <td><%= ispiti[i].NazivKabineta %></td>
-                    <td><%= ispiti[i].DatumIspita %></td>
+                    <th><%= ispiti[i].DioIspita %></th>
+                    <th><%= ispiti[i].NazivKabineta %></th>
+                    <th><%= ispiti[i].DatumIspita %></th>
 
                     <td>
                         <button type="button" id="prijavaDugme" class="btn btn-info" data-toggle="modal"
@@ -108,18 +109,19 @@
                         </button>
                     </td>
                 </tr>
-                <% }} %>
+                <% } %>
             </table>
         </div>
+        <% } %>
 
         <!-- Rezultati ispita-->
         <div class="box">
-            <h4>Rezultati ispita</h4>
+            <h4 class="green">Rezultati ispita</h4>
             <table class="table">
                 <tr>
-                    <td> Naziv ispita </td>
-                    <td> Datum objave </td>
-                    <td> <a href ="#">Rezultat ispita</a></td>
+                    <th> Naziv ispita </th>
+                    <th> Datum objave </th>
+                    <th> <a href ="#">Rezultat ispita</a></th>
 
                 </tr>
             </table>

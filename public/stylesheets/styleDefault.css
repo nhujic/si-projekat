@@ -106,8 +106,22 @@ a, a:hover, a:focus {
 }
 #tabela{
     margin-left: 1.5%;
-    width: 105%;
+    width: 100%;
+    margin-top: 3%;
 
+}
+.green{
+    color:rgb(191,200,21)!important;
+    font-weight: bold;
+    padding: 1%;
+}
+th{
+    background:rgb(191,200,21)!important;
+    color: white;
+}
+.navbar-brand{
+    color:rgb(191,200,21)!important;
+    font-weight: bold;
 }
 .navbar-btn {
     box-shadow: none;
@@ -400,7 +414,9 @@ ul ul a {
 .dugmeProf{
     margin-left: 89%;
 }
-
+#dodajKursDugme{
+    margin-left: 1.5%;
+}
 /* Popup css*/
 .button{
     padding: 10px 15px;

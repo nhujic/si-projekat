@@ -87,20 +87,19 @@
         <!--Table for courses-->
         <div class="table-striped" id="tabela">
             <table class="table">
+                <tr>
                 <th>Naziv kursa</th>
                 <th>Odsjek</th>
                 <th>Profesor</th>
+                <th></th>
+                </tr>
                 <% if(rows.length >= 1){
-                    for(var i = 0; i < rows.length; i++) {
-                     %>
+                for(var i = 0; i < rows.length; i++) {
+                %>
                 <tr>
                     <td><%= rows[i].NazivKursa %></td>
                     <td><%= rows[i].Odsjek %></td>
-                    <td>
-                        <%= rows[i].Ime%> <%= rows[i].Prezime%>
-                    </td>
-
-
+                    <td><%= rows[i].Ime%> <%= rows[i].Prezime%></td>
                     <td>
                         <button type="button" id="prijavaDugme" class="btn btn-info" data-toggle="modal"
                                 data-target="#prijavaModal" onclick="prijaviSe(<%= rows[i].KursId %>);">Prijava
