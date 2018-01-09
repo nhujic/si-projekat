@@ -7,7 +7,7 @@ body {
 .dasboard{
     background: white;
     padding: 3%;
-    width: 105%;
+    width: 100%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 .numberDashboard{
@@ -101,11 +101,11 @@ a, a:hover, a:focus {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    width: 105%;
-    margin-left: 1.5%;
+    width: 100%;
+    margin-left: 4%;
 }
 #tabela{
-    margin-left: 1.5%;
+    margin-left: 4%;
     width: 100%;
     margin-top: 3%;
 
@@ -328,7 +328,7 @@ ul ul a {
     height: 110px;
 }
 .dasboard{
-    margin-left: 1.5%;
+    margin-left: 4%;
 }
 
 /* ---------------------------------------------------
@@ -406,7 +406,7 @@ ul ul a {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    width: 105%;
+    width: 100%;
     margin-left: 1.5%;
     padding: 2%;
 
@@ -414,10 +414,14 @@ ul ul a {
 .dugmeProf{
     margin-left: 89%;
 }
-#dodajKursDugme{
-    margin-left: 1.5%;
-}
 /* Popup css*/
+#divButton{
+    margin-left: 4%;
+    width: 100%;
+}
+#dodajKursDugme{
+    margin-left: 90%;
+}
 .button{
     padding: 10px 15px;
     border-radius: 2px;
