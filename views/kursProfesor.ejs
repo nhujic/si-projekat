@@ -26,7 +26,7 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="sidebartext">
-                <h4><%#= imePrezime[0].Ime %> <%#= imePrezime[0].Prezime %></h4>
+                <h4><%#= imePrez[0].Ime%> <%#= imePrez[0].Prezime%></h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -35,28 +35,15 @@
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/pocetnaStudent">
+                <a href="/pocetnaProfesor">
                     <i class="glyphicon glyphicon-home"></i>
                     Početna
                 </a>
-            <li>
-                <a href="#">
+            <li class="active">
+                <a href="/users/kurseviProfesor">
                     <i class="glyphicon glyphicon-tasks"></i>
-                    Svi Kursevi
-                </a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <%#  if(kursevi.length >= 1){
-                    for(var i=0; i < kursevi.length; i++) { %>
-                    <li><a href="#"><%#= kursevi[i].NazivKursa %></a></li>
-
-                    <%# }} %>
-                </ul>
             </li>
             <li>
                 <a href="#">

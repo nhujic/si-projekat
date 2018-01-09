@@ -35,12 +35,12 @@
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/pocetnaStudent">
+                <a href="/pocetnaProfesor">
                     <i class="glyphicon glyphicon-home"></i>
                     Početna
                 </a>
             <li class="active">
-                <a href="#">
+                <a href="/users/kurseviProfesor">
                     <i class="glyphicon glyphicon-tasks"></i>
                     Moji Kursevi
                 </a>
@@ -84,7 +84,7 @@
                 for(var i = 0; i < kursevi.length; i++) {
                 %>
                 <tr>
-                    <td><%= kursevi[i].NazivKursa %></td>
+                    <td><a href="/kursProfesor?kursId=<%=kursevi[i].KursId%>"><%= kursevi[i].NazivKursa %></a></td>
                     <td><%= kursevi[i].Semestar %></td>
                     <td><%= kursevi[i].Ciklus %></td>
                     <td><%= kursevi[i].SifraKursa %></td>
@@ -112,8 +112,6 @@
                         <div class="form-group">
                             <p>Kurs</p>
                             <input type="text" name="naziv_kursa" id="naziv_kursa" placeholder="Unesi naziv kursa" required="required">
-                            <p>Odsjek</p>
-                            <input type="text" name="odsjek" id="odsjek" placeholder="Unesi odsjek" required="required">
                             <p>Semestar</p>
                             <input type="text" name="semestar" id="semestar" placeholder="Unesi semestar" required="required">
                             <p>Ciklus</p>
