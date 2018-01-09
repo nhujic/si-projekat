@@ -28,40 +28,38 @@
             <div class="sidebartext" id="test">
                 <h1 class="h4"><%= imePrezime[0].Ime %> <%= imePrezime[0].Prezime %></h1>
             </div>
-        <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
-            <i class="glyphicon glyphicon-align-left"></i>
-        </button>
+            </div>
+            <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
+                <i class="glyphicon glyphicon-align-left"></i>
+            </button>
 
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="/pocetnaProfesor">
-                    <i class="glyphicon glyphicon-home"></i>
-                    Početna
-                </a>
-            <li>
-                <a href="/users/kurseviProfesor">
-                    <i class="glyphicon glyphicon-tasks"></i>
-                    Moji Kursevi
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-list-alt"></i>
-                    Ispiti
-                </a>
-            </li>
-        </ul>
-        </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="/pocetnaProfesor">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Početna
+                    </a>
+                <li>
+                    <a href="/users/kurseviProfesor">
+                        <i class="glyphicon glyphicon-tasks"></i>
+                        Moji Kursevi
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                        Ispiti
+                    </a>
+                </li>
+            </ul>
     </nav>
-
-</div>
 
     <!-- Page Content Holder -->
     <div id="content" class="customWidth">
 
         <nav class="navbar navbar-default" id ="nav">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"> Dashboard</a>
+                <a class="navbar-brand" href="#"> Početna stranica (Na kojem fakultetu profesor gleda studente,ispite..)</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -76,7 +74,7 @@
                             <img  class = "icon" src="/images/img1.jpg" alt="book icon">
                         </div>
                         <div class="text">
-                            <span class="textDashboard">Kurseva:</span>
+                            <span class="textDashboard">Kursevi:</span>
                             <br>
                             <h1 class="numberDashboard redtext"> <%= kursevi.length %> </h1>
                         </div>
@@ -87,7 +85,7 @@
                             <img  class = "icon" src="/images/img2.png" alt="people icon">
                         </div>
                         <div class="text">
-                            <span class="textDashboard">Studenata: </span>
+                            <span class="textDashboard">Studenti: </span>
                             <br>
                             <h1 class="numberDashboard yellowtext"> 90 </h1>
                         </div>
@@ -98,7 +96,7 @@
                             <img  class = "icon" src="/images/img8.png" alt="exam icon">
                         </div>
                         <div class="text">
-                            <span class="textDashboard">Ispita:</span>
+                            <span class="textDashboard">Ispiti:</span>
                             <br>
                             <h1 class="numberDashboard bluetext"> 7 </h1>
                         </div>

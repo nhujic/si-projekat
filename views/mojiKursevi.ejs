@@ -14,8 +14,6 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="/stylesheets/style.css" id="theme-stylesheet">
-
     <link rel="stylesheet" href="/stylesheets/styleDefault.css" id="theme-stylesheet">
 
     <script type="text/javascript" src="/javascripts/helper.js"></script>
@@ -62,18 +60,18 @@
         <nav class="navbar navbar-default" id="nav">
 
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"> Svi Kursevi</a>
+                <a class="navbar-brand" href="#"> Moji Kursevi</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" id = "logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         </nav>
         <!--Header end-->
+        <div id="divButton">
         <button class="button btn-info" id="dodajKursDugme" data-toggle="modal" data-target="#dodajKursModal"> Dodaj
             kurs
         </button>
-        <p></p>
-
+        </div>
         <!--Table for courses-->
         <div class="table-striped" id="tabela">
             <table class="table">
@@ -85,7 +83,7 @@
                 for(var i = 0; i < kursevi.length; i++) {
                 %>
                 <tr>
-                    <td><a href="/kursProfesor?kursId=<%=kursevi[i].KursId%>"><%= kursevi[i].NazivKursa %></a></td>
+                    <td><%= kursevi[i].NazivKursa %></td>
                     <td><%= kursevi[i].Semestar %></td>
                     <td><%= kursevi[i].Ciklus %></td>
                     <td><%= kursevi[i].SifraKursa %></td>
@@ -113,6 +111,8 @@
                         <div class="form-group">
                             <p>Kurs</p>
                             <input type="text" name="naziv_kursa" id="naziv_kursa" placeholder="Unesi naziv kursa" required="required">
+                            <p>Odsjek</p>
+                            <input type="text" name="odsjek" id="odsjek" placeholder="Unesi odsjek" required="required">
                             <p>Semestar</p>
                             <input type="text" name="semestar" id="semestar" placeholder="Unesi semestar" required="required">
                             <p>Ciklus</p>
@@ -121,11 +121,11 @@
                             <input type="text" name="sifra_kursa" id="sifra_kursa" placeholder="Unesi šifru kursa"
                                    required="required">
                         </div>
-                        <input type="submit" class="btn btn-info" value="Submit" onclick="kreirajKurs();" >
+                        <input type="submit" class="button" value="Kreiraj" onclick="kreirajKurs();" >
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="button" data-dismiss="modal">Close</button>
                     </div>
 
                 </div>

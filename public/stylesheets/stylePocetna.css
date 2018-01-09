@@ -1365,6 +1365,7 @@ section.charts div[class*="col-"] {
 
 .navbar {
   padding: 0.5rem 1rem;
+  color: rgb(191,200,21);
 }
 
 .navbar-brand {
@@ -1373,6 +1374,7 @@ section.charts div[class*="col-"] {
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
+  color: rgb(191,200,21);
 }
 
 .navbar-toggler {

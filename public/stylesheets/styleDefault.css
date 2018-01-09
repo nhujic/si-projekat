@@ -7,7 +7,7 @@ body {
 .dasboard{
     background: white;
     padding: 3%;
-    width: 105%;
+    width: 100%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 .numberDashboard{
@@ -101,13 +101,27 @@ a, a:hover, a:focus {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    width: 105%;
-    margin-left: 1.5%;
+    width: 100%;
+    margin-left: 4%;
 }
 #tabela{
-    margin-left: 1.5%;
-    width: 105%;
+    margin-left: 4%;
+    width: 100%;
+    margin-top: 3%;
 
+}
+.green{
+    color:rgb(191,200,21)!important;
+    font-weight: bold;
+    padding: 1%;
+}
+th{
+    background:rgb(191,200,21)!important;
+    color: white;
+}
+.navbar-brand{
+    color:rgb(191,200,21)!important;
+    font-weight: bold;
 }
 .navbar-btn {
     box-shadow: none;
@@ -282,22 +296,22 @@ ul ul a {
     height: 150px;
 }
 .red{
-    background: #c82333;
+    background: #88C043;
 }
 .yellow{
-    background: yellow;
+    background: #FF5733;
 }
 .blue{
-    background: cornflowerblue;
+    background: #013B7D ;
 }
 .redtext{
-    color: #c82333;
+    color: #88C043;
 }
 .yellowtext{
-    color: yellow;
+    color: #FF5733;
 }
 .bluetext{
-    color: cornflowerblue;
+    color:  #013B7D ;
 }
 .text{
     width: 100px;
@@ -314,7 +328,7 @@ ul ul a {
     height: 110px;
 }
 .dasboard{
-    margin-left: 1.5%;
+    margin-left: 4%;
 }
 
 /* ---------------------------------------------------
@@ -392,7 +406,7 @@ ul ul a {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    width: 105%;
+    width: 100%;
     margin-left: 1.5%;
     padding: 2%;
 
@@ -400,3 +414,75 @@ ul ul a {
 .dugmeProf{
     margin-left: 89%;
 }
+/* Popup css*/
+#divButton{
+    margin-left: 4%;
+    width: 100%;
+}
+#dodajKursDugme{
+    margin-left: 90%;
+}
+.button{
+    padding: 10px 15px;
+    border-radius: 2px;
+    border: none;
+    font-weight: bold;
+    background-color:rgb(191,200,21)!important;
+    color: white;
+}
+.modal-body{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20px;
+    height:500px;
+}
+.form-group{
+    width: 100%;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    height: 400px;
+    background: #fff;
+
+}
+.form-group  p{
+    margin:0;
+    padding:2px;
+    font-weight: bold;
+    color: #a6af13;
+}
+.form-group input{
+    width: 100%;
+    margin-bottom: 5px;
+}
+.form-group input[type= "text"]{
+    border: none;
+    border-bottom: 2px solid #a6af13 ;
+    outline: none;
+    height: 30px;
+}
+.form-group input[type= "text"]:focus{
+    border-bottom: 2px solid #262626;
+}
+.form-group input[type= "submit"]{
+    border: none;
+    outline: none;
+    height:30px;
+    color:#fff;
+    background: #a6af13;
+    cursor: pointer;
+}
+
+.form-group input[type= "submit"]:hover{
+    background:#4d4d00;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: none;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+

@@ -87,13 +87,13 @@
             <button type="button" id="kreirajIspitDugme" class="btn btn-default dugmeProf" data-toggle="modal"
                     data-target="#kreirajIspit"> + Novi ispit
             </button>
-            <h4>Ispiti</h4>
+            <h4 class="green" >Ispiti</h4>
             <table class="table">
                 <tr>
-                    <td> Naziv ispita </td>
-                    <td> Mjesto održavanja</td>
-                    <td> Vrijeme održavanja</td>
-                    <td> Dosad prijavljeno</td>
+                    <th> Naziv ispita </th>
+                    <th> Mjesto održavanja</th>
+                    <th> Vrijeme održavanja</th>
+                    <th> Dosad prijavljeno</th>
 
                 </tr>
 
@@ -132,7 +132,7 @@
                             <label for="usr">Vrijeme održavanja ispita:</label>
                             <input type="text" class="form-control" id="vrijeme" name="vrijeme">
                         </div>
-                        <input type="submit" class="btn btn-info" value="Submit" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
+                        <input type="submit" class="btn btn-info" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
                     </div>
 
                     <div class="modal-footer">
@@ -146,15 +146,14 @@
 
         <!-- Rezultati ispita-->
         <div class="box">
-            <button type="button" id="dodajRezultat" class="btn btn-default dugmeProf"> + Dodaj rezultate
-            </button>
-            <h4>Rezultati ispita</h4>
+            Dodaj rezultate: <input type="file" name="rezultatiIspita">
+            <h4 class="green">Rezultati ispita</h4>
 
             <table class="table">
                 <tr>
-                    <td> Naziv ispita </td>
-                    <td> Datum objave </td>
-                    <td> <a href ="#">Rezultat ispita</a></td>
+                    <th> Naziv ispita </th>
+                    <th> Datum objave </th>
+                    <th> <a href ="#">Rezultat ispita</a></th>
 
                 </tr>
             </table>
