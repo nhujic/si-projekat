@@ -100,11 +100,11 @@
             <div class="modal-dialog">
 
                 <!-- Modal content-->
-                <div class="modal-content">
+                <div class="modal-content" id="modal-content">
 
-                    <div class="modal-header">
+                    <div class="modal-header green" >
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Kreiranje kursa</h4>
+                        <h4 class="modal-title green">Kreiranje kursa</h4>
                     </div>
 
                     <div class="modal-body">
@@ -121,10 +121,11 @@
                             <input type="text" name="sifra_kursa" id="sifra_kursa" placeholder="Unesi šifru kursa"
                                    required="required">
                         </div>
-                        <input type="submit" class="button" value="Kreiraj" onclick="kreirajKurs();" >
+
                     </div>
 
                     <div class="modal-footer">
+                        <input type="submit" class="button" value="Kreiraj" onclick="kreirajKurs();" >
                         <button type="button" class="button" data-dismiss="modal">Close</button>
                     </div>
 
