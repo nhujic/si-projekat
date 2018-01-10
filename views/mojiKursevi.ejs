@@ -83,7 +83,7 @@
                 for(var i = 0; i < kursevi.length; i++) {
                 %>
                 <tr>
-                    <td><%= kursevi[i].NazivKursa %></td>
+                    <td><a href="/kursProfesor?kursId=<%=kursevi[i].KursId%>"><%= kursevi[i].NazivKursa %></a></td>
                     <td><%= kursevi[i].Semestar %></td>
                     <td><%= kursevi[i].Ciklus %></td>
                     <td><%= kursevi[i].SifraKursa %></td>
