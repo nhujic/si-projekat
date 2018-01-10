@@ -294,7 +294,7 @@ router.post('/kreirajIspit', function (req, res, next) {
     console.log('post kreiranja ispita');
     var detaljiIspita = {
         "DatumIspita": req.body.vrijeme_ispita,
-        "DioIspita": req.body.dio_ispita,
+        "BrojParcijale": req.body.dio_ispita,
         "NazivKabineta": req.body.mjesto_ispita,
         "Kurs_KursId": req.body.kursId
     };
