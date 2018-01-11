@@ -101,7 +101,7 @@
                     <td><%= rows[i].Odsjek %></td>
                     <td><%= rows[i].Ime%> <%= rows[i].Prezime%></td>
                     <td>
-                        <button type="button" id="prijavaDugme" class="btn btn-info" data-toggle="modal"
+                        <button type="button" id="prijavaDugme" class="button" data-toggle="modal"
                                 data-target="#prijavaModal" onclick="prijaviSe(<%= rows[i].KursId %>);">Prijava
                         </button>
                     </td>
@@ -117,21 +117,21 @@
                 <!-- Modal content-->
                 <div class="modal-content">
 
-                    <div class="modal-header">
+                    <div class="modal-header green">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Prijava na kurs</h4>
+                        <h4 class="modal-title green">Prijava na kurs</h4>
                     </div>
 
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="usr">Unesite sifru kursa:</label>
-                            <input type="text" class="form-control" id="sifra_kursa1" name="sifraKursa">
+                    <div class="modal-body-prijava">
+                        <div class="form-group-prijava">
+                            <p>Unesite šifru kursa:</p>
+                            <input type="text" id="sifra_kursa1" name="sifraKursa">
                         </div>
-                        <input type="submit" class="btn btn-info" value="Submit" id="prijaviKurs">
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="button" value="Prijava" id="prijaviKurs">
+                        <button type="button" class="button" data-dismiss="modal">Close</button>
                     </div>
 
                 </div>

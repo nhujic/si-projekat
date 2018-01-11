@@ -26,7 +26,7 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="sidebartext">
-                <h4><%#= imePrez[0].Ime%> <%#= imePrez[0].Prezime%></h4>
+                <h4><%#= imePrezime[0].Ime %> <%#= imePrezime[0].Prezime %></h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -39,11 +39,24 @@
                     <i class="glyphicon glyphicon-home"></i>
                     Početna
                 </a>
-            <li class="active">
+            <li>
                 <a href="#">
                     <i class="glyphicon glyphicon-tasks"></i>
+                    Svi Kursevi
+                </a>
+            </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <%#  if(kursevi.length >= 1){
+                    for(var i=0; i < kursevi.length; i++) { %>
+                    <li><a href="#"><%#= kursevi[i].NazivKursa %></a></li>
+
+                    <%# }} %>
+                </ul>
             </li>
             <li>
                 <a href="#">
@@ -71,7 +84,7 @@
 
         <!-- Ispiti -->
         <div class="box">
-            <button type="button" id="kreirajIspitDugme" class="btn btn-default dugmeProf" data-toggle="modal"
+            <button type="button" id="kreirajIspitDugme" class="button dugmeProf" data-toggle="modal"
                     data-target="#kreirajIspit"> + Novi ispit
             </button>
             <h4 class="green" >Ispiti</h4>
@@ -99,31 +112,31 @@
         <!--modal za kreiranje ispita-->
         <div class="modal fade" id="kreirajIspit" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
-                <div class="modal-content">
+                <div class="modal-content" id="modal-content">
 
-                    <div class="modal-header">
+                    <div class="modal-header green">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Kreiranje ispita</h4>
+                        <h4 class="modal-title green">Kreiranje ispita</h4>
                     </div>
 
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="usr">Ispit iz:</label>
-                            <input type="text" class="form-control" id="ispit" name="ispit">
+                    <div class="modal-body-ispit">
+                        <div class="form-group-ispit">
+                            <p>Ispit iz:</p>
+                            <input type="text"  id="ispit" name="ispit">
 
-                            <label for="usr">Mjesto održavanja ispita:</label>
-                            <input type="text" class="form-control" id="mjesto" name="mjesto">
+                            <p>Mjesto održavanja ispita:</p>
+                            <input type="text" id="mjesto" name="mjesto">
 
-                            <label for="usr">Vrijeme održavanja ispita:</label>
-                            <input type="text" class="form-control" id="vrijeme" name="vrijeme">
+                            <p>Vrijeme održavanja ispita:</p>
+                            <input type="text" id="vrijeme" name="vrijeme">
                         </div>
-                        <input type="submit" class="btn btn-info" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="button" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
+
+                        <button type="button" class="button" data-dismiss="modal">Close</button>
                     </div>
 
                 </div>

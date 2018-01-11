@@ -95,8 +95,8 @@
             <h4 class="green">Ispiti</h4>
             <table class="table">
                 <th>Naziv ispita</th>
-                <th>Mjesto odrzavanja</th>
-                <th>Vrijeme odrzavanja</th>
+                <th>Mjesto održavanja</th>
+                <th>Vrijeme održavanja</th>
 
                 <tr>
                     <th><%= ispiti[i].DioIspita %></th>
@@ -104,9 +104,9 @@
                     <th><%= ispiti[i].DatumIspita %></th>
 
                     <td>
-                        <button type="button" id="prijavaDugme" class="btn btn-info" data-toggle="modal"
+                        <input type="submit" class="button" id="prijavaDugme"  data-toggle="modal"
                                 data-target="#prijavaModal" onclick="prijaviIspit(<%= ispiti[i].IspitId %>);">Prijava
-                        </button>
+
                     </td>
                 </tr>
                 <% } %>

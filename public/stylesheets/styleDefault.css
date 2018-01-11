@@ -407,7 +407,7 @@ ul ul a {
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     width: 100%;
-    margin-left: 1.5%;
+    margin-left: 4%;
     padding: 2%;
 
 }
@@ -415,6 +415,9 @@ ul ul a {
     margin-left: 89%;
 }
 /* Popup css*/
+.modal-content{
+    height: 5% !important;
+}
 #divButton{
     margin-left: 4%;
     width: 100%;
@@ -422,8 +425,19 @@ ul ul a {
 #dodajKursDugme{
     margin-left: 90%;
 }
+
+.dugmeKreiraj{
+    padding: -1px;
+    margin-bottom: 5px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+
+}
+
 .button{
-    padding: 10px 15px;
+    padding: 8px 15px;
     border-radius: 2px;
     border: none;
     font-weight: bold;
@@ -433,14 +447,36 @@ ul ul a {
 .modal-body{
     position: relative;
     margin: 0 auto;
-    margin-top: 20px;
-    height:500px;
+    margin-top: 10px;
+    height:400px;
 }
+.modal-body-ispit{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
+    height:250px;
+}
+
+.modal-body-prijava{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
+    height:250px;
+}
+
 .form-group{
     width: 100%;
-    padding: 10px 10px;
+    padding: 5px 10px;
     box-sizing: border-box;
     height: 400px;
+    background: #fff;
+
+}
+.form-group-ispit{
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    height: 200px;
     background: #fff;
 
 }
@@ -450,7 +486,17 @@ ul ul a {
     font-weight: bold;
     color: #a6af13;
 }
+.form-group-ispit  p{
+    margin:0;
+    padding:2px;
+    font-weight: bold;
+    color: #a6af13;
+}
 .form-group input{
+    width: 100%;
+    margin-bottom: 5px;
+}
+.form-group-ispit input{
     width: 100%;
     margin-bottom: 5px;
 }
@@ -460,9 +506,20 @@ ul ul a {
     outline: none;
     height: 30px;
 }
+
+.form-group-ispit input[type= "text"]{
+    border: none;
+    border-bottom: 2px solid #a6af13 ;
+    outline: none;
+    height: 30px;
+}
 .form-group input[type= "text"]:focus{
     border-bottom: 2px solid #262626;
 }
+.form-group-ispit input[type= "text"]:focus{
+    border-bottom: 2px solid #262626;
+}
+
 .form-group input[type= "submit"]{
     border: none;
     outline: none;
@@ -472,7 +529,70 @@ ul ul a {
     cursor: pointer;
 }
 
+.form-group-ispit input[type= "submit"]{
+    border: none;
+    outline: none;
+    height:30px;
+    color:#fff;
+    background: #a6af13;
+    cursor: pointer;
+}
+
 .form-group input[type= "submit"]:hover{
+    background:#4d4d00;
+}
+.form-group-ispit input[type= "submit"]:hover{
+    background:#4d4d00;
+}
+
+.modal-body-prijava{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
+    height:150px;
+}
+
+.form-group-prijava{
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    height: 100px;
+    background: #fff;
+
+}
+.form-group-prijava  p{
+    margin:0;
+    padding:2px;
+    font-weight: bold;
+    color: #a6af13;
+}
+.form-group-prijava input{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-group-prijava input[type= "text"]{
+    border: none;
+    border-bottom: 2px solid #a6af13 ;
+    outline: none;
+    height: 30px;
+}
+
+.form-group-prijava input[type= "text"]:focus{
+    border-bottom: 2px solid #262626;
+}
+
+
+.form-group-prijava input[type= "submit"]{
+    border: none;
+    outline: none;
+    height:30px;
+    color:#fff;
+    background: #a6af13;
+    cursor: pointer;
+}
+
+.form-group-prijava input[type= "submit"]:hover{
     background:#4d4d00;
 }
 
