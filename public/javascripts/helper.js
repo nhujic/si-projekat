@@ -9,6 +9,10 @@ $(document).ready(function () {
 
     });
 });
+$(function () {
+    $('#vrijeme').datetimepicker();
+});
+
 
 $(document).ready(function(){
     $("#logout").click(function(){
