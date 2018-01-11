@@ -79,7 +79,9 @@ router.get('/kursProfesor', function(req, res, next) {
             console.log(err);
         }
         else {
-            konekcija.query("SELECT * FROM Ispit where Kurs_KursId = ?", [kursId], function (err1, result1, fields) {
+            konekcija.query("select *,count(Ispit_IspitId) as BrojStudenata from Ispit, Korisnik_Ispit "+
+                "where Ispit.Kurs_KursId = ? and Ispit.IspitId = Korisnik_Ispit.Ispit_IspitId " +
+                "group by Korisnik_Ispit.Ispit_IspitId;", [kursId], function (err1, result1, fields) {
                 if(err1){
                     console.log(err1);
                 }else{
@@ -89,6 +91,8 @@ router.get('/kursProfesor', function(req, res, next) {
                     });
                 }
             });
+
+
         }
     });
 });
@@ -271,7 +275,7 @@ router.post('/prijavaNaKurs', function (req, res, next) {
 router.post('/kreirajIspit', function (req, res, next) {
     var detaljiIspita = {
         "DatumIspita": req.body.vrijeme_ispita,
-        "BrojParcijale": req.body.dio_ispita,
+        "DioIspita": req.body.dio_ispita,
         "NazivKabineta": req.body.mjesto_ispita,
         "Kurs_KursId": req.body.kursId
     };
@@ -282,13 +286,13 @@ router.post('/kreirajIspit', function (req, res, next) {
             res.send({status:404});
         }
         else{
-            IspitId = result.insertId;
-            var korisnik_ispit = {
+            IspitId = result.insertId
+             var korisnik_ispit = {
                 "Korisnik_KorisnikId": req.user.korisnikId,
                 "Korisnik_TipKorisnika_TipKorisnikaId":req.user.tipKorisnikaId,
                 "Ispit_IspitId": IspitId
-            }
-            konekcija.query("INSERT INTO Korisnik_Ispit SET ?", korisnik_ispit,function (err1, result1, fields) {
+             }
+                konekcija.query("INSERT INTO Korisnik_Ispit SET ?", korisnik_ispit,function (err1, result1, fields) {
                 if(err1){
                     console.log(err1);
                     res.send({status:404});
@@ -297,6 +301,8 @@ router.post('/kreirajIspit', function (req, res, next) {
                     res.send({status:200, poruka:"Uspješno ste kreirali ispit!"});
                 }
             });
+            console.log("Uspješno ste kreirali ispit!");
+            res.send({status:200, poruka:"Uspješno ste kreirali ispit!"});
         }
     });
 
