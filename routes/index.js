@@ -10,6 +10,9 @@ router.get('/', function(req, res, next) {
 router.get('/choose', function(req, res, next) {
     res.render('choose');
 });
+router.get('/dodajRezlutate', function(req, res, next) {
+    res.render('dodajRezultate');
+});
 
 router.get('/kursStudent', function(req, res, next) {
     let username = req.user.username;
