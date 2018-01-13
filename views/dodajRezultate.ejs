@@ -91,11 +91,12 @@
                     <th></th>
 
                 </tr>
+                <% if(studenti.length > 1){
+                    for(var i = 1; i < studenti.length; i++) {
+                %>
                 <tr>
-                    <td> Ime i prezime </td>
-                    <td> Broj indexa</td>
-                    <td> Osvojeno bodova </td>
-                    <td> Maximalno bodova </td>
+                    <td><%= studenti[i].Ime %>  <%= studenti[i].Prezime%></td>
+                    <td><%= studenti[i].BrojIndexa%></td>
                     <td>
                         <button type="button" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-edit"></span> Edit
@@ -103,7 +104,7 @@
                     </td>
 
                 </tr>
-
+                <% }} %>
 
             </table>
             <input type="submit" class="button" id="dodajRezultateDugme"  data-toggle="modal"
