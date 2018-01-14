@@ -307,6 +307,9 @@ ul ul a {
 .redtext{
     color: #88C043;
 }
+.yellowButton{
+    background: #f9e54d;
+}
 .yellowtext{
     color: #FF5733;
 }
@@ -455,6 +458,7 @@ ul ul a {
     margin: 0 auto;
     margin-top: 10px;
     height:250px;
+<<<<<<< HEAD
 }
 
 .modal-body-prijava{
@@ -464,6 +468,17 @@ ul ul a {
     height:250px;
 }
 
+=======
+}
+
+.modal-body-prijava{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
+    height:250px;
+}
+
+>>>>>>> 887db4871b764edf53c4ac8994d40e9d69711c40
 .form-group{
     width: 100%;
     padding: 5px 10px;

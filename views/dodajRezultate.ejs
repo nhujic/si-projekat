@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Kursevi</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/stylesheets/styleDefault.css" id="theme-stylesheet">
+
+    <script type="text/javascript" src="/javascripts/helper.js"></script>
+    <script type="text/javascript" src="/javascripts/popup.js"></script>
+
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
+            <div class="sidebartext" id="sidebartext">
+                <h4><%#= imePrezime[0].Ime %> <%#= imePrezime[0].Prezime %></h4>
+            </div>
+        </div>
+        <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
+            <i class="glyphicon glyphicon-align-left"></i>
+        </button>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="/pocetnaProfesor">
+                    <i class="glyphicon glyphicon-home"></i>
+                    Početna
+                </a>
+
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-book"></i>
+                    Moji Kursevi
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <%#  if(kursevi.length >= 1){
+                    for(var i=0; i < kursevi.length; i++) { %>
+                    <li><a href="#"><%#= kursevi[i].NazivKursa %></a></li>
+
+                    <%# }} %>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="glyphicon glyphicon-list-alt"></i>
+                    Ispiti
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!--Sidebar end -->
+    <!-- Page Content Holder -->
+    <div id="content" class="customWidth">
+        <!-- Header-->
+        <nav class="navbar navbar-default" id="nav">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" >Ispit iz predmeta odrzan datuma </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </nav>
+        <!--Header end-->
+
+        <!-- Ispiti -->
+        <div class="box">
+
+            <h4 class="green" >Rezultati</h4>
+            <table class="table">
+                <tr>
+                    <th> Ime i prezime </th>
+                    <th> Broj indexa</th>
+                    <th> Osvojeno bodova </th>
+                    <th> Maximalno bodova </th>
+                    <th></th>
+
+                </tr>
+                <% if(studenti.length > 1){
+                    for(var i = 1; i < studenti.length; i++) {
+                %>
+                <tr>
+                    <td><%= studenti[i].Ime %>  <%= studenti[i].Prezime%></td>
+                    <td><%= studenti[i].BrojIndexa%></td>
+                    <td>
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                        </button>
+                    </td>
+
+                </tr>
+                <% }} %>
+
+            </table>
+            <input type="submit" class="button" id="dodajRezultateDugme"  data-toggle="modal"
+                   value="Dodaj rezultate">
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
