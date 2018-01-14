@@ -447,6 +447,16 @@ ul ul a {
     background-color:rgb(191,200,21)!important;
     color: white;
 }
+
+.button_prijava{
+    padding: 8px 15px;
+    margin-left: 72%;
+    border-radius: 2px;
+    border: none;
+    font-weight: bold;
+    background-color:rgb(191,200,21)!important;
+    color: white;
+}
 .modal-body{
     position: relative;
     margin: 0 auto;
@@ -458,7 +468,6 @@ ul ul a {
     margin: 0 auto;
     margin-top: 10px;
     height:250px;
-<<<<<<< HEAD
 }
 
 .modal-body-prijava{
@@ -468,8 +477,6 @@ ul ul a {
     height:250px;
 }
 
-=======
-}
 
 .modal-body-prijava{
     position: relative;
@@ -478,7 +485,6 @@ ul ul a {
     height:250px;
 }
 
->>>>>>> 887db4871b764edf53c4ac8994d40e9d69711c40
 .form-group{
     width: 100%;
     padding: 5px 10px;

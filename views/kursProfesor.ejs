@@ -11,6 +11,12 @@
     <!-- Bootstrap Js CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="Scripts/bootstrap-select.min.js"></script>
+
+
+
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
@@ -99,97 +105,97 @@
                 %>
                 <tr>
 
-                    <td><a href="/dodajRezultate?ispitId=<%= ispiti[i].IspitId%>"><%= ispiti[i].DioIspita %></a></td>
+                    <td><%= ispiti[i].DioIspita %></td>
                     <td><%= ispiti[i].NazivKabineta %></td>
                     <td><%= ispiti[i].DatumIspita %></td>
                     <td><%= (ispiti[i].BrojStudenata)-1 %></td>
-                    <!--<td>-->
-                        <!--<input type="submit" class="button" id="dodajRezultateDugme"  data-toggle="modal" href="/dodajRezultate"-->
-                               <!--value="Dodaj rezultate">-->
-                    <!--</td>-->
+                    <td>
+                        <input type="submit" class="button_prijava" id="dodajRezultateDugme"  data-toggle="modal" onclick="window.location.href='/dodajRezultate?ispitId=<%= ispiti[i].IspitId%>'"
+                               value="Dodaj rezultate">
+                    </td>
                 </tr>
                 <% }} %>
             </table>
         </div>
 <!--Modal za dodavanje rezultata-->
-        <div class="modal fade" id="rezultati" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content" id="modal-content">
+        <!--<div class="modal fade" id="rezultati" role="dialog">-->
+            <!--<div class="modal-dialog">-->
+                <!--&lt;!&ndash; Modal content&ndash;&gt;-->
+                <!--<div class="modal-content" id="modal-content">-->
 
-<<<<<<< HEAD
-                    <div class="modal-header green">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title green">Kreiranje ispita</h4>
-                    </div>
+<!--<<<<<<< HEAD-->
+                    <!--<div class="modal-header green">-->
+                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                        <!--<h4 class="modal-title green">Kreiranje ispita</h4>-->
+                    <!--</div>-->
 
-                    <div class="modal-body-ispit">
-                        <div class="form-group-ispit">
-                            <p>Ispit iz:</p>
-                            <input type="text"  id="ispit" name="ispit">
+                    <!--<div class="modal-body-ispit">-->
+                        <!--<div class="form-group-ispit">-->
+                            <!--<p>Ispit iz:</p>-->
+                            <!--<input type="text"  id="ispit" name="ispit">-->
 
-                            <p>Mjesto održavanja ispita:</p>
-                            <input type="text" id="mjesto" name="mjesto">
+                            <!--<p>Mjesto održavanja ispita:</p>-->
+                            <!--<input type="text" id="mjesto" name="mjesto">-->
 
-                            <p>Vrijeme održavanja ispita:</p>
-                            <input type="text" id="vrijeme" name="vrijeme">
-                        </div>
-                    </div>
+                            <!--<p>Vrijeme održavanja ispita:</p>-->
+                            <!--<input type="text" id="vrijeme" name="vrijeme">-->
+                        <!--</div>-->
+                    <!--</div>-->
 
-                    <div class="modal-footer">
-                        <input type="submit" class="button" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
+                    <!--<div class="modal-footer">-->
+                        <!--<input type="submit" class="button" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">-->
 
-                        <button type="button" class="button" data-dismiss="modal">Close</button>
-=======
-                    <div class="modal-header green" >
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title green">Naziv predmeta</h4>
-                        <h5 class="modal-title green">Dio ispita datum ispita </h5>
-                    </div>
+                        <!--<button type="button" class="button" data-dismiss="modal">Close</button>-->
+<!--=======-->
+                    <!--<div class="modal-header green" >-->
+                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                        <!--<h4 class="modal-title green">Naziv predmeta</h4>-->
+                        <!--<h5 class="modal-title green">Dio ispita datum ispita </h5>-->
+                    <!--</div>-->
 
-                    <div class="modal-body">
-                    <table class="table">
-                        <tr>
-                            <th></th>
-                            <th>Ime i prezime </th>
-                            <th>Broj indexa</th>
-                            <th>Bodova</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-
+                    <!--<div class="modal-body">-->
+                    <!--<table class="table">-->
                         <!--<tr>-->
-                            <!--<td>1.</td>-->
-                            <!--<td>Maja Mihojevic</td>-->
-                            <!--<td>5113</td>-->
-                            <!--<td><input type="taxt" name="osvojenoBodova" ></td>-->
-                            <!--<td>-->
-                                <!--<button type="button" class="btn btn-default btn-sm">-->
-                                    <!--<span class="glyphicon glyphicon-edit"></span> Edit-->
-                                <!--</button>-->
-                            <!--</td>-->
-                            <!--<td>-->
-                                <!--<button type="button" class="btn btn-default btn-sm">-->
-                                    <!--<span class="glyphicon glyphicon-ok-sign"></span> OK-->
-                                <!--</button>-->
-                            <!--</td>-->
+                            <!--<th></th>-->
+                            <!--<th>Ime i prezime </th>-->
+                            <!--<th>Broj indexa</th>-->
+                            <!--<th>Bodova</th>-->
+                            <!--<th></th>-->
+                            <!--<th></th>-->
                         <!--</tr>-->
 
+                        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>1.</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Maja Mihojevic</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>5113</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td><input type="taxt" name="osvojenoBodova" ></td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<button type="button" class="btn btn-default btn-sm">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="glyphicon glyphicon-edit"></span> Edit&ndash;&gt;-->
+                                <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<button type="button" class="btn btn-default btn-sm">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="glyphicon glyphicon-ok-sign"></span> OK&ndash;&gt;-->
+                                <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
 
-                    </table>
 
-                    </div>
+                    <!--</table>-->
 
-                    <div class="modal-footer">
-                        <input type="submit" class="button" value="Dodaj rezultate" >
-                        <button type="button" class="button" data-dismiss="modal">Zatvori</button>
->>>>>>> 887db4871b764edf53c4ac8994d40e9d69711c40
-                    </div>
+                    <!--</div>-->
 
-                </div>
+                    <!--<div class="modal-footer">-->
+                        <!--<input type="submit" class="button" value="Dodaj rezultate" >-->
+                        <!--<button type="button" class="button" data-dismiss="modal">Zatvori</button>-->
+<!--&gt;>>>>>> 887db4871b764edf53c4ac8994d40e9d69711c40-->
+                    <!--</div>-->
 
-            </div>
-        </div>
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
 
         <!--modal za kreiranje ispita-->
         <div class="modal fade" id="kreirajIspit" role="dialog">
@@ -211,15 +217,29 @@
                             <input type="text" id="mjesto" name="mjesto">
 
                             <p>Vrijeme održavanja ispita:</p>
-                            <input type="text" class="form-control" id="vrijeme" name="vrijeme">
+                            <input type="date" id="datum" name="datum">
 
-                        </div>
+                            <p>Vrijeme održavanja ispita:</p>
+                            <input type="time" id="vrijeme" name="vrijeme">
+                            <!--
+                                      <div class='col-sm-6'>
+                                      <div class="form-group">
+                              <div class='input-group date' id='vrijeme'>
+                                  <input type='text'  />
+                                  <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+
+                                      </div>
+                                  </div>
+                              </div>  -->
+                       </div>
                     </div>
 
                     <div class="modal-footer">
                         <input type="submit" class="button" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
 
-                        <button type="button" class="button" data-dismiss="modal">Close</button>
+                        <button type="button" class="button" data-dismiss="modal">Odustani</button>
                     </div>
 
                 </div>
