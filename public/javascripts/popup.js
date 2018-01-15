@@ -75,6 +75,7 @@ function kreirajIspit(KursID) {
     var datum_ispita = $("#datum").val();
     var vrijeme_ispita = $("#vrijeme").val();
 
+
     $.post("/kreirajIspit", {kursId: kursId,dio_ispita: dio_ispita, mjesto_ispita: mjesto_ispita, datum_ispita: datum_ispita, vrijeme_ispita:vrijeme_ispita})
         .done(function (data) {
             if (data.status == 200) {

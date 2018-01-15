@@ -89,31 +89,6 @@ router.get('/kursStudent', function(req, res, next) {
 
 router.get('/kursProfesor', function(req, res, next) {
     var kursId =  req.query.kursId;
-    konekcija.query("SELECT * FROM Kurs where KursId = ?", [kursId], function (err, result, fields) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            konekcija.query("select *,count(Ispit_IspitId) as BrojStudenata from Ispit, Korisnik_Ispit "+
-                "where Ispit.Kurs_KursId = ? and Ispit.IspitId = Korisnik_Ispit.Ispit_IspitId " +
-                "group by Korisnik_Ispit.Ispit_IspitId;", [kursId], function (err1, result1, fields) {
-                if(err1){
-                    console.log(err1);
-                }else{
-                    res.render('kursProfesor',{
-                        nazivKursa: result,
-                        ispiti:result1
-                    });
-                }
-            });
-
-
-        }
-    });
-});
-
-router.get('/kursProfesor', function(req, res, next) {
-    var kursId =  req.query.kursId;
 
     konekcija.query("SELECT * FROM Kurs where KursId = ?", [kursId], function (err, result, fields) {
         if (err) {
@@ -329,13 +304,15 @@ router.post('/prijavaNaKurs', function (req, res, next) {
 });
 
 router.post('/kreirajIspit', function (req, res, next) {
+   console.log(req.body.vrijeme_ispita);
     var detaljiIspita = {
-        "DatumIspita": req.body.vrijeme_ispita,
+        "DatumIspita": req.body.datum_ispita + ' ' + req.body.vrijeme_ispita,
         "DioIspita": req.body.dio_ispita,
         "NazivKabineta": req.body.mjesto_ispita,
         "Kurs_KursId": req.body.kursId
     };
     var IspitId;
+    console.log(detaljiIspita.DatumIspita);
     konekcija.query("INSERT INTO Ispit SET ?", detaljiIspita, function (err, result, fields) {
         if(err){
             console.log(err);
@@ -357,7 +334,6 @@ router.post('/kreirajIspit', function (req, res, next) {
                     res.send({status:200, poruka:"Uspješno ste kreirali ispit!"});
                 }
             });
-
         }
     });
 
