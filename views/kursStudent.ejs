@@ -97,17 +97,20 @@
                 <th>Naziv ispita</th>
                 <th>Mjesto održavanja</th>
                 <th>Vrijeme održavanja</th>
+                <th> </th>
 
                 <tr>
-                    <th><%= ispiti[i].DioIspita %></th>
-                    <th><%= ispiti[i].NazivKabineta %></th>
-                    <th><%= ispiti[i].DatumIspita %></th>
+                    <td><%= ispiti[i].DioIspita %></td>
+                    <td><%= ispiti[i].NazivKabineta %></td>
+                    <td><%= ispiti[i].DatumIspita %></td>
+
 
                     <td>
-                        <input type="submit" class="button" id="prijavaDugme"  data-toggle="modal"
-                                data-target="#prijavaModal" onclick="prijaviIspit(<%= ispiti[i].IspitId %>);">Prijava
+                        <button type="submit" class="button" id="prijavaDugme"  data-toggle="modal"
+                                data-target="#prijavaModal" onclick="prijaviIspit(<%= ispiti[i].IspitId %>);">Prijava</button>
 
                     </td>
+
                 </tr>
                 <% } %>
             </table>

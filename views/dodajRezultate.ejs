@@ -27,7 +27,7 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="sidebartext">
-                <h4><%#= imePrezime[0].Ime %> <%#= imePrezime[0].Prezime %></h4>
+                <h4><%#= imePrez[0].Ime%> <%#= imePrez[0].Prezime%></h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -40,19 +40,11 @@
                     <i class="glyphicon glyphicon-home"></i>
                     Početna
                 </a>
-
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-book"></i>
+            <li >
+                <a href="/users/kurseviProfesor">
+                    <i class="glyphicon glyphicon-tasks"></i>
                     Moji Kursevi
                 </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <%#  if(kursevi.length >= 1){
-                    for(var i=0; i < kursevi.length; i++) { %>
-                    <li><a href="#"><%#= kursevi[i].NazivKursa %></a></li>
-
-                    <%# }} %>
-                </ul>
             </li>
             <li>
                 <a href="#">
@@ -87,9 +79,6 @@
                     <th> Ime i prezime </th>
                     <th> Broj indexa</th>
                     <th> Osvojeno bodova </th>
-                    <th> Maximalno bodova </th>
-                    <th></th>
-
                 </tr>
                 <% if(studenti.length > 1){
                     for(var i = 1; i < studenti.length; i++) {
@@ -97,18 +86,30 @@
                 <tr>
                     <td><%= studenti[i].Ime %>  <%= studenti[i].Prezime%></td>
                     <td><%= studenti[i].BrojIndexa%></td>
-                    <td>
-                        <button type="button" class="btn btn-default btn-sm">
+                    <td> <input type="text"  id="osvojenoBodova" name="osvojenoBodova"> </td>
+
+                 <!--   <td>
+                        <button type="button" class="button btn-sm">
                             <span class="glyphicon glyphicon-edit"></span> Edit
                         </button>
-                    </td>
+                    </td>  -->
 
                 </tr>
+                <tr> </tr>
                 <% }} %>
 
             </table>
-            <input type="submit" class="button" id="dodajRezultateDugme"  data-toggle="modal"
-                   value="Dodaj rezultate">
+            <table class="detalji">
+                <tr>
+                    <td align="center"> Maximalno bodova:  <input type="text" id="maxBodova" name="maxBodova"> </td>
+                    <td> Uvid: <input type="date"  id="uvid" name="uvid"> </td>
+
+                    <td align="right"> <input type="submit" class="button" id="spasiRezultateDugme"  data-toggle="modal"
+                                value="Spasi rezultate"> </td>
+
+                </tr>
+
+            </table>
         </div>
 
     </div>
