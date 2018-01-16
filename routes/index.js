@@ -330,7 +330,7 @@ router.post('/prijavaNaKurs', function (req, res, next) {
 
 router.post('/kreirajIspit', function (req, res, next) {
     var detaljiIspita = {
-        "DatumIspita": req.body.vrijeme_ispita,
+        "DatumIspita": req.body.datum_ispita + ' ' + req.body.vrijeme_ispita,
         "DioIspita": req.body.dio_ispita,
         "NazivKabineta": req.body.mjesto_ispita,
         "Kurs_KursId": req.body.kursId
