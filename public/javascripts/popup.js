@@ -1,7 +1,6 @@
 
 function kreirajKurs() {
     var naziv_kursa = $("#naziv_kursa").val();
-    var odsjek = $("#odsjek").val();
     var semestar = $("#semestar").val();
     var ciklus = $("#ciklus").val();
     var sifra_kursa = $("#sifra_kursa").val();
@@ -23,7 +22,7 @@ function kreirajKurs() {
 
     else {*/
 
-        $.post("/kreirajKurs", {naziv_kursa: naziv_kursa, odsjek: odsjek, semestar:semestar, ciklus:ciklus, sifra_kursa:sifra_kursa})
+        $.post("/kreirajKurs", {naziv_kursa: naziv_kursa, semestar:semestar, ciklus:ciklus, sifra_kursa:sifra_kursa})
             .done(function (data) {
                 if (data.status == 200) {
                     alert(data.poruka);

@@ -11,6 +11,12 @@
     <!-- Bootstrap Js CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="Scripts/bootstrap-select.min.js"></script>
+
+
+
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
@@ -27,7 +33,7 @@
         <div class="sidebar-header">
             <img src="/images/img6.png" alt="..." class="img-fluid rounded-circle iconsmall" id="profilnaSlika">
             <div class="sidebartext" id="sidebartext">
-                <h4><%#= imePrezime[0].Ime %> <%#= imePrezime[0].Prezime %></h4>
+                <h4><%#= imePrez[0].Ime%> <%#= imePrez[0].Prezime%></h4>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn btn-secundary navbar-btn">
@@ -40,19 +46,11 @@
                     <i class="glyphicon glyphicon-home"></i>
                     Početna
                 </a>
-
             <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="glyphicon glyphicon-book"></i>
+                <a href="/users/kurseviProfesor">
+                    <i class="glyphicon glyphicon-tasks"></i>
                     Moji Kursevi
                 </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <%#  if(kursevi.length >= 1){
-                    for(var i=0; i < kursevi.length; i++) { %>
-                    <li><a href="#"><%#= kursevi[i].NazivKursa %></a></li>
-
-                    <%# }} %>
-                </ul>
             </li>
             <li>
                 <a href="#">
@@ -99,13 +97,13 @@
                 %>
                 <tr>
 
-                    <td><%= ispiti[i].DioIspita %></td>
-                    <td><%= ispiti[i].NazivKabineta %></td>
+                    <td align="center"><%= ispiti[i].DioIspita %></td>
+                    <td align="center"><%= ispiti[i].NazivKabineta %></td>
                     <td><%= ispiti[i].DatumIspita %></td>
-                    <td><%= (ispiti[i].BrojStudenata)-1 %></td>
+                    <td align="center"><%= (ispiti[i].BrojStudenata)-1 %></td>
                     <td>
-                        <input type="submit" class="button" id="dodajRezultateDugme"  data-toggle="modal" onclick="window.location.href='/dodajRezultate?ispitId=<%= ispiti[i].IspitId%>'"
-                               value="Dodaj rezultate">
+                        <input type="submit" class="button_prijava" id="dodajRezultateDugme"  data-toggle="modal" onclick="window.location.href='/dodajRezultate?ispitId=<%= ispiti[i].IspitId%>'"
+                               value="Rezultati">
                     </td>
                 </tr>
                 <% }} %>
@@ -210,16 +208,30 @@
                             <p>Mjesto održavanja ispita:</p>
                             <input type="text" id="mjesto" name="mjesto">
 
-                            <p>Vrijeme održavanja ispita:</p>
-                            <input type="text" class="form-control" id="vrijeme" name="vrijeme">
+                            <p>Datum održavanja ispita:</p>
+                            <input type="date" id="datum" name="datum">
 
-                        </div>
+                            <p>Vrijeme održavanja ispita:</p>
+                            <input type="time" id="vrijeme" name="vrijeme">
+                            <!--
+                                      <div class='col-sm-6'>
+                                      <div class="form-group">
+                              <div class='input-group date' id='vrijeme'>
+                                  <input type='text'  />
+                                  <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+
+                                      </div>
+                                  </div>
+                              </div>  -->
+                       </div>
                     </div>
 
                     <div class="modal-footer">
                         <input type="submit" class="button" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">
 
-                        <button type="button" class="button" data-dismiss="modal">Close</button>
+                        <button type="button" class="button" data-dismiss="modal">Odustani</button>
                     </div>
 
                 </div>

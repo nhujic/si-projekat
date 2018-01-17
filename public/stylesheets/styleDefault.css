@@ -520,6 +520,9 @@ ul ul a {
 .form-group-ispit input{
     width: 100%;
     margin-bottom: 5px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #a6af13 ;
 }
 .form-group input[type= "text"]{
     border: none;
@@ -627,3 +630,20 @@ ul ul a {
     left: 0;
 }
 
+.table input{
+    border: none;
+    border-bottom: 2px solid #a6af13 ;
+    outline: none;
+    text-align: center;
+}
+.detalji{
+    width: 90%;
+    background: white;
+
+}
+.detalji input{
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #a6af13 ;
+    text-align: center;
+}
