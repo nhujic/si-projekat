@@ -21,6 +21,7 @@ router.get('/dodajRezultate', function(req, res, next) {
         else {
             res.render('dodajRezultate', {
                 studenti: result,
+                ispit:ispitId
             });
         }
     });
@@ -112,45 +113,6 @@ router.get('/kursProfesor', function(req, res, next) {
     });
 });
 
-router.get('/kursProfesor', function(req, res, next) {
-    var kursId =  req.query.kursId;
-
-    konekcija.query("SELECT * FROM Kurs where KursId = ?", [kursId], function (err, result, fields) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            konekcija.query("select *,count(Ispit_IspitId) as BrojStudenata from Ispit, Korisnik_Ispit "+
-                "where Ispit.Kurs_KursId = ? and Ispit.IspitId = Korisnik_Ispit.Ispit_IspitId " +
-                "group by Korisnik_Ispit.Ispit_IspitId;", [kursId], function (err1, result1, fields) {
-                if(err1){
-                    console.log(err1);
-                }else{
-                    var ispitId = req.query.ispitId;
-                    konekcija.query("select * from korisnik as k inner join korisnik_ispit as ki "+
-                        "on k.korisnikId = ki.korisnik_korisnikId inner join ispit as i on i.ispitId = ki.ispit_ispitId "+
-                        "where ispitId = ?", [ispitId], function (err2, result2,fields) {
-                        if(err2){
-                            console.log(err2);
-                        }else{
-                            res.render('kursProfesor',{
-                                nazivKursa: result,
-                                ispiti:result1,
-                                studenti:result2
-                            });
-                        }
-                    });
-                    // res.render('kursProfesor',{
-                    //     nazivKursa: result,
-                    //     ispiti:result1
-                    // });
-                }
-            });
-
-
-        }
-    });
-});
 
 
 router.get('/pocetnaStudent', function(req, res, next) {
