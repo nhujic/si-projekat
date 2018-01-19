@@ -14,9 +14,6 @@
     <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/bootstrap-datetimepicker.js"></script>
     <script src="Scripts/bootstrap-select.min.js"></script>
-
-
-
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
@@ -24,6 +21,8 @@
 
     <script type="text/javascript" src="/javascripts/helper.js"></script>
     <script type="text/javascript" src="/javascripts/popup.js"></script>
+    <script type="text/javascript" src="/javascripts/datepicker.js"></script>
+
 
 </head>
 <body>
@@ -99,7 +98,9 @@
 
                     <td align="center"><%= ispiti[i].DioIspita %></td>
                     <td align="center"><%= ispiti[i].NazivKabineta %></td>
-                    <td><%= ispiti[i].DatumIspita %></td>
+                    <td><%= (new Date(ispiti[i].DatumIspita).getDate() + 100).toString().substring(1)%>/<%= (new Date(ispiti[i].DatumIspita).getMonth() + 101).toString().substring(1)%>/<%= (new Date(ispiti[i].DatumIspita).getFullYear()).toString()%>
+                        u
+                        <%= (new Date(ispiti[i].DatumIspita).getHours()+100).toString().substring(1) %>:<%= (new Date(ispiti[i].DatumIspita).getMinutes()+100).toString().substring(1) %></td>
                     <td align="center"><%= (ispiti[i].BrojStudenata)-1 %></td>
                     <td>
                         <input type="submit" class="button_prijava" id="dodajRezultateDugme"  data-toggle="modal" onclick="window.location.href='/dodajRezultate?ispitId=<%= ispiti[i].IspitId%>'"
@@ -109,84 +110,84 @@
                 <% }} %>
             </table>
         </div>
-<!--Modal za dodavanje rezultata-->
+        <!--Modal za dodavanje rezultata-->
         <!--<div class="modal fade" id="rezultati" role="dialog">-->
-            <!--<div class="modal-dialog">-->
-                <!--&lt;!&ndash; Modal content&ndash;&gt;-->
-                <!--<div class="modal-content" id="modal-content">-->
+        <!--<div class="modal-dialog">-->
+        <!--&lt;!&ndash; Modal content&ndash;&gt;-->
+        <!--<div class="modal-content" id="modal-content">-->
 
-<!--<<<<<<< HEAD-->
-                    <!--<div class="modal-header green">-->
-                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                        <!--<h4 class="modal-title green">Kreiranje ispita</h4>-->
-                    <!--</div>-->
+        <!--<<<<<<< HEAD-->
+        <!--<div class="modal-header green">-->
+        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+        <!--<h4 class="modal-title green">Kreiranje ispita</h4>-->
+        <!--</div>-->
 
-                    <!--<div class="modal-body-ispit">-->
-                        <!--<div class="form-group-ispit">-->
-                            <!--<p>Ispit iz:</p>-->
-                            <!--<input type="text"  id="ispit" name="ispit">-->
+        <!--<div class="modal-body-ispit">-->
+        <!--<div class="form-group-ispit">-->
+        <!--<p>Ispit iz:</p>-->
+        <!--<input type="text"  id="ispit" name="ispit">-->
 
-                            <!--<p>Mjesto održavanja ispita:</p>-->
-                            <!--<input type="text" id="mjesto" name="mjesto">-->
+        <!--<p>Mjesto održavanja ispita:</p>-->
+        <!--<input type="text" id="mjesto" name="mjesto">-->
 
-                            <!--<p>Vrijeme održavanja ispita:</p>-->
-                            <!--<input type="text" id="vrijeme" name="vrijeme">-->
-                        <!--</div>-->
-                    <!--</div>-->
+        <!--<p>Vrijeme održavanja ispita:</p>-->
+        <!--<input type="text" id="vrijeme" name="vrijeme">-->
+        <!--</div>-->
+        <!--</div>-->
 
-                    <!--<div class="modal-footer">-->
-                        <!--<input type="submit" class="button" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">-->
+        <!--<div class="modal-footer">-->
+        <!--<input type="submit" class="button" value="Kreiraj" id="kreirajIspit" onclick="kreirajIspit(<%= nazivKursa[0].KursId %>);">-->
 
-                        <!--<button type="button" class="button" data-dismiss="modal">Close</button>-->
-<!--=======-->
-                    <!--<div class="modal-header green" >-->
-                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                        <!--<h4 class="modal-title green">Naziv predmeta</h4>-->
-                        <!--<h5 class="modal-title green">Dio ispita datum ispita </h5>-->
-                    <!--</div>-->
+        <!--<button type="button" class="button" data-dismiss="modal">Close</button>-->
+        <!--=======-->
+        <!--<div class="modal-header green" >-->
+        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+        <!--<h4 class="modal-title green">Naziv predmeta</h4>-->
+        <!--<h5 class="modal-title green">Dio ispita datum ispita </h5>-->
+        <!--</div>-->
 
-                    <!--<div class="modal-body">-->
-                    <!--<table class="table">-->
-                        <!--<tr>-->
-                            <!--<th></th>-->
-                            <!--<th>Ime i prezime </th>-->
-                            <!--<th>Broj indexa</th>-->
-                            <!--<th>Bodova</th>-->
-                            <!--<th></th>-->
-                            <!--<th></th>-->
-                        <!--</tr>-->
+        <!--<div class="modal-body">-->
+        <!--<table class="table">-->
+        <!--<tr>-->
+        <!--<th></th>-->
+        <!--<th>Ime i prezime </th>-->
+        <!--<th>Broj indexa</th>-->
+        <!--<th>Bodova</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</tr>-->
 
-                        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<td>1.</td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<td>Maja Mihojevic</td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<td>5113</td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<td><input type="taxt" name="osvojenoBodova" ></td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<td>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<button type="button" class="btn btn-default btn-sm">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<span class="glyphicon glyphicon-edit"></span> Edit&ndash;&gt;-->
-                                <!--&lt;!&ndash;</button>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<td>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<button type="button" class="btn btn-default btn-sm">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<span class="glyphicon glyphicon-ok-sign"></span> OK&ndash;&gt;-->
-                                <!--&lt;!&ndash;</button>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>1.</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>Maja Mihojevic</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>5113</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td><input type="taxt" name="osvojenoBodova" ></td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<button type="button" class="btn btn-default btn-sm">&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="glyphicon glyphicon-edit"></span> Edit&ndash;&gt;-->
+        <!--&lt;!&ndash;</button>&ndash;&gt;-->
+        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<button type="button" class="btn btn-default btn-sm">&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="glyphicon glyphicon-ok-sign"></span> OK&ndash;&gt;-->
+        <!--&lt;!&ndash;</button>&ndash;&gt;-->
+        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
 
 
-                    <!--</table>-->
+        <!--</table>-->
 
-                    <!--</div>-->
+        <!--</div>-->
 
-                    <!--<div class="modal-footer">-->
-                        <!--<input type="submit" class="button" value="Dodaj rezultate" >-->
-                        <!--<button type="button" class="button" data-dismiss="modal">Zatvori</button>-->
-<!--&gt;>>>>>> 887db4871b764edf53c4ac8994d40e9d69711c40-->
-                    <!--</div>-->
+        <!--<div class="modal-footer">-->
+        <!--<input type="submit" class="button" value="Dodaj rezultate" >-->
+        <!--<button type="button" class="button" data-dismiss="modal">Zatvori</button>-->
+        <!--&gt;>>>>>> 887db4871b764edf53c4ac8994d40e9d69711c40-->
+        <!--</div>-->
 
-                <!--</div>-->
+        <!--</div>-->
 
-            <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
 
         <!--modal za kreiranje ispita-->
@@ -208,7 +209,7 @@
                             <p>Mjesto održavanja ispita:</p>
                             <input type="text" id="mjesto" name="mjesto">
 
-                            <p>Datum održavanja ispita:</p>
+                            <p>Vrijeme održavanja ispita:</p>
                             <input type="date" id="datum" name="datum">
 
                             <p>Vrijeme održavanja ispita:</p>
@@ -225,7 +226,7 @@
                                       </div>
                                   </div>
                               </div>  -->
-                       </div>
+                        </div>
                     </div>
 
                     <div class="modal-footer">

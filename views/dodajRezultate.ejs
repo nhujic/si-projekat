@@ -18,6 +18,8 @@
 
     <script type="text/javascript" src="/javascripts/helper.js"></script>
     <script type="text/javascript" src="/javascripts/popup.js"></script>
+    <script type="text/javascript" src="/javascripts/datepicker.js"></script>
+
 
 </head>
 <body>
@@ -86,7 +88,8 @@
                 <tr>
                     <td><%= studenti[i].Ime %>  <%= studenti[i].Prezime%></td>
                     <td><%= studenti[i].BrojIndexa%></td>
-                    <td> <input type="text"  id="osvojenoBodova" name="osvojenoBodova"> </td>
+                    <td hidden><input type="text"  class="Korisnik_KorisnikId" id="korisnikId" name="osvojenoBodova" value="<%= studenti[i].KorisnikId %>"></td>
+                    <td> <input type="text" class="OsvojeniBrojBodova" id="osvojenoBodova" name="osvojenoBodova"> </td>
 
                  <!--   <td>
                         <button type="button" class="button btn-sm">
@@ -105,7 +108,7 @@
                     <td> Uvid: <input type="date"  id="uvid" name="uvid"> </td>
 
                     <td align="right"> <input type="submit" class="button" id="spasiRezultateDugme"  data-toggle="modal"
-                                value="Spasi rezultate"> </td>
+                                value="Spasi rezultate" onclick="spasiRezultate(<%= ispit %>);"> </td>
 
                 </tr>
 

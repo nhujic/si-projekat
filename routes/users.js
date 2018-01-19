@@ -361,7 +361,6 @@ router.post('/login', function (req, res, next) {
                     console.log(err);
                     res.send({status:400});
                 } else if (resultsTip[0].Tip == 'student') {
-                    console.log("lslslslsl");
                     var obj = {
                         username: username,
                         password: password,
@@ -370,12 +369,11 @@ router.post('/login', function (req, res, next) {
                         tip: 'student'
                     }
                     var str = JSON.stringify(obj);
-                    console.log(str);
+                    //console.log(str);
                     var kriptuj = encrypt(str);
                     res.cookie('name', kriptuj);
                     res.send({status:200, tip:'student'});
                 } else if (resultsTip[0].Tip == 'profesor') {
-                    console.log("jjgiajiaj");
                     var obj = {
                         username: username,
                         password: password,

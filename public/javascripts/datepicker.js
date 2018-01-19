@@ -19,3 +19,23 @@ $(document).ready(
         });
     }
 );
+
+$(document).ready(
+
+    function () {
+        $("#vrijeme" ).timepicker({
+            timeFormat: 'HH:MM'
+        });
+    }
+);
+
+$(document).ready(
+
+    function () {
+        $("#uvid" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd'
+        });
+    }
+);
