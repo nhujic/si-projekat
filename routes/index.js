@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var baza =  require('../konekcija.js');
 var konekcija = baza.dbConnection();
+var nodemailer = require('nodemailer');
 
 router.get('/', function(req, res, next) {
     res.render('login');
@@ -64,13 +65,18 @@ router.get('/dodajRezultate', function(req, res, next) {
         }
     });
 
-
-
 });
 
 router.post('/dodajRezultate', function (req, res, next) {
 
-    console.log(req.body.name.length);
+    var transport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: "siprojekat@gmail.com",
+            pass: "mreze123"
+        }
+    });
+
     var id = req.body.ispitId[0];
     var danas = new Date();
     var dd = danas.getDate();
@@ -93,7 +99,7 @@ router.post('/dodajRezultate', function (req, res, next) {
         else if(result1.length > 0) {
             for (var i = 0; i < req.body.name.length; i++) {
                 var detaljiIspita = {
-                    "OsvojeniBrojBodova": req.body.name[i],
+                    "OsvojeniBrojBodova": req.body.bodovi[i],
                     "Ispit_IspitId": req.body.ispitId[i],
                     "Ispit_Kurs_KursId": req.body.kursId[i],
                     "Korisnik_KorisnikId": req.body.korisnikId[i]
@@ -111,7 +117,7 @@ router.post('/dodajRezultate', function (req, res, next) {
         else{
             for (var i = 0; i < req.body.name.length; i++) {
                 var detaljiIspita = {
-                    "OsvojeniBrojBodova": req.body.name[i],
+                    "OsvojeniBrojBodova": req.body.bodovi[i],
                     "MaxBrojBodova": req.body.maxBodova,
                     "DatumObjave": danas,
                     "DatumUvida": req.body.uvid,
@@ -129,6 +135,30 @@ router.post('/dodajRezultate', function (req, res, next) {
                     }
                 });
             }
+            konekcija.query('SELECT * from KURS where kursid = ?',[req.body.kursId[0]], function (err3, result3, field) {
+                if(err3){
+                    console.log(err3);
+                }else{
+                    for (var i = 0; i < req.body.bodovi.length; i++) {
+                        var mail = {
+                            to: req.body.email[i],
+                            subject: "Rezultati ispita: " + result3[0].NazivKursa,
+                            text: req.body.dioIspita[0] + "\n" + "Osvojeni bodovi: " + req.body.bodovi[i] + "\nMaksimalni bodovi: " + req.body.maxBodova + "\nUvid u radove: " + req.body.uvid
+                        }
+
+                        transport.sendMail(mail, function(error, response){
+                            if(error){
+                                console.log(error);
+                            }else{
+                                console.log("Message sent: " + response.message);
+                            }
+                            transport.close();
+                        });
+                    }
+                }
+            });
+
+
 
         }
     });
