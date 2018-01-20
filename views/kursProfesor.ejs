@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Kursevi</title>
+    <title><%= nazivKursa[0].NazivKursa %></title>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <!-- Bootstrap Js CDN -->
@@ -204,16 +204,17 @@
                     <div class="modal-body-ispit">
                         <div class="form-group-ispit">
                             <p>Dio ispita:</p>
-                            <input type="text"  id="ispit" name="ispit">
-
+                            <input type="text"  id="ispit" name="ispit" required="required">
+                            <div class="validacija" id="validator_ispit"> </div>
                             <p>Mjesto održavanja ispita:</p>
-                            <input type="text" id="mjesto" name="mjesto">
-
+                            <input type="text" id="mjesto" name="mjesto" required="required">
+                            <div class="validacija" id="validator_mjesto"> </div>
                             <p>Vrijeme održavanja ispita:</p>
-                            <input type="date" id="datum" name="datum">
-
+                            <input type="date" id="datum" name="datum" required="required">
+                            <div class="validacija" id="validator_datum"> </div>
                             <p>Vrijeme održavanja ispita:</p>
-                            <input type="time" id="vrijeme" name="vrijeme">
+                            <input type="time" id="vrijeme" name="vrijeme" required="required">
+                            <div class="validacija" id="validator_vrijeme"> </div>
                             <!--
                                       <div class='col-sm-6'>
                                       <div class="form-group">

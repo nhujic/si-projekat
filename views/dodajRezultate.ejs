@@ -77,42 +77,58 @@
 
             <h4 class="green" >Rezultati</h4>
             <table class="table">
-                <tr>
-                    <th> Ime i prezime </th>
-                    <th> Broj indexa</th>
-                    <th> Osvojeno bodova </th>
-                </tr>
-                <% if(studenti.length > 1){
-                    for(var i = 1; i < studenti.length; i++) {
-                %>
-                <tr>
-                    <td><%= studenti[i].Ime %>  <%= studenti[i].Prezime%></td>
-                    <td><%= studenti[i].BrojIndexa%></td>
-                    <td hidden><input type="text"  class="Korisnik_KorisnikId" id="korisnikId" name="osvojenoBodova" value="<%= studenti[i].KorisnikId %>"></td>
-                    <td> <input type="text" class="OsvojeniBrojBodova" id="osvojenoBodova" name="osvojenoBodova"> </td>
+                <form method="post" action="/dodajRezultate">
+                    <tr>
+                        <th> Ime i prezime </th>
+                        <th> Broj indexa</th>
+                        <th> Osvojeno bodova </th>
+                    </tr>
+                    <% if(studenti.length >= 1){
+                    for(var i = 0; i < studenti.length; i++) {
+                    %>
+                    <tr>
+                        <td><%= studenti[i].Ime %>  <%= studenti[i].Prezime%></td>
+                        <td><%= studenti[i].BrojIndexa%></td>
+                        <td hidden><input type="text"  class="Korisnik_KorisnikId" id="korisnikId" name="korisnikId" value="<%= studenti[i].KorisnikId %>"></td>
+                        <td hidden><input type="text" id="ispitId" name="ispitId" value="<%= studenti[i].Ispit_IspitId %>"></td>
+                        <td hidden><input type="text" id="kursId" name="kursId" value="<%= studenti[i].Kurs_KursId %>"></td>
+                        <% if(rezultat == 1){%>
+                        <td> <input type="text" class="OsvojeniBrojBodova" id=name name=name value="<%= studenti[i].OsvojeniBrojBodova %>" ></td>
+                        <%}else{%>
+                        <td> <input type="text" class="OsvojeniBrojBodova" id=name name=name ></td>
+                        <%}%>
+                        <!--   <td>
+                               <button type="button" class="button btn-sm">
+                                   <span class="glyphicon glyphicon-edit"></span> Edit
+                               </button>
+                           </td>  -->
+                    </tr>
+                    <% }} %>
 
-                 <!--   <td>
-                        <button type="button" class="button btn-sm">
-                            <span class="glyphicon glyphicon-edit"></span> Edit
-                        </button>
-                    </td>  -->
-
-                </tr>
-                <tr> </tr>
-                <% }} %>
 
             </table>
+            <script>
+            </script>
             <table class="detalji">
+
                 <tr>
-                    <td align="center"> Maximalno bodova:  <input type="text" id="maxBodova" name="maxBodova"> </td>
-                    <td> Uvid: <input type="date"  id="uvid" name="uvid"> </td>
+                    <% if(rezultat == 1){ %>
+                    <td align="center"> Maximalno bodova:  <input type="text" id="maxBodova" name="maxBodova" value="<%= maxBrojBodova %>"> </td>
+                    <td> Uvid: <%= (new Date(datumUvida).getDate() + 100).toString().substring(1)%>/<%= (new Date(datumUvida).getMonth() + 101).toString().substring(1)%>/<%= (new Date(datumUvida).getFullYear()).toString()%><input type="date"  id="uvid" name="uvid"> </td>
 
                     <td align="right"> <input type="submit" class="button" id="spasiRezultateDugme"  data-toggle="modal"
-                                value="Spasi rezultate" onclick="spasiRezultate(<%= ispit %>);"> </td>
-
+                                              value="Spasi rezultate"> </td>
+                    <%} else{ %>
+                    <td align="center"> Maximalno bodova:  <input type="text" id="maxBodova" name="maxBodova"> </td>
+                    <td> Uvid:<input type="date" id="uvid" name="uvid">
+                    <td align="right"> <input type="submit" class="button" id="spasiRezultateDugme"  data-toggle="modal"
+                                              value="Spasi rezultate"> </td>
+                    <% } %>
                 </tr>
 
+                </form>
             </table>
+
         </div>
 
     </div>

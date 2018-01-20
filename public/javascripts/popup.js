@@ -5,36 +5,36 @@ function kreirajKurs() {
     var ciklus = $("#ciklus").val();
     var sifra_kursa = $("#sifra_kursa").val();
 
-/*
+
     if (naziv_kursa == "") {
         $("#validator_naziv_kursa").html("Unesite naziv kursa!");
-    } else if (odsjek == "") {
-        $("#validator_pass").html("Unesite odsjek!");
-    }else if (semestar == "") {
-        $("#validator_pass").html("Unesite semestar!");
-    }else if (smjer == "") {
-        $("#validator_pass").html("Unesite smjer!");
+    } else if (semestar == "") {
+        $("#validator_sem").html("Unesite semestar!");
     }else if (ciklus == "") {
-        $("#validator_pass").html("Unesite ciklus!");
+        $("#validator_ciklus").html("Unesite ciklus!");
     }else if (sifra_kursa == "") {
-        $("#validator_pass").html("Unesite sifru kursa!");
+        $("#validator_sifra_kursa").html("Unesite šifru kursa!");
     }
-
-    else {*/
-
-        $.post("/kreirajKurs", {naziv_kursa: naziv_kursa, semestar:semestar, ciklus:ciklus, sifra_kursa:sifra_kursa})
+    else {
+        $.post("/kreirajKurs", {
+            naziv_kursa: naziv_kursa,
+            semestar: semestar,
+            ciklus: ciklus,
+            sifra_kursa: sifra_kursa
+        })
             .done(function (data) {
                 if (data.status == 200) {
                     alert(data.poruka);
                     window.location.href = "/users/kurseviProfesor";
                 } else if (data.status == 404) {
                     //alert(data.poruka);
-                } else if(data.status == 401) {
+                } else if (data.status == 401) {
                     alert(data.poruka);
-                }else{
+                } else {
                     alert('Greska');
                 }
             });
+    }
 
 }
 
@@ -44,24 +44,29 @@ function prijaviSe(KursId) {
     $(document).ready(function() {
         $('#prijaviKurs').click(function (event) {
             var sifra_kursa1 = $("#sifra_kursa1").val();
-            $.post("/prijavaNaKurs", {sifra_kursa1:sifra_kursa1, kursId:kursId})
-                .done(function (data) {
-                    if (data.status == 200) {
-                        $(alert(data.poruka));
-                        window.location.href = "/users/kurseviStudent";
-                    } else if (data.status == 401) {
-                        $(alert(data.poruka));
-                    } else if(data.status == 402){
-                        $(alert(data.poruka));
-                    } else if(data.status == 403){
-                        $(alert(data.poruka));
-                        window.location.href = "/users/kurseviStudent";
-                    }
-                    else {
-                        $(alert('Greska!'));
-                    }
+            if (sifra_kursa1 == "") {
+                $("#validator_prijava_kurs").html("Unesite šifru kursa!");
+            }
+            else {
+                $.post("/prijavaNaKurs", {sifra_kursa1: sifra_kursa1, kursId: kursId})
+                    .done(function (data) {
+                        if (data.status == 200) {
+                            $(alert(data.poruka));
+                            window.location.href = "/users/kurseviStudent";
+                        } else if (data.status == 401) {
+                            $(alert(data.poruka));
+                        } else if (data.status == 402) {
+                            $(alert(data.poruka));
+                        } else if (data.status == 403) {
+                            $(alert(data.poruka));
+                            window.location.href = "/users/kurseviStudent";
+                        }
+                        else {
+                            $(alert('Greska!'));
+                        }
 
-                });
+                    });
+            }
         });
     });
 }
@@ -74,16 +79,32 @@ function kreirajIspit(KursID) {
     var datum_ispita = $("#datum").val();
     var vrijeme_ispita = $("#vrijeme").val();
 
-    $.post("/kreirajIspit", {kursId: kursId,dio_ispita: dio_ispita, mjesto_ispita: mjesto_ispita, datum_ispita: datum_ispita, vrijeme_ispita:vrijeme_ispita})
-        .done(function (data) {
-            if (data.status == 200) {
-                alert(data.poruka);
-                window.location.href = "/kursProfesor?kursId=" + kursId;
-            } else if (data.status == 404) {
-                alert('Greska');
-            }
-        });
-
+    if (dio_ispita == "") {
+        $("#validator_ispit").html("Unesite koji dio ispita studenti polažu!");
+    } else if (mjesto_ispita== "") {
+        $("#validator_mjesto").html("Unesite gdje će se ispit održati!");
+    }else if (datum_ispita== "") {
+        $("#validator_datum").html("Unesite datum ispita!");
+    }else if (vrijeme_ispita== "") {
+        $("#validator_vrijeme").html("Unesite vrijeme ispita!");
+    }
+    else {
+        $.post("/kreirajIspit", {
+            kursId: kursId,
+            dio_ispita: dio_ispita,
+            mjesto_ispita: mjesto_ispita,
+            datum_ispita: datum_ispita,
+            vrijeme_ispita: vrijeme_ispita
+        })
+            .done(function (data) {
+                if (data.status == 200) {
+                    alert(data.poruka);
+                    window.location.href = "/kursProfesor?kursId=" + kursId;
+                } else if (data.status == 404) {
+                    alert('Greska');
+                }
+            });
+    }
 }
 
 
