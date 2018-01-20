@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Kursevi</title>
+    <title><%= nazivKursa[0].NazivKursa %></title>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <!-- Bootstrap Js CDN -->
@@ -88,9 +88,7 @@
         </div>
 
         <!-- Ispiti i prijava-->
-        <% if(ispiti.length >= 1){
-        for(var i = 0; i < ispiti.length; i++) {
-        %>
+
         <div class="box">
             <h4 class="green">Ispiti</h4>
             <table class="table">
@@ -99,11 +97,16 @@
                 <th>Vrijeme održavanja</th>
                 <th> </th>
 
+                <% if(ispiti.length >= 1){
+                for(var i = 0; i < ispiti.length; i++) {
+                %>
+
                 <tr>
                     <td><%= ispiti[i].DioIspita %></td>
                     <td><%= ispiti[i].NazivKabineta %></td>
-                    <td><%= ispiti[i].DatumIspita %></td>
-
+                    <td><%= (new Date(ispiti[i].DatumIspita).getDate() + 100).toString().substring(1)%>/<%= (new Date(ispiti[i].DatumIspita).getMonth() + 101).toString().substring(1)%>/<%= (new Date(ispiti[i].DatumIspita).getFullYear()).toString()%>
+                    u
+                    <%= (new Date(ispiti[i].DatumIspita).getHours()+100).toString().substring(1) %>:<%= (new Date(ispiti[i].DatumIspita).getMinutes()+100).toString().substring(1) %></td>
 
                     <td>
                         <button type="submit" class="button" id="prijavaDugme"  data-toggle="modal"
@@ -124,9 +127,23 @@
                 <tr>
                     <th> Naziv ispita </th>
                     <th> Datum objave </th>
-                    <th> <a href ="#">Rezultat ispita</a></th>
+                    <th> Datum uvida </th>
+                    <th> Osvojeno bodova</th>
+                    <th> Maksimalan broj bodova</th>
+                </tr>
+                <% if(rezultati.length >= 1){
+                for(var i = 0; i < rezultati.length; i++) {
+                %>
+
+                <tr>
+                    <td><%= rezultati[i].DioIspita %></td>
+                    <td><%= (new Date(rezultati[i].DatumObjave).getDate() + 100).toString().substring(1)%>.<%= (new Date(rezultati[i].DatumObjave).getMonth() + 101).toString().substring(1)%>.<%= (new Date(rezultati[i].DatumObjave).getFullYear()).toString()%></td>
+                    <td><%= (new Date(rezultati[i].DatumUvida).getDate() + 100).toString().substring(1)%>.<%= (new Date(rezultati[i].DatumUvida).getMonth() + 101).toString().substring(1)%>.<%= (new Date(rezultati[i].DatumUvida).getFullYear()).toString()%></td>
+                    <td><%= rezultati[i].OsvojeniBrojBodova%></td>
+                    <td><%= rezultati[i].MaxBrojBodova%></td>
 
                 </tr>
+                <% }} %>
             </table>
         </div>
 

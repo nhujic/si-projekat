@@ -317,7 +317,7 @@ ul ul a {
     color:  #013B7D ;
 }
 .text{
-    width: 100px;
+    width: 90px;
     height: 70px;
     padding: 5%;
 }
@@ -327,8 +327,8 @@ ul ul a {
 }
 .icon{
     padding: 10px;
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
 }
 .dasboard{
     margin-left: 4%;
@@ -426,7 +426,7 @@ ul ul a {
     width: 100%;
 }
 #dodajKursDugme{
-    margin-left: 90%;
+    margin-left: 89.5%;
 }
 
 .dugmeKreiraj{

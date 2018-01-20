@@ -12,25 +12,133 @@ router.get('/choose', function(req, res, next) {
 });
 router.get('/dodajRezultate', function(req, res, next) {
     var ispitId =  req.query.ispitId;
-    konekcija.query("SELECT * from korisnik as k inner join korisnik_ispit as ki on k.korisnikid = ki.korisnik_korisnikid "+
-        "inner join tipkorisnika as tk on k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid inner join  korisnickidetalji as kd "+
-        "on kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid where ispit_ispitid = ?", [ispitId], function (err, result, fields) {
-        if (err) {
+    var uneseniRezultati = 0;
+
+    konekcija.query("SELECT * from rezultatispita where ispit_ispitid = ?",[ispitId],function (err, result, field) {
+        if(err){
             console.log(err);
-        }
-        else {
-            res.render('dodajRezultate', {
-                studenti: result,
-                ispit:ispitId
-            });
+        }else{
+            if(result.length > 0){
+                uneseniRezultati = 1;
+                konekcija.query("SELECT * from korisnik as k " +
+                    "inner join rezultatispita as rz on rz.korisnik_korisnikid = k.korisnikid " +
+                    "inner join tipkorisnika as tk on k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid " +
+                    "inner join  korisnickidetalji as kd on kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid " +
+                    "inner join ispit as i on i.ispitId = rz.ispit_ispitId " +
+                    "where tk.tip = 'student' and rz.ispit_ispitId = ? " , [ispitId], function (err1, result1, fields) {
+                    if (err1) {
+                        console.log(err1);
+                    }
+                    else {
+                        var maxBrojBodova = result1[0].MaxBrojBodova;
+                        var datumUvida = result1[0].DatumUvida;
+                        res.render('dodajRezultate', {
+                            studenti: result1,
+                            ispit:ispitId,
+                            rezultat:uneseniRezultati,
+                            maxBrojBodova: maxBrojBodova,
+                            datumUvida: datumUvida
+                        });
+                    }
+                });
+            }else{
+                console.log('nisu uneseni rezultati');
+                konekcija.query("SELECT * from korisnik as k inner join korisnik_ispit as ki on k.korisnikid = ki.korisnik_korisnikid " +
+                    "inner join tipkorisnika as tk on k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid inner join  korisnickidetalji as kd "+
+                    "on kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid " +
+                    "inner join ispit as i on i.ispitId = ki.ispit_ispitId " +
+                    "where tk.tip = 'student' and ispit_ispitid = ?", [ispitId], function (err2, result2, field) {
+                    if(err2){
+                        console.log(err2);
+                    }
+                    else{
+                        res.render('dodajRezultate', {
+
+                            studenti: result2,
+                            ispit:ispitId,
+                            rezultat:uneseniRezultati
+                        });
+                    }
+                });
+            }
         }
     });
 
+
+
+});
+
+router.post('/dodajRezultate', function (req, res, next) {
+
+    console.log(req.body.name.length);
+    var id = req.body.ispitId[0];
+    var danas = new Date();
+    var dd = danas.getDate();
+    var mm = danas.getMonth() + 1;
+    var yyyy = danas.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    danas = yyyy + '-' + mm + '-' + dd;
+
+    konekcija.query("SELECT * FROM RezultatIspita WHERE Ispit_IspitId = ?", [id], function (err, result1, fields) {
+        if(err){
+            console.log(err);
+        }
+        else if(result1.length > 0) {
+            for (var i = 0; i < req.body.name.length; i++) {
+                var detaljiIspita = {
+                    "OsvojeniBrojBodova": req.body.name[i],
+                    "Ispit_IspitId": req.body.ispitId[i],
+                    "Ispit_Kurs_KursId": req.body.kursId[i],
+                    "Korisnik_KorisnikId": req.body.korisnikId[i]
+                };
+                konekcija.query("UPDATE RezultatIspita SET ? WHERE Ispit_IspitId = ? and Korisnik_KorisnikId =?", [detaljiIspita, id, detaljiIspita.Korisnik_KorisnikId], function (err1, result2, fields) {
+                    if (err1) {
+                        console.log(err1);
+                    }
+                    else {
+                        console.log("Uspjesno ste azurirali podatke");
+                    }
+                });
+            }
+        }
+        else{
+            for (var i = 0; i < req.body.name.length; i++) {
+                var detaljiIspita = {
+                    "OsvojeniBrojBodova": req.body.name[i],
+                    "MaxBrojBodova": req.body.maxBodova,
+                    "DatumObjave": danas,
+                    "DatumUvida": req.body.uvid,
+                    "Ispit_IspitId": req.body.ispitId[i],
+                    "Ispit_Kurs_KursId": req.body.kursId[i],
+                    "Korisnik_KorisnikId": req.body.korisnikId[i]
+                };
+                konekcija.query("INSERT INTO rezultatispita SET ?", [detaljiIspita], function (error, result, fields) {
+                    if(error){
+                        console.log(error);
+                    }
+                    else{
+                        console.log('uspjesan unos');
+
+                    }
+                });
+            }
+
+        }
+    });
+    res.redirect('/dodajRezultate?ispitId='+id);
 });
 
 router.get('/kursStudent', function(req, res, next) {
     let username = req.user.username;
     let tipKorisnikaId = req.user.tipKorisnikaId;
+    let korisnikId = req.user.korisnikId;
     var KursId = req.query.kursId;
 
     konekcija.query("SELECT * FROM Korisnik as k " +
@@ -63,19 +171,30 @@ router.get('/kursStudent', function(req, res, next) {
                                         console.log(err);
                                     }
                                     else {
-                                        konekcija.query("SELECT * FROM Ispit WHERE Kurs_KursId = ?", [KursId], function (err1, res1, fields) {
+                                        konekcija.query("SELECT * FROM Ispit WHERE Kurs_KursId = ?", [KursId], function (err2, res1, fields) {
                                             if(err1){
-                                                console.log(err);
+                                                console.log(err2);
                                             }
-                                            else{
-                                                res.render('kursStudent', {
-                                                    imePrezime: results2,
-                                                    kursevi: result,
-                                                    nazivKursa:result1,
-                                                    ispiti: res1
+                                            else {
+                                                konekcija.query("SELECT * FROM RezultatIspita AS ri " +
+                                                    "INNER JOIN Ispit as i ON i.ispitId = ri.ispit_ispitId " +
+                                                    "WHERE ri.Korisnik_KorisnikId =? AND ri.Ispit_Kurs_KursId = ?", [korisnikId, KursId], function (err3, res2, fields) {
+                                                    if (err3) {
+                                                        console.log(err3);
+                                                    }
+                                                    else {
+                                                        res.render('kursStudent', {
+                                                            imePrezime: results2,
+                                                            kursevi: result,
+                                                            nazivKursa:result1,
+                                                            ispiti: res1,
+                                                            rezultati:res2
+                                                        });
+                                                    }
+
                                                 });
                                             }
-                                        })
+                                        });
 
                                     }
                                 });
@@ -263,31 +382,31 @@ router.post('/prijavaNaKurs', function (req, res, next) {
                     console.log("Vec ste prijavljeni na ovaj kurs!");
                     res.send({status:403, poruka:"Vec ste prijavljeni na ovaj kurs!"});
                 }
-              else{
-                            var korisnik_kurs = {
-                                "Korisnik_KorisnikId": korisnikId,
-                                "Korisnik_TipKorisnika_TipKorisnikaId":tipKorisnikaId,
-                                "Kurs_KursId":KursId
-                            }
-                            konekcija.query("INSERT INTO korisnik_kurs SET ?", korisnik_kurs, function (error2, results2, fields2) {
-                                if(error2){
-                                    console.log(error2);
-                                    res.send({status:401});
-                                }
-                                else{
-                                    console.log("Upsješno ste se prijavili na kurs!");
-                                    res.send({status:200, poruka:"Upsješno ste se prijavili na kurs!"})
-                                }
-                            })
+                else{
+                    var korisnik_kurs = {
+                        "Korisnik_KorisnikId": korisnikId,
+                        "Korisnik_TipKorisnika_TipKorisnikaId":tipKorisnikaId,
+                        "Kurs_KursId":KursId
+                    }
+                    konekcija.query("INSERT INTO korisnik_kurs SET ?", korisnik_kurs, function (error2, results2, fields2) {
+                        if(error2){
+                            console.log(error2);
+                            res.send({status:401});
                         }
-                    });
-            }
+                        else{
+                            console.log("Upsješno ste se prijavili na kurs!");
+                            res.send({status:200, poruka:"Upsješno ste se prijavili na kurs!"})
+                        }
+                    })
+                }
+            });
+        }
         else{
-                console.log("Pogrijesili ste sifru. Pokusajte ponovo");
-                res.send({status:402, poruka:"Pogrijesili ste sifru. Pokusajte ponovo"})
-            }
+            console.log("Pogrijesili ste sifru. Pokusajte ponovo");
+            res.send({status:402, poruka:"Pogrijesili ste sifru. Pokusajte ponovo"})
+        }
 
-        });
+    });
 });
 
 router.post('/kreirajIspit', function (req, res, next) {
@@ -305,12 +424,12 @@ router.post('/kreirajIspit', function (req, res, next) {
         }
         else{
             IspitId = result.insertId
-             var korisnik_ispit = {
+            var korisnik_ispit = {
                 "Korisnik_KorisnikId": req.user.korisnikId,
                 "Korisnik_TipKorisnika_TipKorisnikaId":req.user.tipKorisnikaId,
                 "Ispit_IspitId": IspitId
-             }
-                konekcija.query("INSERT INTO Korisnik_Ispit SET ?", korisnik_ispit,function (err1, result1, fields) {
+            }
+            konekcija.query("INSERT INTO Korisnik_Ispit SET ?", korisnik_ispit,function (err1, result1, fields) {
                 if(err1){
                     console.log(err1);
                     res.send({status:404});
@@ -353,14 +472,14 @@ router.post('/prijavaNaIspit', function (req, res, next) {
                 if(error2){
                     console.log(error2);
                     res.send({status:400});
-                    }
-                    else{
-                        console.log("Upsjeno ste se prijavili na ispit!");
-                        res.send({status:200, poruka:"Upsjeno ste se prijavili na ispit!"});
-                    }
-                });
-            }
-        });
+                }
+                else{
+                    console.log("Upsjeno ste se prijavili na ispit!");
+                    res.send({status:200, poruka:"Upsjeno ste se prijavili na ispit!"});
+                }
+            });
+        }
+    });
 });
 
 module.exports = router;
