@@ -22,8 +22,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Kurs` (
   `Semestar` VARCHAR(45) NULL,
   `Ciklus` VARCHAR(45) NULL,
   `SifraKursa` VARCHAR(45) NULL,
-  PRIMARY KEY (`KursId`),
-  UNIQUE INDEX `SifraKursa_UNIQUE` (`SifraKursa` ASC))
+  PRIMARY KEY (`KursId`))
 ENGINE = InnoDB;
 
 
@@ -169,7 +168,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`RezultatiZadatka`
+-- Table `mydb`.`RezultatIspita`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`RezultatIspita` (
   `RezultatId` INT NOT NULL AUTO_INCREMENT,
@@ -193,33 +192,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`RezultatIspita` (
   	REFERENCES `mydb`.`Korisnik` (`KorisnikId`)
   	ON DELETE NO ACTION
   	ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Zadatak`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zadatak` (
-  `ZadatakId` INT NOT NULL AUTO_INCREMENT,
-  `RedniBrojZadatka` INT NOT NULL,
-  `MaxBrojBodova` INT NOT NULL,
-  `Komentar` VARCHAR(45) NULL,
-  `Ispit_IspitId` INT NOT NULL,
-  `Ispit_Kurs_KursId` INT NOT NULL,
-  `RezultatiIspita_RezultatId` INT NOT NULL,
-  PRIMARY KEY (`ZadatakId`, `Ispit_IspitId`, `Ispit_Kurs_KursId`, `RezultatiIspita_RezultatId`),
-  INDEX `fk_Zadatak_Ispit1_idx` (`Ispit_IspitId` ASC, `Ispit_Kurs_KursId` ASC),
-  INDEX `fk_Zadatak_RezultatiIspita1_idx` (`RezultatiIspita_RezultatId` ASC),
-  CONSTRAINT `fk_Zadatak_Ispit1`
-    FOREIGN KEY (`Ispit_IspitId` , `Ispit_Kurs_KursId`)
-    REFERENCES `mydb`.`Ispit` (`IspitId` , `Kurs_KursId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Zadatak_RezultatiIspita1`
-    FOREIGN KEY (`RezultatiIspita_RezultatId`)
-    REFERENCES `mydb`.`RezultatIspita` (`RezultatId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

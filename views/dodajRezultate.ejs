@@ -94,7 +94,6 @@
                         <td hidden><input type="text" id="kursId" name="kursId" value="<%= studenti[i].Kurs_KursId %>"></td>
                         <td hidden><input type="text" id="email" name="email" value="<%= studenti[i].Email %>"></td>
                         <td hidden><input type="text" id="dioIspita" name="dioIspita" value="<%= studenti[i].DioIspita %>"></td>
-
                         <% if(rezultat == 1){%>
                         <td> <input type="text" class="OsvojeniBrojBodova" id=bodovi name=bodovi value="<%= studenti[i].OsvojeniBrojBodova %>" ></td>
                         <%}else{%>
@@ -118,7 +117,6 @@
                     <% if(rezultat == 1){ %>
                     <td align="center"> Maximalno bodova:  <input type="text" id="maxBodova" name="maxBodova" value="<%= maxBrojBodova %>"> </td>
                     <td> Uvid: <%= (new Date(datumUvida).getDate() + 100).toString().substring(1)%>/<%= (new Date(datumUvida).getMonth() + 101).toString().substring(1)%>/<%= (new Date(datumUvida).getFullYear()).toString()%><input type="date"  id="uvid" name="uvid"> </td>
-
                     <td align="right"> <input type="submit" class="button" id="spasiRezultateDugme"  data-toggle="modal"
                                               value="Spasi rezultate"> </td>
                     <%} else{ %>

@@ -74,6 +74,9 @@ router.post('/dodajRezultate', function (req, res, next) {
         auth: {
             user: "siprojekat@gmail.com",
             pass: "mreze123"
+        },
+        tls: {
+            rejectUnauthorized: false
         }
     });
 
@@ -97,7 +100,7 @@ router.post('/dodajRezultate', function (req, res, next) {
             console.log(err);
         }
         else if(result1.length > 0) {
-            for (var i = 0; i < req.body.name.length; i++) {
+            for (var i = 0; i < req.body.bodovi.length; i++) {
                 var detaljiIspita = {
                     "OsvojeniBrojBodova": req.body.bodovi[i],
                     "Ispit_IspitId": req.body.ispitId[i],
@@ -115,7 +118,7 @@ router.post('/dodajRezultate', function (req, res, next) {
             }
         }
         else{
-            for (var i = 0; i < req.body.name.length; i++) {
+            for (var i = 0; i < req.body.bodovi.length; i++) {
                 var detaljiIspita = {
                     "OsvojeniBrojBodova": req.body.bodovi[i],
                     "MaxBrojBodova": req.body.maxBodova,
