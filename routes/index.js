@@ -31,14 +31,32 @@ router.get('/dodajRezultate', function(req, res, next) {
                         console.log(err1);
                     }
                     else {
-                        var maxBrojBodova = result1[0].MaxBrojBodova;
-                        var datumUvida = result1[0].DatumUvida;
-                        res.render('dodajRezultate', {
-                            studenti: result1,
-                            ispit:ispitId,
-                            rezultat:uneseniRezultati,
-                            maxBrojBodova: maxBrojBodova,
-                            datumUvida: datumUvida
+                        konekcija.query("SELECT * FROM Ispit WHERE IspitId = ?", [ispitId], function (err3, res1, fields) {
+                            if(err3){
+                                console.log(err3);
+                            }
+                            else{
+                                konekcija.query("SELECT * FROM Kurs WHERE KursId = ?", [res1[0].Kurs_KursId], function (err5, res3, fields) {
+                                    if(err5){
+                                        console.log(err5);
+                                    }
+                                    else{
+                                        var predmet = res3[0].NazivKursa;
+                                        var datumIspita = res1[0].DatumIspita;
+                                        var maxBrojBodova = result1[0].MaxBrojBodova;
+                                        var datumUvida = result1[0].DatumUvida;
+                                        res.render('dodajRezultate', {
+                                            studenti: result1,
+                                            ispit:ispitId,
+                                            rezultat:uneseniRezultati,
+                                            maxBrojBodova: maxBrojBodova,
+                                            datumUvida: datumUvida,
+                                            datumIspita: datumIspita,
+                                            predmet:predmet
+                                        });
+                                    }
+                                });
+                            }
                         });
                     }
                 });
@@ -53,11 +71,30 @@ router.get('/dodajRezultate', function(req, res, next) {
                         console.log(err2);
                     }
                     else{
-                        res.render('dodajRezultate', {
+                        konekcija.query("SELECT * FROM Ispit WHERE IspitId = ?", [ispitId], function (err4, res2, fields) {
+                            if(err4){
+                                console.log(err4);
+                            }
+                            else{
+                                konekcija.query("SELECT * FROM Kurs WHERE KursId = ?", [res2[0].Kurs_KursId], function (err6, res4, fields) {
+                                    if(err6){
+                                        console.log(err6);
+                                    }
+                                    else{
+                                        var predmet = res4[0].NazivKursa;
+                                        var datumIspita = res2[0].DatumIspita;
+                                        console.log(res2[0].Kurs_KursId);
+                                        res.render('dodajRezultate', {
+                                            studenti: result2,
+                                            ispit:ispitId,
+                                            rezultat:uneseniRezultati,
+                                            predmet:predmet,
+                                            datumIspita:datumIspita
+                                        });
+                                    }
+                                });
 
-                            studenti: result2,
-                            ispit:ispitId,
-                            rezultat:uneseniRezultati
+                            }
                         });
                     }
                 });
