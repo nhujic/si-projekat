@@ -63,6 +63,7 @@ router.get('/dodajRezultate', function(req, res, next) {
                                                             else{
                                                                 var predmet = res3[0].NazivKursa;
                                                                 var datumIspita = res1[0].DatumIspita;
+                                                                var dioIspita = res1[0].DioIspita;
                                                                 var maxBrojBodova = result1[0].MaxBrojBodova;
                                                                 var datumUvida = result1[0].DatumUvida;
                                                                 res.render('dodajRezultate', {
@@ -74,7 +75,8 @@ router.get('/dodajRezultate', function(req, res, next) {
                                                                     datumIspita: datumIspita,
                                                                     predmet:predmet,
                                                                     kursevi: rezultat2,
-                                                                    imePrezime: rezultat1
+                                                                    imePrezime: rezultat1,
+                                                                    dioIspita: dioIspita
                                                                 });
                                                             }
                                                         });
@@ -115,7 +117,7 @@ router.get('/dodajRezultate', function(req, res, next) {
                                                             else{
                                                                 var predmet = res4[0].NazivKursa;
                                                                 var datumIspita = res2[0].DatumIspita;
-                                                                console.log(res2[0].Kurs_KursId);
+                                                                var dioIspita = res2[0].DioIspita;
                                                                 res.render('dodajRezultate', {
                                                                     studenti: result2,
                                                                     ispit:ispitId,
@@ -123,7 +125,8 @@ router.get('/dodajRezultate', function(req, res, next) {
                                                                     predmet:predmet,
                                                                     datumIspita:datumIspita,
                                                                     imePrezime:rezultat1,
-                                                                    kursevi:rezultat3
+                                                                    kursevi:rezultat3,
+                                                                    dioIspita:dioIspita
                                                                 });
                                                             }
                                                         });

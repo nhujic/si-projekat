@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Kursevi</title>
+    <title><%= predmet %> - <%= dioIspita %></title>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <!-- Bootstrap Js CDN -->
@@ -61,12 +61,6 @@
                     <% }} %>
                 </ul>
             </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-list-alt"></i>
-                    Ispiti
-                </a>
-            </li>
         </ul>
     </nav>
     <!--Sidebar end -->
@@ -76,7 +70,7 @@
         <nav class="navbar navbar-default" id="nav">
 
             <div class="navbar-header">
-                <a class="navbar-brand" >Ispit iz predmeta <%= predmet %> odrzan datuma <%= (new Date(datumIspita).getDate() + 100).toString().substring(1)%>.<%= (new Date(datumIspita).getMonth() + 101).toString().substring(1)%>.<%= (new Date(datumIspita).getFullYear()).toString()%>.</a>
+                <a class="navbar-brand" >Ispit iz predmeta <%= predmet %> održan datuma <%= (new Date(datumIspita).getDate() + 100).toString().substring(1)%>.<%= (new Date(datumIspita).getMonth() + 101).toString().substring(1)%>.<%= (new Date(datumIspita).getFullYear()).toString()%>.</a>
 
             </div>
             <ul class="nav navbar-nav navbar-right">
@@ -130,7 +124,7 @@
                 <tr>
                     <% if(rezultat == 1){ %>
                     <td align="center"> Maximalno bodova:  <input type="text" id="maxBodova" name="maxBodova" value="<%= maxBrojBodova %>"> </td>
-                    <td> Uvid: <%= (new Date(datumUvida).getDate() + 100).toString().substring(1)%>/<%= (new Date(datumUvida).getMonth() + 101).toString().substring(1)%>/<%= (new Date(datumUvida).getFullYear()).toString()%><input type="date"  id="uvid" name="uvid"> </td>
+                    <td> Uvid: <%= (new Date(datumUvida).getDate() + 100).toString().substring(1)%>.<%= (new Date(datumUvida).getMonth() + 101).toString().substring(1)%>.<%= (new Date(datumUvida).getFullYear()).toString()%>.</td>
                     <td align="right"> <input type="submit" class="button" id="spasiRezultateDugme"  data-toggle="modal"
                                               value="Spasi rezultate"> </td>
                     <%} else{ %>
