@@ -99,6 +99,8 @@
 
                 <% if(ispiti.length >= 1){
                 for(var i = 0; i < ispiti.length; i++) {
+                    var danas = new Date();
+                    if(danas < ispiti[i].DatumIspita){
                 %>
 
                 <tr>
@@ -115,7 +117,7 @@
                     </td>
 
                 </tr>
-                <% } %>
+                <% }} %>
             </table>
         </div>
         <% } %>

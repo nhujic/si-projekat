@@ -28,8 +28,8 @@ function getObjectFromToken(token){
 }
 
 function authorize() {
-    let validationPaths = ['/pocetnaProfesor','/pocetnaStudent','/users/kurseviProfesor','/users/kurseviStudent', '/kursProfesor', '/kursStudent'];
-    let profesorValidationPaths = ['/pocetnaProfesor','/users/kurseviProfesor', '/kursProfesor'];
+    let validationPaths = ['/pocetnaProfesor','/pocetnaStudent','/users/kurseviProfesor','/users/kurseviStudent', '/kursProfesor', '/kursStudent', 'dodajRezultate'];
+    let profesorValidationPaths = ['/pocetnaProfesor','/users/kurseviProfesor', '/kursProfesor', '/dodajRezultate'];
     let studentValidationPaths = ['/pocetnaStudent','/users/kurseviStudent', '/kursStudent'];
     let regLogValidationPaths = ['/','/login', '/users/registracija/profesor', 'users/registracija/student', '/choose'];
 

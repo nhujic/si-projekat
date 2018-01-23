@@ -14,93 +14,135 @@ router.get('/choose', function(req, res, next) {
 router.get('/dodajRezultate', function(req, res, next) {
     var ispitId =  req.query.ispitId;
     var uneseniRezultati = 0;
+    var tipKorisnikaId = req.user.tipKorisnikaId;
+    var username = req.user.username;
 
-    konekcija.query("SELECT * from rezultatispita where ispit_ispitid = ?",[ispitId],function (err, result, field) {
-        if(err){
-            console.log(err);
-        }else{
-            if(result.length > 0){
-                uneseniRezultati = 1;
-                konekcija.query("SELECT * from korisnik as k " +
-                    "inner join rezultatispita as rz on rz.korisnik_korisnikid = k.korisnikid " +
-                    "inner join tipkorisnika as tk on k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid " +
-                    "inner join  korisnickidetalji as kd on kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid " +
-                    "inner join ispit as i on i.ispitId = rz.ispit_ispitId " +
-                    "where tk.tip = 'student' and rz.ispit_ispitId = ? " , [ispitId], function (err1, result1, fields) {
-                    if (err1) {
-                        console.log(err1);
-                    }
-                    else {
-                        konekcija.query("SELECT * FROM Ispit WHERE IspitId = ?", [ispitId], function (err3, res1, fields) {
-                            if(err3){
-                                console.log(err3);
-                            }
-                            else{
-                                konekcija.query("SELECT * FROM Kurs WHERE KursId = ?", [res1[0].Kurs_KursId], function (err5, res3, fields) {
-                                    if(err5){
-                                        console.log(err5);
+    konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [tipKorisnikaId], function (greska, rezultat, fields) {
+        if(greska){
+            console.log(greska);
+        }
+        else{
+            konekcija.query("SELECT * FROM KorisnickiDetalji WHERE KorisnickiDetaljiId = ?", [rezultat[0].KorisnickiDetalji_KorisnickiDetaljiId],function (greska1, rezultat1, fields) {
+                if(greska1){
+                    console.log(greska1);
+                }
+                else{
+                    konekcija.query("SELECT * from rezultatispita where ispit_ispitid = ?",[ispitId],function (err, result, field) {
+                        if(err){
+                            console.log(err);
+                        }else{
+                            if(result.length > 0){
+                                uneseniRezultati = 1;
+                                konekcija.query("SELECT * from korisnik as k " +
+                                    "inner join rezultatispita as rz on rz.korisnik_korisnikid = k.korisnikid " +
+                                    "inner join tipkorisnika as tk on k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid " +
+                                    "inner join  korisnickidetalji as kd on kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid " +
+                                    "inner join ispit as i on i.ispitId = rz.ispit_ispitId " +
+                                    "where tk.tip = 'student' and rz.ispit_ispitId = ? " , [ispitId], function (err1, result1, fields) {
+                                    if (err1) {
+                                        console.log(err1);
+                                    }
+                                    else {
+                                        konekcija.query("SELECT * FROM Ispit WHERE IspitId = ?", [ispitId], function (err3, res1, fields) {
+                                            if(err3){
+                                                console.log(err3);
+                                            }
+                                            else{
+                                                konekcija.query("SELECT * FROM Kurs WHERE KursId = ?", [res1[0].Kurs_KursId], function (err5, res3, fields) {
+                                                    if(err5){
+                                                        console.log(err5);
+                                                    }
+                                                    else{
+                                                        konekcija.query("SELECT * FROM Korisnik as k " +
+                                                            "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+                                                            "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+                                                            "WHERE username = ?", [username], function (greska2, rezultat2, fields) {
+                                                            if(greska2){
+                                                                console.log(greska2);
+                                                            }
+                                                            else{
+                                                                var predmet = res3[0].NazivKursa;
+                                                                var datumIspita = res1[0].DatumIspita;
+                                                                var maxBrojBodova = result1[0].MaxBrojBodova;
+                                                                var datumUvida = result1[0].DatumUvida;
+                                                                res.render('dodajRezultate', {
+                                                                    studenti: result1,
+                                                                    ispit:ispitId,
+                                                                    rezultat:uneseniRezultati,
+                                                                    maxBrojBodova: maxBrojBodova,
+                                                                    datumUvida: datumUvida,
+                                                                    datumIspita: datumIspita,
+                                                                    predmet:predmet,
+                                                                    kursevi: rezultat2,
+                                                                    imePrezime: rezultat1
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }else{
+                                console.log('nisu uneseni rezultati');
+                                konekcija.query("SELECT * from korisnik as k inner join korisnik_ispit as ki on k.korisnikid = ki.korisnik_korisnikid " +
+                                    "inner join tipkorisnika as tk on k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid inner join  korisnickidetalji as kd "+
+                                    "on kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid " +
+                                    "inner join ispit as i on i.ispitId = ki.ispit_ispitId " +
+                                    "where tk.tip = 'student' and ispit_ispitid = ?", [ispitId], function (err2, result2, field) {
+                                    if(err2){
+                                        console.log(err2);
                                     }
                                     else{
-                                        var predmet = res3[0].NazivKursa;
-                                        var datumIspita = res1[0].DatumIspita;
-                                        var maxBrojBodova = result1[0].MaxBrojBodova;
-                                        var datumUvida = result1[0].DatumUvida;
-                                        res.render('dodajRezultate', {
-                                            studenti: result1,
-                                            ispit:ispitId,
-                                            rezultat:uneseniRezultati,
-                                            maxBrojBodova: maxBrojBodova,
-                                            datumUvida: datumUvida,
-                                            datumIspita: datumIspita,
-                                            predmet:predmet
+                                        konekcija.query("SELECT * FROM Ispit WHERE IspitId = ?", [ispitId], function (err4, res2, fields) {
+                                            if(err4){
+                                                console.log(err4);
+                                            }
+                                            else{
+                                                konekcija.query("SELECT * FROM Kurs WHERE KursId = ?", [res2[0].Kurs_KursId], function (err6, res4, fields) {
+                                                    if(err6){
+                                                        console.log(err6);
+                                                    }
+                                                    else{
+                                                        konekcija.query("SELECT * FROM Korisnik as k " +
+                                                            "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+                                                            "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+                                                            "WHERE username = ?", [username], function (greska3, rezultat3, fields) {
+                                                            if(greska3){
+                                                                console.log(greska3);
+                                                            }
+                                                            else{
+                                                                var predmet = res4[0].NazivKursa;
+                                                                var datumIspita = res2[0].DatumIspita;
+                                                                console.log(res2[0].Kurs_KursId);
+                                                                res.render('dodajRezultate', {
+                                                                    studenti: result2,
+                                                                    ispit:ispitId,
+                                                                    rezultat:uneseniRezultati,
+                                                                    predmet:predmet,
+                                                                    datumIspita:datumIspita,
+                                                                    imePrezime:rezultat1,
+                                                                    kursevi:rezultat3
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+
+                                            }
                                         });
                                     }
                                 });
                             }
-                        });
-                    }
-                });
-            }else{
-                console.log('nisu uneseni rezultati');
-                konekcija.query("SELECT * from korisnik as k inner join korisnik_ispit as ki on k.korisnikid = ki.korisnik_korisnikid " +
-                    "inner join tipkorisnika as tk on k.tipkorisnika_tipkorisnikaid = tk.tipkorisnikaid inner join  korisnickidetalji as kd "+
-                    "on kd.korisnickidetaljiid = tk.korisnickidetalji_korisnickidetaljiid " +
-                    "inner join ispit as i on i.ispitId = ki.ispit_ispitId " +
-                    "where tk.tip = 'student' and ispit_ispitid = ?", [ispitId], function (err2, result2, field) {
-                    if(err2){
-                        console.log(err2);
-                    }
-                    else{
-                        konekcija.query("SELECT * FROM Ispit WHERE IspitId = ?", [ispitId], function (err4, res2, fields) {
-                            if(err4){
-                                console.log(err4);
-                            }
-                            else{
-                                konekcija.query("SELECT * FROM Kurs WHERE KursId = ?", [res2[0].Kurs_KursId], function (err6, res4, fields) {
-                                    if(err6){
-                                        console.log(err6);
-                                    }
-                                    else{
-                                        var predmet = res4[0].NazivKursa;
-                                        var datumIspita = res2[0].DatumIspita;
-                                        console.log(res2[0].Kurs_KursId);
-                                        res.render('dodajRezultate', {
-                                            studenti: result2,
-                                            ispit:ispitId,
-                                            rezultat:uneseniRezultati,
-                                            predmet:predmet,
-                                            datumIspita:datumIspita
-                                        });
-                                    }
-                                });
-
-                            }
-                        });
-                    }
-                });
-            }
+                        }
+                    });
+                }
+            })
         }
     });
+
+
 
 });
 
@@ -279,25 +321,53 @@ router.get('/kursStudent', function(req, res, next) {
 
 router.get('/kursProfesor', function(req, res, next) {
     var kursId =  req.query.kursId;
-    konekcija.query("SELECT * FROM Kurs where KursId = ?", [kursId], function (err, result, fields) {
-        if (err) {
-            console.log(err);
+    var tipKorisnikaId = req.user.tipKorisnikaId;
+    var username = req.user.username;
+    konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [tipKorisnikaId], function (greska, rezultat, fields) {
+        if(greska){
+            console.log(greska);
         }
-        else {
-            konekcija.query("select *,count(Ispit_IspitId) as BrojStudenata from Ispit, Korisnik_Ispit "+
-                "where Ispit.Kurs_KursId = ? and Ispit.IspitId = Korisnik_Ispit.Ispit_IspitId " +
-                "group by Korisnik_Ispit.Ispit_IspitId;", [kursId], function (err1, result1, fields) {
-                if(err1){
-                    console.log(err1);
-                }else{
-                    res.render('kursProfesor',{
-                        nazivKursa: result,
-                        ispiti:result1
+        else{
+            konekcija.query("SELECT * FROM KorisnickiDetalji WHERE KorisnickiDetaljiId = ?", [rezultat[0].KorisnickiDetalji_KorisnickiDetaljiId], function (greska1, rezultat1, fields) {
+                if(greska1){
+                    console.log(greska1);
+                }
+                else{
+                    konekcija.query("SELECT * FROM Kurs where KursId = ?", [kursId], function (err, result, fields) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            konekcija.query("select *,count(Ispit_IspitId) as BrojStudenata from Ispit, Korisnik_Ispit "+
+                                "where Ispit.Kurs_KursId = ? and Ispit.IspitId = Korisnik_Ispit.Ispit_IspitId " +
+                                "group by Korisnik_Ispit.Ispit_IspitId;", [kursId], function (err1, result1, fields) {
+                                if(err1){
+                                    console.log(err1);
+                                }else{
+                                    konekcija.query("SELECT * FROM Korisnik as k " +
+                                        "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+                                        "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+                                        "WHERE username = ?", [username], function (greska2, rezultat2, fields) {
+                                        if(greska2){
+                                            console.log(greska2);
+                                        }
+                                        else{
+                                            res.render('kursProfesor',{
+                                                nazivKursa: result,
+                                                ispiti:result1,
+                                                imePrezime: rezultat1,
+                                                kursevi:rezultat2
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+
+
+                        }
                     });
                 }
             });
-
-
         }
     });
 });
@@ -308,6 +378,7 @@ router.get('/pocetnaStudent', function(req, res, next) {
 
     let username = req.user.username;
     let tipKorisnikaId = req.user.tipKorisnikaId;
+    let korisnikId = req.user.korisnikId;
     konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [tipKorisnikaId], function (err1, results1, fields) {
         if(err1){
             console.log(err1);
@@ -327,9 +398,31 @@ router.get('/pocetnaStudent', function(req, res, next) {
                                 console.log(err);
                             }
                             else {
-                                res.render('pocetnaStudent', {
-                                    imePrezime: results2,
-                                    kursevi: result
+                                konekcija.query("SELECT * FROM Ispit AS i " +
+                                    "INNER JOIN Korisnik_ispit AS ki ON ki.Ispit_IspitId = i.IspitId " +
+                                    "WHERE ki.Korisnik_KorisnikId = ?", [korisnikId], function (err3, results3, fields) {
+                                    if(err3){
+                                        console.log(err3);
+                                    }
+                                    else{
+                                        var danas = new Date();
+                                        var preostaliIspiti = 0;
+                                        var zavrseniIspiti = 0;
+                                        for(var i = 0; i < results3.length; i++){
+                                            if(results3[i].DatumIspita > danas ){
+                                                preostaliIspiti = preostaliIspiti + 1;
+                                            }
+                                            else{
+                                                zavrseniIspiti = zavrseniIspiti + 1;
+                                            }
+                                        }
+                                        res.render('pocetnaStudent', {
+                                            imePrezime: results2,
+                                            kursevi: result,
+                                            preostaliIspiti: preostaliIspiti,
+                                            zavrseniIspiti: zavrseniIspiti
+                                        });
+                                    }
                                 });
                             }
                         });
@@ -343,6 +436,7 @@ router.get('/pocetnaStudent', function(req, res, next) {
 router.get('/pocetnaProfesor', function(req, res, next) {
     let username = req.user.username;
     let tipKorisnikaId = req.user.tipKorisnikaId;
+    let korisnikId = req.user.korisnikId;
     konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [tipKorisnikaId], function (err1, results1, fields) {
         if(err1){
             console.log(err1);
@@ -363,7 +457,32 @@ router.get('/pocetnaProfesor', function(req, res, next) {
                                 console.log(err);
                             }
                             else {
-                                res.render('pocetnaProfesor', {imePrezime: results2, kursevi:result});
+                                konekcija.query("SELECT * FROM Ispit AS i " +
+                                    "INNER JOIN Korisnik_ispit AS ki ON ki.Ispit_IspitId = i.IspitId " +
+                                    "WHERE ki.Korisnik_KorisnikId = ?", [korisnikId], function (err3, results3, fields) {
+                                    if(err3){
+                                        console.log(err3);
+                                    }
+                                    else{
+                                        var danas = new Date();
+                                        var preostaliIspiti = 0;
+                                        var zavrseniIspiti = 0;
+                                        for(var i = 0; i < results3.length; i++){
+                                            if(results3[i].DatumIspita > danas ){
+                                                preostaliIspiti = preostaliIspiti + 1;
+                                            }
+                                            else{
+                                                zavrseniIspiti = zavrseniIspiti + 1;
+                                            }
+                                        }
+                                        res.render('pocetnaProfesor', {
+                                            imePrezime: results2,
+                                            kursevi:result,
+                                            preostaliIspiti: preostaliIspiti,
+                                            zavrseniIspiti: zavrseniIspiti
+                                        });
+                                    }
+                                });
                             }
                         });
                     }

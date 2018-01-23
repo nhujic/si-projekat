@@ -40,10 +40,23 @@
                     Početna
                 </a>
             <li class="active">
-                <a href="#">
-                    <i class="glyphicon glyphicon-tasks"></i>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-book"></i>
                     Moji Kursevi
                 </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="/users/kurseviProfesor">
+                            <i class="glyphicon glyphicon-tasks"></i>
+                            Detaljno
+                        </a>
+                    </li>
+                    <%  if(kursevi.length >= 1){
+                    for(var i=0; i < kursevi.length; i++) { %>
+                    <li><a href="/kursProfesor?kursId=<%= kursevi[i].KursId%>"><%= kursevi[i].NazivKursa %></a></li>
+
+                    <% }} %>
+                </ul>
             </li>
             <li>
                 <a href="#">
@@ -60,7 +73,7 @@
         <nav class="navbar navbar-default" id="nav">
 
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"> Moji Kursevi</a>
+                <a class="navbar-brand" href="#"> Detaljno </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" id = "logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
