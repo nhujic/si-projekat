@@ -440,59 +440,72 @@ router.get('/pocetnaProfesor', function(req, res, next) {
     let username = req.user.username;
     let tipKorisnikaId = req.user.tipKorisnikaId;
     let korisnikId = req.user.korisnikId;
-    konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [tipKorisnikaId], function (err1, results1, fields) {
-        if(err1){
-            console.log(err1);
+    var brojStudenata = 0;
+    konekcija.query("SELECT COUNT(DISTINCT Korisnik_KorisnikId) AS Broj FROM Korisnik_Kurs WHERE Kurs_KursId IN " +
+        "(SELECT Kurs_KursId FROM Korisnik_Kurs WHERE Korisnik_KorisnikId = ?)", [korisnikId],function (greska, rezultat, fields) {
+        if(greska){
+            console.log(greska);
         }
         else{
-            if(results1.length > 0){
-                konekcija.query("SELECT * FROM KorisnickiDetalji WHERE KorisnickiDetaljiId = ?", [results1[0].KorisnickiDetalji_KorisnickiDetaljiId], function (err2, results2, fields) {
-                    if(err2){
-                        console.log(err2);
-                    }
-                    else{
-
-                        konekcija.query("SELECT * FROM Korisnik as k " +
-                            "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
-                            "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
-                            "WHERE username = ?", [username], function (err, result, fields) {
-                            if(err){
-                                console.log(err);
+            brojStudenata = rezultat[0].Broj;
+            konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [tipKorisnikaId], function (err1, results1, fields) {
+                if(err1){
+                    console.log(err1);
+                }
+                else{
+                    if(results1.length > 0){
+                        konekcija.query("SELECT * FROM KorisnickiDetalji WHERE KorisnickiDetaljiId = ?", [results1[0].KorisnickiDetalji_KorisnickiDetaljiId], function (err2, results2, fields) {
+                            if(err2){
+                                console.log(err2);
                             }
-                            else {
-                                konekcija.query("SELECT * FROM Ispit AS i " +
-                                    "INNER JOIN Korisnik_ispit AS ki ON ki.Ispit_IspitId = i.IspitId " +
-                                    "WHERE ki.Korisnik_KorisnikId = ?", [korisnikId], function (err3, results3, fields) {
-                                    if(err3){
-                                        console.log(err3);
+                            else{
+
+                                konekcija.query("SELECT * FROM Korisnik as k " +
+                                    "INNER JOIN Korisnik_Kurs as kk ON k.korisnikid = kk.korisnik_korisnikid " +
+                                    "INNER JOIN Kurs as ku ON ku.kursid = kk.kurs_kursid " +
+                                    "WHERE username = ?", [username], function (err, result, fields) {
+                                    if(err){
+                                        console.log(err);
                                     }
-                                    else{
-                                        var danas = new Date();
-                                        var preostaliIspiti = 0;
-                                        var zavrseniIspiti = 0;
-                                        for(var i = 0; i < results3.length; i++){
-                                            if(results3[i].DatumIspita > danas ){
-                                                preostaliIspiti = preostaliIspiti + 1;
+                                    else {
+                                        konekcija.query("SELECT * FROM Ispit AS i " +
+                                            "INNER JOIN Korisnik_ispit AS ki ON ki.Ispit_IspitId = i.IspitId " +
+                                            "WHERE ki.Korisnik_KorisnikId = ?", [korisnikId], function (err3, results3, fields) {
+                                            if(err3){
+                                                console.log(err3);
                                             }
                                             else{
-                                                zavrseniIspiti = zavrseniIspiti + 1;
-                                            }
-                                        }
-                                        res.render('pocetnaProfesor', {
-                                            imePrezime: results2,
-                                            kursevi:result,
-                                            preostaliIspiti: preostaliIspiti,
-                                            zavrseniIspiti: zavrseniIspiti
+                                                        var danas = new Date();
+                                                        var preostaliIspiti = 0;
+                                                        var zavrseniIspiti = 0;
+                                                        for(var i = 0; i < results3.length; i++){
+                                                            if(results3[i].DatumIspita > danas ){
+                                                                preostaliIspiti = preostaliIspiti + 1;
+                                                            }
+                                                            else{
+                                                                zavrseniIspiti = zavrseniIspiti + 1;
+                                                            }
+                                                        }
+                                                        res.render('pocetnaProfesor', {
+                                                            imePrezime: results2,
+                                                            kursevi:result,
+                                                            preostaliIspiti: preostaliIspiti,
+                                                            zavrseniIspiti: zavrseniIspiti,
+                                                            brojStudenata: brojStudenata
+                                                        });
+                                                    }
+
                                         });
                                     }
                                 });
                             }
                         });
                     }
-                });
-            }
+                }
+            });
         }
-    });
+    })
+
 });
 
 router.post('/kreirajKurs', function (req, res, next) {
