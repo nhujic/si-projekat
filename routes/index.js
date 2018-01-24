@@ -447,7 +447,7 @@ router.get('/pocetnaProfesor', function(req, res, next) {
             console.log(greska);
         }
         else{
-            brojStudenata = rezultat[0].Broj;
+            brojStudenata = rezultat[0].Broj - 1;
             konekcija.query("SELECT KorisnickiDetalji_KorisnickiDetaljiId FROM tipKorisnika WHERE TipKorisnikaId =?", [tipKorisnikaId], function (err1, results1, fields) {
                 if(err1){
                     console.log(err1);
